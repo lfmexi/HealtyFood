@@ -6,5 +6,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_menu_principal">Menu Principal</string>
+    <string name="title_activity_busca_recetas">Buscar Recetas</string>
+    <string name="title_activity_publica_receta">Publicar Recetas</string>
+    <string name="title_activity_mis_recetas">Mis Recetas</string>
+    <string name="title_activity_ejercicios">Ejercicios</string>
+    <string name="title_activity_perfil">Perfil</string>
+    <string name="title_activity_medidor">Medidor</string>
 
 </resources>
