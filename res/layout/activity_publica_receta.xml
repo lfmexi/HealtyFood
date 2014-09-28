@@ -8,4 +8,110 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".PublicaReceta" >
 
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="414dp" >
+
+                <ImageView
+                    android:id="@+id/receta_imagen"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginTop="18dp"
+                    android:src="@drawable/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/receta_imagen"
+                    android:layout_below="@+id/receta_imagen"
+                    android:layout_marginTop="16dp"
+                    android:text="Nombre de la receta" />
+
+                <EditText
+                    android:id="@+id/receta_nombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView1"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/textView1"
+                    android:ems="10" />
+
+                <Button
+                    android:id="@+id/receta_boton_agrega"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/receta_nombre"
+                    android:layout_alignRight="@+id/textView1"
+                    android:layout_below="@+id/receta_nombre"
+                    android:layout_marginTop="20dp"
+                    android:text="Agregar Ingredientes" />
+
+                <Spinner
+                    android:id="@+id/receta_spinner_cat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/receta_publicar"
+                    android:layout_below="@+id/receta_boton_agrega" />
+
+                <EditText
+                    android:id="@+id/editText1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView3"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/textView3"
+                    android:ems="10"
+                    android:inputType="textMultiLine" >
+
+                    <requestFocus />
+                </EditText>
+
+                <Button
+                    android:id="@+id/receta_publicar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/receta_imagen"
+                    android:layout_alignParentRight="true"
+                    android:text="Publicar" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/receta_boton_agrega"
+                    android:layout_toRightOf="@+id/receta_boton_agrega"
+                    android:text="Seleccionar una categoría" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/receta_boton_agrega"
+                    android:layout_below="@+id/receta_spinner_cat"
+                    android:text="Instrucciones" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 </RelativeLayout>

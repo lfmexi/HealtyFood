@@ -12,5 +12,12 @@
     <string name="title_activity_ejercicios">Ejercicios</string>
     <string name="title_activity_perfil">Perfil</string>
     <string name="title_activity_medidor">Medidor</string>
+    <string-array name="categories_array">
+        <item>Entrada</item>
+        <item>Plato Fuerte</item>
+        <item>Desayuno</item>
+        <item>Cena</item>
+        <item>Bebida</item>
+    </string-array>
 
 </resources>
