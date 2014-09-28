@@ -1,6 +1,20 @@
 package edu.tesis.healthyfood;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.app.Activity;
@@ -26,6 +40,7 @@ public class PublicaReceta extends Activity {
 		
 		selector_categoria = (Spinner)this.findViewById(R.id.receta_spinner_cat);
 		imagen = (ImageView)this.findViewById(R.id.receta_imagen);
+		boton_registrar = (Button)this.findViewById(R.id.receta_publicar);
 		
 		ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,
 		        R.array.categories_array, android.R.layout.simple_spinner_item);
@@ -40,8 +55,15 @@ public class PublicaReceta extends Activity {
 		});
 		
 		selector_categoria.setAdapter(adapter);
-	}
 
+		boton_registrar.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -60,6 +82,11 @@ public class PublicaReceta extends Activity {
 		}
 	}
 	
+	public void registrarOnClick(){
+		UploaderTask ut = new UploaderTask();
+		ut.execute(path_imagen);
+	}
+	
 	public String getPath(Uri uri) {
         String[] projection = { MediaStore.Images.Media.DATA };
         Cursor cursor = managedQuery(uri, projection, null, null, null);
@@ -75,6 +102,23 @@ public class PublicaReceta extends Activity {
 		this.startActivityForResult(Intent.createChooser(intent, "Completar seleccionando"), 1);
 	}
 	
+	public static void postFile(String filename) throws ClientProtocolException, IOException{
+		String url="http://healthylifeapp.esy.es/upload.php";
+		HttpClient cliente = new DefaultHttpClient();
+		HttpPost post = new HttpPost(url);
+        MultipartEntityBuilder me = MultipartEntityBuilder.create();
+        
+        me.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+        me.addPart("file", new FileBody(new File(filename)));
+        post.setEntity(me.build());
+        
+        HttpResponse response=cliente.execute(post);
+        HttpEntity entidad = response.getEntity();
+        
+        entidad.consumeContent();
+        cliente.getConnectionManager().shutdown();
+	}
+	
 	private Spinner selector_categoria;
 	private EditText campo_nombre;
 	private EditText campo_instrucciones;
@@ -84,4 +128,23 @@ public class PublicaReceta extends Activity {
 	private Button boton_ingredientes;
 	private Button boton_registrar;
 
+	
+	private class UploaderTask extends AsyncTask<String,Void,String>{
+
+		protected String doInBackground(String... arg0) {
+			// TODO Auto-generated method stub
+			try {
+				postFile(arg0[0]);
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
+			return "ok";
+		}
+	}
 }
