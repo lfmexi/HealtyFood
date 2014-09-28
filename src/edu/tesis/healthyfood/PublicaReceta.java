@@ -18,6 +18,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -60,7 +61,7 @@ public class PublicaReceta extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				
+				registrarOnClick();
 			}
 		});
 	}
@@ -83,7 +84,11 @@ public class PublicaReceta extends Activity {
 	}
 	
 	public void registrarOnClick(){
-		UploaderTask ut = new UploaderTask();
+        AlertDialog.Builder b= new AlertDialog.Builder(this);
+        b.setTitle("Carga en progreso");
+        b.setMessage("Espere mientras se cargan los datos al servidor");
+        AlertDialog a = b.show();
+		UploaderTask ut = new UploaderTask(this,a);
 		ut.execute(path_imagen);
 	}
 	
@@ -102,7 +107,7 @@ public class PublicaReceta extends Activity {
 		this.startActivityForResult(Intent.createChooser(intent, "Completar seleccionando"), 1);
 	}
 	
-	public static void postFile(String filename) throws ClientProtocolException, IOException{
+	public static void postFile(String filename,PublicaReceta padre) throws ClientProtocolException, IOException{
 		String url="http://healthylifeapp.esy.es/upload.php";
 		HttpClient cliente = new DefaultHttpClient();
 		HttpPost post = new HttpPost(url);
@@ -111,12 +116,14 @@ public class PublicaReceta extends Activity {
         me.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
         me.addPart("file", new FileBody(new File(filename)));
         post.setEntity(me.build());
+ 
         
         HttpResponse response=cliente.execute(post);
         HttpEntity entidad = response.getEntity();
         
         entidad.consumeContent();
         cliente.getConnectionManager().shutdown();
+
 	}
 	
 	private Spinner selector_categoria;
@@ -131,10 +138,17 @@ public class PublicaReceta extends Activity {
 	
 	private class UploaderTask extends AsyncTask<String,Void,String>{
 
+		private  PublicaReceta padre;
+		private AlertDialog alerta;
+		public UploaderTask(PublicaReceta p,AlertDialog a){
+			padre = p;
+			alerta=a;
+		}
+		
 		protected String doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
 			try {
-				postFile(arg0[0]);
+				postFile(arg0[0],padre);
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -145,6 +159,21 @@ public class PublicaReceta extends Activity {
 				return null;
 			}
 			return "ok";
+		}
+		
+		protected void onPostExecute(String result){
+			alerta.dismiss();
+			if(result!=null){
+				AlertDialog.Builder b= new AlertDialog.Builder(padre);
+		        b.setTitle("Carga exitosa");
+		        b.setMessage("La receta ha sido publicada con éxito");
+		        b.show();
+			}else{
+				AlertDialog.Builder b= new AlertDialog.Builder(padre);
+		        b.setTitle("Error");
+		        b.setMessage("La receta no ha sido publicada con éxito");
+		        b.show();
+			}
 		}
 	}
 }

@@ -1,5 +1,7 @@
 package edu.tesis.healthyfood;
 
+import edu.tesis.healthyfood.sqlite.SQLite;
+import edu.tesis.healthyfood.sqlite.Sesion;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -26,8 +28,23 @@ public class MainActivity extends Activity {
 	}
 
 	private void botonOnClick(){
-		Intent i = new Intent(this,Login.class);
-		this.startActivity(i);
+		SQLite sql = new SQLite(this);
+		sql.abrir();
+		Sesion s = sql.getLastSesion();
+		sql.cerrar();
+		if(s!=null){
+			if(s.getFecha_fin()!=null){
+				Intent i = new Intent(this,Login.class);
+				this.startActivity(i);
+			}else{
+				Intent i = new Intent(this,MenuPrincipal.class);
+				i.putExtra("infoUser", s.getUser());
+				this.startActivity(i);
+			}
+		}else{
+			Intent i = new Intent(this,Login.class);
+			this.startActivity(i);
+		}
 	}
 	
 	@Override
