@@ -11,6 +11,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.net.Uri;
@@ -34,18 +35,25 @@ import android.widget.Spinner;
 
 public class PublicaReceta extends Activity {
 
+	String user="";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_publica_receta);
 		
 		selector_categoria = (Spinner)this.findViewById(R.id.receta_spinner_cat);
+		campo_nombre = (EditText)this.findViewById(R.id.receta_nombre);
+		campo_instrucciones = (EditText)this.findViewById(R.id.receta_intrucciones);
 		imagen = (ImageView)this.findViewById(R.id.receta_imagen);
 		boton_registrar = (Button)this.findViewById(R.id.receta_publicar);
 		
 		ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,
 		        R.array.categories_array, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		
+		Intent i=this.getIntent();
+		user = i.getExtras().getString("infoUser");
 		
 		imagen.setOnClickListener(new OnClickListener(){
 			@Override
@@ -84,12 +92,16 @@ public class PublicaReceta extends Activity {
 	}
 	
 	public void registrarOnClick(){
-        AlertDialog.Builder b= new AlertDialog.Builder(this);
-        b.setTitle("Carga en progreso");
-        b.setMessage("Espere mientras se cargan los datos al servidor");
-        AlertDialog a = b.show();
-		UploaderTask ut = new UploaderTask(this,a);
-		ut.execute(path_imagen);
+        if(campo_nombre.getText()!=null && campo_instrucciones.getText()!=null && selector_categoria.getSelectedItem()!=null){
+        	
+        	AlertDialog.Builder b= new AlertDialog.Builder(this);
+            b.setTitle("Carga en progreso");
+            b.setMessage("Espere mientras se cargan los datos al servidor "+selector_categoria.getSelectedItem().toString());
+            AlertDialog a = b.show();
+    		UploaderTask ut = new UploaderTask(this,a);
+    		
+    		ut.execute(path_imagen,user,campo_nombre.getText().toString(),campo_instrucciones.getText().toString(),selector_categoria.getSelectedItem().toString());
+        }
 	}
 	
 	public String getPath(Uri uri) {
@@ -107,24 +119,6 @@ public class PublicaReceta extends Activity {
 		this.startActivityForResult(Intent.createChooser(intent, "Completar seleccionando"), 1);
 	}
 	
-	public static void postFile(String filename,PublicaReceta padre) throws ClientProtocolException, IOException{
-		String url="http://healthylifeapp.esy.es/upload.php";
-		HttpClient cliente = new DefaultHttpClient();
-		HttpPost post = new HttpPost(url);
-        MultipartEntityBuilder me = MultipartEntityBuilder.create();
-        
-        me.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-        me.addPart("file", new FileBody(new File(filename)));
-        post.setEntity(me.build());
- 
-        
-        HttpResponse response=cliente.execute(post);
-        HttpEntity entidad = response.getEntity();
-        
-        entidad.consumeContent();
-        cliente.getConnectionManager().shutdown();
-
-	}
 	
 	private Spinner selector_categoria;
 	private EditText campo_nombre;
@@ -148,7 +142,7 @@ public class PublicaReceta extends Activity {
 		protected String doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
 			try {
-				postFile(arg0[0],padre);
+				postFile(arg0[0],arg0[1],arg0[2],arg0[3],arg0[4]);
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -159,6 +153,26 @@ public class PublicaReceta extends Activity {
 				return null;
 			}
 			return "ok";
+		}
+		
+		private void postFile(String filename,String username, String nombre, String instruct,String cat) throws ClientProtocolException, IOException{
+			String url=Login.url+"/recipes.php";
+			HttpClient cliente = new DefaultHttpClient();
+			HttpPost post = new HttpPost(url);
+	        MultipartEntityBuilder me = MultipartEntityBuilder.create();
+	        
+	        me.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+	        me.addPart("file", new FileBody(new File(filename)));
+	        me.addPart("user", new StringBody(username));
+	        me.addPart("name", new StringBody(nombre));
+	        me.addPart("ins", new StringBody(instruct));
+	        me.addPart("categoria", new StringBody(cat));
+	        post.setEntity(me.build());
+	        HttpResponse response=cliente.execute(post);
+	        HttpEntity entidad = response.getEntity();
+	        
+	        entidad.consumeContent();
+	        cliente.getConnectionManager().shutdown();
 		}
 		
 		protected void onPostExecute(String result){

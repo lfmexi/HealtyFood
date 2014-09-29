@@ -54,6 +54,16 @@
             android:name="edu.tesis.healthyfood.Medidor"
             android:label="@string/title_activity_medidor" >
         </activity>
+        <activity
+            android:name="edu.tesis.healthyfood.ForgotData"
+            android:label="@string/title_activity_forgot_data" >
+        </activity>
+        <activity
+            android:name="edu.tesis.healthyfood.Registrar"
+            android:label="@string/title_activity_registrar" >
+        </activity>
     </application>
-	<uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>

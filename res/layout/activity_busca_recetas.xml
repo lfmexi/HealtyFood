@@ -27,7 +27,7 @@
                 android:layout_height="422dp" >
 
                 <EditText
-                    android:id="@+id/campo_busqueda"
+                    android:id="@+id/receta_intrucciones"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -44,7 +44,7 @@
                     android:id="@+id/botonBuscar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/campo_busqueda"
+                    android:layout_alignBottom="@+id/receta_intrucciones"
                     android:layout_alignParentRight="true"
                     android:text="Buscar" />
 
@@ -52,8 +52,8 @@
                     android:id="@+id/listView1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/campo_busqueda"
-                    android:layout_below="@+id/campo_busqueda"
+                    android:layout_alignLeft="@+id/receta_intrucciones"
+                    android:layout_below="@+id/receta_intrucciones"
                     android:layout_marginTop="15dp" >
                 </ListView>
 

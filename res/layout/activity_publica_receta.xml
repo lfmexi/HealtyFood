@@ -72,7 +72,7 @@
                     android:layout_below="@+id/receta_boton_agrega" />
 
                 <EditText
-                    android:id="@+id/campo_busqueda"
+                    android:id="@+id/receta_intrucciones"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/textView3"

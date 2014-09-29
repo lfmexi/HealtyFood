@@ -13,10 +13,15 @@ import android.widget.TextView;
 
 public class MenuPrincipal extends Activity {
 
+	String user="";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu_principal);
+		
+		Intent i=this.getIntent();
+		user = i.getExtras().getString("infoUser");
+		
 		String listado[]=new String[]{
 				"Publicar receta","Buscar recetas","Mis recetas","Ejercicios recomendados","Mi Perfil","Medidor de calorías"
 		};
@@ -44,6 +49,7 @@ public class MenuPrincipal extends Activity {
 		String nombreMenu=((TextView) view).getText().toString();
 		if(nombreMenu.equals("Publicar receta")){
 			Intent i = new Intent(this,PublicaReceta.class);
+			i.putExtra("infoUser", user);
 			this.startActivity(i);
 		}else if(nombreMenu.equals("Buscar recetas")){
 			Intent i = new Intent(this,BuscaRecetas.class);
