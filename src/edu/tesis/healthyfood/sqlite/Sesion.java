@@ -3,6 +3,7 @@ package edu.tesis.healthyfood.sqlite;
 import java.util.Date;
 
 public class Sesion {
+	private int id;
 	private String user;
 	private Date fecha_inicio;
 	private Date fecha_fin;
@@ -35,6 +36,14 @@ public class Sesion {
 
 	public void setFecha_fin(Date fecha_fin) {
 		this.fecha_fin = fecha_fin;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

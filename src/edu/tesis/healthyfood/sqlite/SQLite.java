@@ -43,14 +43,15 @@ public class SQLite {
 	public Sesion getLastSesion(){
 		Sesion ses=null;
 		Cursor cursor = db.query(sqlh.tabla,
-				new String[]{sqlh.username,sqlh.fecha_inicio,sqlh.fecha_fin},
+				new String[]{sqlh.id_sesion,sqlh.username,sqlh.fecha_inicio,sqlh.fecha_fin},
 							null,null,null,null,
 							sqlh.id_sesion+" DESC ","1");
 		if(cursor.moveToFirst()){
 			do{
 				ses = new Sesion(null,null,null);
-				ses.setUser(cursor.getString(0));
-				if(cursor.getString(1)!=null){
+				ses.setId(cursor.getInt(0));
+				ses.setUser(cursor.getString(1));
+				if(cursor.getString(2)!=null){
 					try {
 						ses.setFecha_inicio(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(cursor.getString(1)));
 					} catch (ParseException e) {
@@ -58,7 +59,7 @@ public class SQLite {
 						e.printStackTrace();
 					}
 				}
-				if(cursor.getString(2)!=null){
+				if(cursor.getString(3)!=null){
 					try {
 						ses.setFecha_inicio(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(cursor.getString(2)));
 					} catch (ParseException e) {
@@ -69,5 +70,9 @@ public class SQLite {
 			}while(cursor.moveToNext());
 		}
 		return ses;
+	}
+	
+	public boolean deleteSesion(int id){
+		return (db.delete(sqlh.tabla, sqlh.id_sesion+"="+id, null)>0)?true:false;
 	}
 }

@@ -14,12 +14,16 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import edu.tesis.healthyfood.sobj.ContenedorIngredientes;
+import edu.tesis.healthyfood.sobj.Ingrediente_Receta;
+
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -36,17 +40,21 @@ import android.widget.Spinner;
 public class PublicaReceta extends Activity {
 
 	String user="";
+
+	static ContenedorIngredientes contenedor = new ContenedorIngredientes();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_publica_receta);
-		
+		contenedor = new ContenedorIngredientes();
 		selector_categoria = (Spinner)this.findViewById(R.id.receta_spinner_cat);
 		campo_nombre = (EditText)this.findViewById(R.id.receta_nombre);
 		campo_instrucciones = (EditText)this.findViewById(R.id.receta_intrucciones);
 		imagen = (ImageView)this.findViewById(R.id.receta_imagen);
 		boton_registrar = (Button)this.findViewById(R.id.receta_publicar);
+		boton_ingredientes = (Button)this.findViewById(R.id.receta_boton_agrega);
+		boton_ver = (Button)this.findViewById(R.id.recetas_ver_ingredientes);
 		
 		ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,
 		        R.array.categories_array, android.R.layout.simple_spinner_item);
@@ -72,6 +80,22 @@ public class PublicaReceta extends Activity {
 				registrarOnClick();
 			}
 		});
+		
+		boton_ingredientes.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				agregarOnClick();
+			}
+		});
+		
+		boton_ver.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				verOnClick();
+			}
+		});
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -90,17 +114,54 @@ public class PublicaReceta extends Activity {
 			imagen.setImageBitmap(bitmap);
 		}
 	}
+
+	private void verOnClick(){
+		String ingredientes = "";
+		for(Ingrediente_Receta ir :contenedor.lista.values()){
+			ingredientes+=ir.getNombre_ingrediente();
+			
+			if(ir.getGramos()!=0){
+				ingredientes = ingredientes + " -> " +ir.getGramos() + "g";
+			}
+			if(ir.getUnidades()!=0){
+				ingredientes = ingredientes + " -> " +ir.getUnidades() + " unidades";
+			}
+			ingredientes+="\n";
+		}
+		AlertDialog.Builder b = new AlertDialog.Builder(this);
+		b.setTitle("Ingredientes en la receta");
+		b.setMessage(ingredientes);
+		b.show();
+	}
 	
-	public void registrarOnClick(){
+	private void agregarOnClick(){
+		Intent i = new Intent(this,Ingredientes.class);
+		this.startActivity(i);
+	}
+	
+	private void registrarOnClick(){
         if(campo_nombre.getText()!=null && campo_instrucciones.getText()!=null && selector_categoria.getSelectedItem()!=null){
         	
+        	if(!campo_nombre.getText().toString().equals("")&& !campo_instrucciones.getText().toString().equals("")){
+
+            	AlertDialog.Builder b= new AlertDialog.Builder(this);
+                b.setTitle("Carga en progreso");
+                b.setMessage("Espere mientras se cargan los datos al servidor");
+                AlertDialog a = b.show();
+        		UploaderTask ut = new UploaderTask(this,a);
+        		
+        		ut.execute(path_imagen,user,campo_nombre.getText().toString(),campo_instrucciones.getText().toString(),selector_categoria.getSelectedItem().toString());
+        	}else {
+            	AlertDialog.Builder b= new AlertDialog.Builder(this);
+                b.setTitle("Error en la carga");
+                b.setMessage("Todos los campos son obligatorios");
+                b.show();
+            }
+        }else {
         	AlertDialog.Builder b= new AlertDialog.Builder(this);
-            b.setTitle("Carga en progreso");
-            b.setMessage("Espere mientras se cargan los datos al servidor "+selector_categoria.getSelectedItem().toString());
-            AlertDialog a = b.show();
-    		UploaderTask ut = new UploaderTask(this,a);
-    		
-    		ut.execute(path_imagen,user,campo_nombre.getText().toString(),campo_instrucciones.getText().toString(),selector_categoria.getSelectedItem().toString());
+            b.setTitle("Error en la carga");
+            b.setMessage("Todos los campos son obligatorios");
+            b.show();
         }
 	}
 	
@@ -128,6 +189,7 @@ public class PublicaReceta extends Activity {
 	private String path_imagen;
 	private Button boton_ingredientes;
 	private Button boton_registrar;
+	private Button boton_ver;
 
 	
 	private class UploaderTask extends AsyncTask<String,Void,String>{

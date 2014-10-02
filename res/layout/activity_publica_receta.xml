@@ -62,7 +62,7 @@
                     android:layout_alignRight="@+id/textView1"
                     android:layout_below="@+id/receta_nombre"
                     android:layout_marginTop="20dp"
-                    android:text="Agregar Ingredientes" />
+                    android:text="Agregar o quitar Ingredientes" />
 
                 <Spinner
                     android:id="@+id/receta_spinner_cat"
@@ -84,23 +84,6 @@
                     <requestFocus />
                 </EditText>
 
-                <Button
-                    android:id="@+id/receta_publicar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/receta_imagen"
-                    android:layout_alignParentRight="true"
-                    android:text="Publicar" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignTop="@+id/receta_boton_agrega"
-                    android:layout_toRightOf="@+id/receta_boton_agrega"
-                    android:text="Seleccionar una categoría" />
-
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
@@ -108,6 +91,32 @@
                     android:layout_alignLeft="@+id/receta_boton_agrega"
                     android:layout_below="@+id/receta_spinner_cat"
                     android:text="Instrucciones" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/receta_boton_agrega"
+                    android:layout_alignRight="@+id/receta_imagen"
+                    android:layout_alignTop="@+id/receta_spinner_cat"
+                    android:text="Seleccionar una categoría" />
+
+                <Button
+                    android:id="@+id/recetas_ver_ingredientes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/receta_spinner_cat"
+                    android:layout_alignTop="@+id/receta_boton_agrega"
+                    android:text="Ver Ingredientes" />
+
+                <Button
+                    android:id="@+id/receta_publicar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/textView1"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@+id/textView1"
+                    android:text="Publicar" />
 
             </RelativeLayout>
 

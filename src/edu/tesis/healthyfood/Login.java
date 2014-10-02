@@ -165,9 +165,7 @@ public class Login extends Activity {
 		    	int num_registros=mArray.length();
 		    	for (int i = 0; i < num_registros; i++) {
 		    	    JSONObject object = mArray.getJSONObject(i);
-//		    	    String id = object.getString("id");
 		    	    String campo1 = object.getString("nick");
-//		    	    String campo2 = object.getString("nombre");
 		    	    regs=campo1;
 		    	}
 		    }catch(JSONException e){

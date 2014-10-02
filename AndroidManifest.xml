@@ -62,6 +62,18 @@
             android:name="edu.tesis.healthyfood.Registrar"
             android:label="@string/title_activity_registrar" >
         </activity>
+        <activity
+            android:name="edu.tesis.healthyfood.Ingredientes"
+            android:label="@string/title_activity_ingredientes" >
+        </activity>
+        <activity
+            android:name="edu.tesis.healthyfood.RecetasPropias"
+            android:label="@string/title_activity_recetas_propias" >
+        </activity>
+        <activity
+            android:name="edu.tesis.healthyfood.Favoritas"
+            android:label="@string/title_activity_favoritas" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
