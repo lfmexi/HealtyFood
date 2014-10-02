@@ -69,17 +69,19 @@ public class Ingredientes extends Activity {
 				b.setTitle("Agregue el ingrediente");
 				
 				final EditText input = new EditText(this);
-				input.setInputType(InputType.TYPE_CLASS_NUMBER);
-				b.setView(input);
+				
 				
 				final Ingrediente_Receta ir = ingredientes.get(nombre);
 				if(ir.getTipoMedida().equals("u")){
 					b.setMessage("Agregue las unidades necesarias del ingrediente");
+					input.setInputType(InputType.TYPE_CLASS_NUMBER);
+					b.setView(input);
 					b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							// TODO Auto-generated method stub
 							try{
+								
 								int entero = Integer.parseInt(input.getText().toString());
 								ir.setUnidades(entero);
 								PublicaReceta.contenedor.lista.put(nombre, ir);
@@ -89,8 +91,28 @@ public class Ingredientes extends Activity {
 						}
 					});
 					b.setNegativeButton("Cancel", null);
-				}else{
+				}else if(ir.getTipoMedida().equals("g")){
 					b.setMessage("Agregue los gramos utilizados del ingrediente");
+					input.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+					b.setView(input);
+					b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							try{
+								double entero = Double.parseDouble(input.getText().toString());
+								ir.setGramos(entero);
+								PublicaReceta.contenedor.lista.put(nombre, ir);
+							}catch(NumberFormatException nfe){
+								//nada
+							}
+						}
+					});
+					b.setNegativeButton("Cancel", null);
+				}else {
+					b.setMessage("Agregue los litros utilizados del ingrediente");
+					input.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+					b.setView(input);
 					b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {

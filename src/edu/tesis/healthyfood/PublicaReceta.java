@@ -126,6 +126,9 @@ public class PublicaReceta extends Activity {
 			if(ir.getUnidades()!=0){
 				ingredientes = ingredientes + " -> " +ir.getUnidades() + " unidades";
 			}
+			if(ir.getLitros()!=0){
+				ingredientes = ingredientes + " -> " +ir.getLitros() + " unidades";
+			}
 			ingredientes+="\n";
 		}
 		AlertDialog.Builder b = new AlertDialog.Builder(this);

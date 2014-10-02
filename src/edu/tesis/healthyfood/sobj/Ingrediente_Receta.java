@@ -5,6 +5,7 @@ public class Ingrediente_Receta {
 	private String nombre_ingrediente;
 	private int unidades;
 	private double gramos;
+	private double litros;
 	private String tipoMedida;
 	
 	public Ingrediente_Receta(String n,String t){
@@ -46,6 +47,14 @@ public class Ingrediente_Receta {
 
 	public void setTipoMedida(String tipoMedida) {
 		this.tipoMedida = tipoMedida;
+	}
+
+	public double getLitros() {
+		return litros;
+	}
+
+	public void setLitros(double litros) {
+		this.litros = litros;
 	}
 	
 	
