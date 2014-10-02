@@ -139,18 +139,33 @@ public class PublicaReceta extends Activity {
 		this.startActivity(i);
 	}
 	
+	private String constructIngredientes(){
+		String json="[";
+		
+		for(Ingrediente_Receta ir:contenedor.lista.values()){
+			String ingrediente = "{\"nombre_ingrediente\":\""+ir.getNombre_ingrediente()+"\",\"unidades\":"+ir.getUnidades()+",\"gramos\":"+ir.getGramos()+"}";
+			if(json.equals("[")){
+				json+=ingrediente;
+			}else{
+				json+=","+ingrediente;
+			}
+		}
+		json+="]";
+		return json;
+	}
+	
 	private void registrarOnClick(){
         if(campo_nombre.getText()!=null && campo_instrucciones.getText()!=null && selector_categoria.getSelectedItem()!=null){
         	
-        	if(!campo_nombre.getText().toString().equals("")&& !campo_instrucciones.getText().toString().equals("")){
+        	if(!campo_nombre.getText().toString().equals("")&& !campo_instrucciones.getText().toString().equals("") && !contenedor.lista.isEmpty()){
 
             	AlertDialog.Builder b= new AlertDialog.Builder(this);
                 b.setTitle("Carga en progreso");
                 b.setMessage("Espere mientras se cargan los datos al servidor");
                 AlertDialog a = b.show();
         		UploaderTask ut = new UploaderTask(this,a);
-        		
-        		ut.execute(path_imagen,user,campo_nombre.getText().toString(),campo_instrucciones.getText().toString(),selector_categoria.getSelectedItem().toString());
+        		String ingredientes = constructIngredientes();
+        		ut.execute(path_imagen,user,campo_nombre.getText().toString(),campo_instrucciones.getText().toString(),selector_categoria.getSelectedItem().toString(),ingredientes);
         	}else {
             	AlertDialog.Builder b= new AlertDialog.Builder(this);
                 b.setTitle("Error en la carga");
@@ -204,7 +219,7 @@ public class PublicaReceta extends Activity {
 		protected String doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
 			try {
-				postFile(arg0[0],arg0[1],arg0[2],arg0[3],arg0[4]);
+				postFile(arg0[0],arg0[1],arg0[2],arg0[3],arg0[4],arg0[5]);
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -217,7 +232,7 @@ public class PublicaReceta extends Activity {
 			return "ok";
 		}
 		
-		private void postFile(String filename,String username, String nombre, String instruct,String cat) throws ClientProtocolException, IOException{
+		private void postFile(String filename,String username, String nombre, String instruct,String cat,String ingr) throws ClientProtocolException, IOException{
 			String url=Login.url+"/recipes.php";
 			HttpClient cliente = new DefaultHttpClient();
 			HttpPost post = new HttpPost(url);
@@ -229,6 +244,7 @@ public class PublicaReceta extends Activity {
 	        me.addPart("name", new StringBody(nombre));
 	        me.addPart("ins", new StringBody(instruct));
 	        me.addPart("categoria", new StringBody(cat));
+	        me.addPart("ingredientes", new StringBody(ingr));
 	        post.setEntity(me.build());
 	        HttpResponse response=cliente.execute(post);
 	        HttpEntity entidad = response.getEntity();
