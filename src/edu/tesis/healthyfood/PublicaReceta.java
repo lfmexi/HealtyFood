@@ -146,7 +146,7 @@ public class PublicaReceta extends Activity {
 		String json="[";
 		
 		for(Ingrediente_Receta ir:contenedor.lista.values()){
-			String ingrediente = "{\"nombre_ingrediente\":\""+ir.getNombre_ingrediente()+"\",\"unidades\":"+ir.getUnidades()+",\"gramos\":"+ir.getGramos()+"}";
+			String ingrediente = "{\"nombre_ingrediente\":\""+ir.getNombre_ingrediente()+"\",\"unidades\":"+ir.getUnidades()+",\"gramos\":"+ir.getGramos()+",\"litros\":"+ir.getLitros()+"}";
 			if(json.equals("[")){
 				json+=ingrediente;
 			}else{
@@ -204,7 +204,7 @@ public class PublicaReceta extends Activity {
 	private EditText campo_instrucciones;
 	private ImageView imagen;
 	private Bitmap bitmap;
-	private String path_imagen;
+	private String path_imagen="";
 	private Button boton_ingredientes;
 	private Button boton_registrar;
 	private Button boton_ver;
@@ -242,7 +242,9 @@ public class PublicaReceta extends Activity {
 	        MultipartEntityBuilder me = MultipartEntityBuilder.create();
 	        
 	        me.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-	        me.addPart("file", new FileBody(new File(filename)));
+	        
+	        if(!filename.equals("")) me.addPart("file", new FileBody(new File(filename)));
+	        
 	        me.addPart("user", new StringBody(username));
 	        me.addPart("name", new StringBody(nombre));
 	        me.addPart("ins", new StringBody(instruct));
@@ -263,6 +265,7 @@ public class PublicaReceta extends Activity {
 		        b.setTitle("Carga exitosa");
 		        b.setMessage("La receta ha sido publicada con éxito");
 		        b.show();
+		        padre.finish();
 			}else{
 				AlertDialog.Builder b= new AlertDialog.Builder(padre);
 		        b.setTitle("Error");

@@ -27,7 +27,7 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f090018;
+        public static final int action_settings=0x7f090020;
         public static final int botonBuscar=0x7f090002;
         public static final int fav_lista=0x7f090004;
         public static final int ing_buscar=0x7f090007;
@@ -38,7 +38,7 @@ public final class R {
         public static final int loginUsername=0x7f090009;
         public static final int login_boton_register=0x7f09000e;
         public static final int login_forgot=0x7f09000d;
-        public static final int logout=0x7f090019;
+        public static final int logout=0x7f090021;
         public static final int main_boton_ingreso=0x7f09000c;
         public static final int mis_recetas_lista=0x7f090010;
         public static final int propias_lista=0x7f090017;
@@ -49,10 +49,18 @@ public final class R {
         public static final int receta_publicar=0x7f090015;
         public static final int receta_spinner_cat=0x7f090014;
         public static final int recetas_ver_ingredientes=0x7f090016;
+        public static final int registro_boton_confirma=0x7f09001f;
+        public static final int registro_confirma=0x7f09001e;
+        public static final int registro_email=0x7f090019;
+        public static final int registro_nombre=0x7f09001a;
+        public static final int registro_pass=0x7f09001c;
+        public static final int registro_username=0x7f090018;
         public static final int scrollView1=0x7f090000;
         public static final int textView1=0x7f090005;
         public static final int textView2=0x7f090008;
         public static final int textView3=0x7f09000a;
+        public static final int textView4=0x7f09001b;
+        public static final int textView5=0x7f09001d;
     }
     public static final class layout {
         public static final int activity_busca_recetas=0x7f030000;
@@ -69,6 +77,7 @@ public final class R {
         public static final int activity_publica_receta=0x7f03000b;
         public static final int activity_recetas_propias=0x7f03000c;
         public static final int activity_registrar=0x7f03000d;
+        public static final int activity_registro=0x7f03000e;
     }
     public static final class menu {
         public static final int busca_recetas=0x7f080000;
@@ -85,6 +94,7 @@ public final class R {
         public static final int publica_receta=0x7f08000b;
         public static final int recetas_propias=0x7f08000c;
         public static final int registrar=0x7f08000d;
+        public static final int registro=0x7f08000e;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
@@ -103,6 +113,7 @@ public final class R {
         public static final int title_activity_publica_receta=0x7f050006;
         public static final int title_activity_recetas_propias=0x7f05000e;
         public static final int title_activity_registrar=0x7f05000c;
+        public static final int title_activity_registro=0x7f050010;
     }
     public static final class style {
         /** 

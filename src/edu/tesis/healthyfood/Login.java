@@ -104,7 +104,7 @@ public class Login extends Activity {
 	}
 	
 	private void loginRegister(){
-		Intent i= new Intent(this,Registrar.class);
+		Intent i= new Intent(this,Registro.class);
 		startActivity(i);
 		finish();
 	}
