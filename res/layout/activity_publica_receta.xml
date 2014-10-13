@@ -34,7 +34,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="17dp"
                     android:layout_marginTop="18dp"
-                    android:src="@drawable/ic_launcher" />
+                    android:src="@drawable/ic_stat_icono_camara" />
 
                 <TextView
                     android:id="@+id/textView1"
@@ -59,10 +59,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/receta_nombre"
-                    android:layout_alignRight="@+id/textView1"
                     android:layout_below="@+id/receta_nombre"
                     android:layout_marginTop="20dp"
-                    android:text="Agregar o quitar Ingredientes" />
+                    android:layout_toLeftOf="@+id/recetas_ver_ingredientes"
+                    android:text="Agregar o quitar" />
 
                 <Spinner
                     android:id="@+id/receta_spinner_cat"
@@ -70,27 +70,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/receta_publicar"
                     android:layout_below="@+id/receta_boton_agrega" />
-
-                <EditText
-                    android:id="@+id/receta_intrucciones"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/textView3"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/textView3"
-                    android:ems="10"
-                    android:inputType="textMultiLine" >
-
-                    <requestFocus />
-                </EditText>
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/receta_boton_agrega"
-                    android:layout_below="@+id/receta_spinner_cat"
-                    android:text="Instrucciones" />
 
                 <TextView
                     android:id="@+id/textView2"
@@ -102,14 +81,6 @@
                     android:text="Seleccionar una categoría" />
 
                 <Button
-                    android:id="@+id/recetas_ver_ingredientes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/receta_spinner_cat"
-                    android:layout_alignTop="@+id/receta_boton_agrega"
-                    android:text="Ver Ingredientes" />
-
-                <Button
                     android:id="@+id/receta_publicar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -117,6 +88,41 @@
                     android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@+id/textView1"
                     android:text="Publicar" />
+
+                <Button
+                    android:id="@+id/recetas_ver_ingredientes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/receta_boton_agrega"
+                    android:text="Ver" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/recetas_ver_ingredientes"
+                    android:layout_alignLeft="@+id/receta_boton_agrega"
+                    android:text="Ingredientes" />
+
+                <EditText
+                    android:id="@+id/receta_intrucciones"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView3"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="14dp"
+                    android:ems="10"
+                    android:inputType="textMultiLine" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/receta_intrucciones"
+                    android:layout_alignRight="@+id/textView4"
+                    android:text="Instrucciones" />
 
             </RelativeLayout>
 

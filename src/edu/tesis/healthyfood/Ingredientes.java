@@ -1,9 +1,29 @@
 package edu.tesis.healthyfood;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import edu.tesis.healthyfood.sobj.ContenedorIngredientes;
 import edu.tesis.healthyfood.sobj.Ingrediente_Receta;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -148,20 +168,95 @@ public class Ingredientes extends Activity {
 	private void busquedaOnClick(){
 		if(campoBusqueda.getText()!=null){
 			String str= campoBusqueda.getText().toString();
-			if(!str.equals("")){
-				String arreglo[] = new String[]{
-						"Ingrediente 1","Ingrediente 2","Ingrediente 3"
-				};
-				listaRes.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,android.R.id.text1,arreglo));
-				ingredientes = new TreeMap<String,Ingrediente_Receta>();
-				ingredientes.put("Ingrediente 1", new Ingrediente_Receta("Ingrediente 1","u"));
-				ingredientes.put("Ingrediente 2", new Ingrediente_Receta("Ingrediente 2","g"));
-				ingredientes.put("Ingrediente 3", new Ingrediente_Receta("Ingrediente 3","u"));
-			}
+			IngredienteAsync ia = new IngredienteAsync(this);
+			ia.execute(str);
 		}
 	}
 	
 	private EditText campoBusqueda;
 	private Button botonBusqueda;
 	private ListView listaRes;
+	
+	private class IngredienteAsync extends AsyncTask<String,Void,String[]>{
+
+		private Ingredientes padre;
+		
+		public IngredienteAsync(Ingredientes i){
+			padre=i;
+		}
+		
+		@Override
+		protected String[] doInBackground(String... arg0) {
+			// TODO Auto-generated method stub
+			HttpClient cliente = new DefaultHttpClient();
+			HttpPost post = new HttpPost(Login.url+"/getIngredientes.php");
+			
+	        List<NameValuePair> params = new ArrayList<NameValuePair>(2);
+	        params.add(new BasicNameValuePair("patron",arg0[0]));
+	        try {
+				post.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return getValores(cliente,post);
+		}
+		
+		private StringBuilder inputStreamToString(InputStream is) {
+		    String rLine = "";
+		    StringBuilder answer = new StringBuilder();
+		    BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+		    try {
+		     while ((rLine = rd.readLine()) != null) {
+		      answer.append(rLine);
+		       }
+		    }
+		    catch (IOException e) {
+		        e.printStackTrace();
+		     }
+		    return answer;
+		}
+		
+		private String []getValores(HttpClient cliente, HttpPost post){
+			String []regs=null;
+			try{
+		    	HttpResponse response = cliente.execute(post);
+		    	String jsonResult = inputStreamToString(response.getEntity().getContent()).toString();
+		    	JSONArray mArray = new JSONArray(jsonResult);
+		    	int num_registros=mArray.length();
+		    	if(num_registros>0){
+		    		regs = new String[num_registros];
+		    		for (int i = 0; i < num_registros; i++) {
+			    	    JSONObject object = mArray.getJSONObject(i);
+			    	    String campo1 = object.getString("nombre");
+			    	    String campo2 = object.getString("tipoMedida");
+			    	    regs[i] = campo1+","+campo2;
+			    	}
+		    	}
+		    }catch(JSONException e){
+		    	e.printStackTrace();
+		    } catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	    	cliente.getConnectionManager().shutdown();
+			return regs;
+		}
+		
+		protected void onPostExecute(String[] result){
+			if(result!=null){
+				String adaptador[] = new String[result.length];
+				for(int i = 0;i<result.length;i++){
+					String linea_ingrediente = result[i];
+					String [] attr_ingrediente = linea_ingrediente.split(",");
+					padre.ingredientes.put(attr_ingrediente[0], new Ingrediente_Receta(attr_ingrediente[0],attr_ingrediente[1]));
+					adaptador[i] = attr_ingrediente[0];
+				}
+				padre.listaRes.setAdapter(new ArrayAdapter<String>(padre,android.R.layout.simple_list_item_1,android.R.id.text1,adaptador));
+			}
+		}
+		
+	}
+	
 }

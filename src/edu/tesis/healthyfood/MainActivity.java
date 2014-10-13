@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends Activity {
 
@@ -16,7 +17,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		Button ingreso = (Button)this.findViewById(R.id.main_boton_ingreso);
+		ImageButton ingreso = (ImageButton)this.findViewById(R.id.main_boton_entrar);
 		
 		ingreso.setOnClickListener(new OnClickListener(){
 			@Override

@@ -70,6 +70,7 @@ public class MenuPrincipal extends Activity {
 			return;
 		}
 		sql.cerrar();
+		this.finish();
 	}
 	
 	private void listaOnClick(View view){

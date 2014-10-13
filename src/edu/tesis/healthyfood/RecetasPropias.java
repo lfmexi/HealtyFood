@@ -18,5 +18,5 @@ public class RecetasPropias extends Activity {
 		getMenuInflater().inflate(R.menu.recetas_propias, menu);
 		return true;
 	}
-
+	
 }
