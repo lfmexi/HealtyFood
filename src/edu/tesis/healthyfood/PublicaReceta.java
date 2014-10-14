@@ -24,6 +24,7 @@ import android.provider.MediaStore;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -127,7 +128,7 @@ public class PublicaReceta extends Activity {
 				ingredientes = ingredientes + " -> " +ir.getUnidades() + " unidades";
 			}
 			if(ir.getLitros()!=0){
-				ingredientes = ingredientes + " -> " +ir.getLitros() + " unidades";
+				ingredientes = ingredientes + " -> " +ir.getLitros() + " litros";
 			}
 			ingredientes+="\n";
 		}
@@ -264,8 +265,15 @@ public class PublicaReceta extends Activity {
 				AlertDialog.Builder b= new AlertDialog.Builder(padre);
 		        b.setTitle("Carga exitosa");
 		        b.setMessage("La receta ha sido publicada con éxito");
+		        b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface arg0, int arg1) {
+						// TODO Auto-generated method stub
+				        padre.finish();
+					}
+		        });
 		        b.show();
-		        padre.finish();
 			}else{
 				AlertDialog.Builder b= new AlertDialog.Builder(padre);
 		        b.setTitle("Error");
