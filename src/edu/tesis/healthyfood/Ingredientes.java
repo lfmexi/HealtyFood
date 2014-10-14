@@ -139,7 +139,7 @@ public class Ingredientes extends Activity {
 							// TODO Auto-generated method stub
 							try{
 								double entero = Double.parseDouble(input.getText().toString());
-								ir.setGramos(entero);
+								ir.setLitros(entero);
 								PublicaReceta.contenedor.lista.put(nombre, ir);
 							}catch(NumberFormatException nfe){
 								//nada
