@@ -12,7 +12,10 @@
     <string name="title_activity_ejercicios">Ejercicios</string>
     <string name="title_activity_perfil">Perfil</string>
     <string name="title_activity_medidor">Medidor</string>
-
+    <string name="title_tab_profile">Mi perfil</string>
+    <string name="title_tab_recipes">Recetas</string>
+    <string name="title_tab_settings">Configuración</string>
+    
     <string-array name="categories_array">
         <item>Entrada</item>
         <item>Plato Fuerte</item>

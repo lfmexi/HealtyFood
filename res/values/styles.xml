@@ -14,9 +14,9 @@
     </style>
 
     <style name="estilo" parent="android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">#9CC916</item> 
-       <item name="android:titleTextStyle"  tools:targetApi="11">@style/NoTitleText</item>
-        <item name="android:subtitleTextStyle"  tools:targetApi="11">@style/NoTitleText</item>		
+		<item name="android:background">#9CC916</item> 
+        <item name="android:titleTextStyle"  tools:targetApi="11">@style/NoTitleText</item>
+        <item name="android:subtitleTextStyle"  tools:targetApi="11">@style/NoTitleText</item>
     </style>
     
     <!-- Application theme. -->

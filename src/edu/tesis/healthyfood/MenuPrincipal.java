@@ -5,21 +5,40 @@ import edu.tesis.healthyfood.sqlite.Sesion;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar.Tab;
+import android.support.v7.app.ActionBar.TabListener;
 
-public class MenuPrincipal extends Activity {
+public class MenuPrincipal extends ActionBarActivity implements TabListener {
 
 	String user="";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		ActionBar Bar=getSupportActionBar();
+		Bar.setDisplayHomeAsUpEnabled(true);
+		Bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);;
+		Tab p=Bar.newTab().setText(R.string.title_tab_profile).setIcon(R.drawable.ic_action_action_perm_identity).setTabListener(this);
+		Bar.addTab(p);
+		p=Bar.newTab().setText(R.string.title_tab_recipes).setIcon(R.drawable.ic_action_action_assignment).setTabListener(this);
+		Bar.addTab(p);
+		p=Bar.newTab().setText(R.string.title_tab_settings).setIcon(R.drawable.ic_action_action_settings).setTabListener(this);
+		Bar.addTab(p);
+		
 		setContentView(R.layout.activity_menu_principal);
 		
 		Intent i=this.getIntent();
@@ -103,5 +122,36 @@ public class MenuPrincipal extends Activity {
 	}
 	
 	private ListView listaMenu;
+	@Override
+	public void onTabReselected(Tab tab, FragmentTransaction fragmentTransaction) {
+		
+		
+	}
+
+	@Override
+	public void onTabSelected(Tab arg0, FragmentTransaction arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTabUnselected(Tab arg0, FragmentTransaction arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	public static class DummySectionFragment extends Fragment {
+	    public static final String ARG_SECTION_NUMBER = "placeholder_text";
+
+	    @Override
+	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	       Bundle savedInstanceState) {
+	      TextView textView = new TextView(getActivity());
+	      textView.setGravity(Gravity.CENTER);
+	      textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+	      return textView;
+	    }
+	  }
 
 }
