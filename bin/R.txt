@@ -291,7 +291,7 @@ int id action_settings 0x7f05005d
 int id activity_chooser_view_content 0x7f050025
 int id always 0x7f05000b
 int id beginning 0x7f050011
-int id botonBuscar 0x7f05003e
+int id busca_receta_result 0x7f05003c
 int id checkbox 0x7f05002d
 int id collapseActionView 0x7f05000d
 int id default_activity_button 0x7f050028
@@ -302,15 +302,14 @@ int id edit_query 0x7f050030
 int id end 0x7f050013
 int id expand_activities_button 0x7f050026
 int id expanded_menu 0x7f05002c
-int id fav_lista 0x7f050040
+int id fav_lista 0x7f05003f
 int id home 0x7f050014
 int id homeAsUp 0x7f050005
 int id icon 0x7f05002a
 int id ifRoom 0x7f05000a
 int id image 0x7f050027
-int id ing_buscar 0x7f050043
-int id ingredientes_busca 0x7f050042
-int id ingredientes_result 0x7f05003f
+int id ing_buscar 0x7f050042
+int id ingredientes_busca 0x7f050041
 int id listMode 0x7f050001
 int id listView1 0x7f050055
 int id list_item 0x7f050029
@@ -332,10 +331,11 @@ int id progress_horizontal 0x7f050019
 int id radio 0x7f05002f
 int id receta_boton_agrega 0x7f050050
 int id receta_imagen 0x7f05004e
-int id receta_intrucciones 0x7f05003d
+int id receta_instrucciones 0x7f05003d
 int id receta_nombre 0x7f05004f
 int id receta_publicar 0x7f050053
 int id receta_spinner_cat 0x7f050052
+int id recetas_buscar 0x7f05003e
 int id recetas_ver_ingredientes 0x7f050051
 int id registro_boton_confirma 0x7f05005c
 int id registro_confirma 0x7f05005b
@@ -343,7 +343,7 @@ int id registro_email 0x7f050057
 int id registro_nombre 0x7f050058
 int id registro_pass 0x7f050059
 int id registro_username 0x7f050056
-int id scrollView1 0x7f05003c
+int id scrollView1 0x7f050043
 int id search_badge 0x7f050032
 int id search_bar 0x7f050031
 int id search_button 0x7f050033
@@ -361,7 +361,7 @@ int id showTitle 0x7f050006
 int id split_action_bar 0x7f05001e
 int id submit_area 0x7f050039
 int id tabMode 0x7f050002
-int id textView1 0x7f050041
+int id textView1 0x7f050040
 int id textView2 0x7f050044
 int id textView3 0x7f050046
 int id textView4 0x7f050054
@@ -410,7 +410,8 @@ int layout activity_perfil 0x7f030022
 int layout activity_publica_receta 0x7f030023
 int layout activity_recetas_propias 0x7f030024
 int layout activity_registro 0x7f030025
-int layout support_simple_spinner_dropdown_item 0x7f030026
+int layout activity_visualiza_receta 0x7f030026
+int layout support_simple_spinner_dropdown_item 0x7f030027
 int menu busca_recetas 0x7f0d0000
 int menu ejercicios 0x7f0d0001
 int menu favoritas 0x7f0d0002
@@ -427,6 +428,7 @@ int menu publica_receta 0x7f0d000c
 int menu recetas_propias 0x7f0d000d
 int menu registrar 0x7f0d000e
 int menu registro 0x7f0d000f
+int menu visualiza_receta 0x7f0d0010
 int string abc_action_bar_home_description 0x7f0a0001
 int string abc_action_bar_up_description 0x7f0a0002
 int string abc_action_menu_overflow_description 0x7f0a0003
@@ -457,6 +459,7 @@ int string title_activity_publica_receta 0x7f0a0013
 int string title_activity_recetas_propias 0x7f0a001e
 int string title_activity_registrar 0x7f0a001c
 int string title_activity_registro 0x7f0a0020
+int string title_activity_visualiza_receta 0x7f0a0021
 int string title_tab_profile 0x7f0a0018
 int string title_tab_recipes 0x7f0a0019
 int string title_tab_settings 0x7f0a001a

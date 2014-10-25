@@ -1120,7 +1120,6 @@ containing a value of this type.
         public static final int tab_unselected_pressed_healthyfood=0x7f02007d;
     }
     public static final class id {
-<<<<<<< HEAD
         public static final int action_bar=0x7f05001c;
         public static final int action_bar_activity_content=0x7f050015;
         public static final int action_bar_container=0x7f05001b;
@@ -1138,7 +1137,7 @@ containing a value of this type.
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
-        public static final int botonBuscar=0x7f05003e;
+        public static final int busca_receta_result=0x7f05003c;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
         public static final int default_activity_button=0x7f050028;
@@ -1149,15 +1148,14 @@ containing a value of this type.
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050026;
         public static final int expanded_menu=0x7f05002c;
-        public static final int fav_lista=0x7f050040;
+        public static final int fav_lista=0x7f05003f;
         public static final int home=0x7f050014;
         public static final int homeAsUp=0x7f050005;
         public static final int icon=0x7f05002a;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
-        public static final int ing_buscar=0x7f050043;
-        public static final int ingredientes_busca=0x7f050042;
-        public static final int ingredientes_result=0x7f05003f;
+        public static final int ing_buscar=0x7f050042;
+        public static final int ingredientes_busca=0x7f050041;
         public static final int listMode=0x7f050001;
         public static final int listView1=0x7f050055;
         public static final int list_item=0x7f050029;
@@ -1179,10 +1177,11 @@ containing a value of this type.
         public static final int radio=0x7f05002f;
         public static final int receta_boton_agrega=0x7f050050;
         public static final int receta_imagen=0x7f05004e;
-        public static final int receta_intrucciones=0x7f05003d;
+        public static final int receta_instrucciones=0x7f05003d;
         public static final int receta_nombre=0x7f05004f;
         public static final int receta_publicar=0x7f050053;
         public static final int receta_spinner_cat=0x7f050052;
+        public static final int recetas_buscar=0x7f05003e;
         public static final int recetas_ver_ingredientes=0x7f050051;
         public static final int registro_boton_confirma=0x7f05005c;
         public static final int registro_confirma=0x7f05005b;
@@ -1190,7 +1189,7 @@ containing a value of this type.
         public static final int registro_nombre=0x7f050058;
         public static final int registro_pass=0x7f050059;
         public static final int registro_username=0x7f050056;
-        public static final int scrollView1=0x7f05003c;
+        public static final int scrollView1=0x7f050043;
         public static final int search_badge=0x7f050032;
         public static final int search_bar=0x7f050031;
         public static final int search_button=0x7f050033;
@@ -1208,7 +1207,7 @@ containing a value of this type.
         public static final int split_action_bar=0x7f05001e;
         public static final int submit_area=0x7f050039;
         public static final int tabMode=0x7f050002;
-        public static final int textView1=0x7f050041;
+        public static final int textView1=0x7f050040;
         public static final int textView2=0x7f050044;
         public static final int textView3=0x7f050046;
         public static final int textView4=0x7f050054;
@@ -1283,7 +1282,8 @@ containing a value of this type.
         public static final int activity_publica_receta=0x7f030023;
         public static final int activity_recetas_propias=0x7f030024;
         public static final int activity_registro=0x7f030025;
-        public static final int support_simple_spinner_dropdown_item=0x7f030026;
+        public static final int activity_visualiza_receta=0x7f030026;
+        public static final int support_simple_spinner_dropdown_item=0x7f030027;
     }
     public static final class menu {
         public static final int busca_recetas=0x7f0d0000;
@@ -1302,6 +1302,7 @@ containing a value of this type.
         public static final int recetas_propias=0x7f0d000d;
         public static final int registrar=0x7f0d000e;
         public static final int registro=0x7f0d000f;
+        public static final int visualiza_receta=0x7f0d0010;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1361,104 +1362,10 @@ containing a value of this type.
         public static final int title_activity_recetas_propias=0x7f0a001e;
         public static final int title_activity_registrar=0x7f0a001c;
         public static final int title_activity_registro=0x7f0a0020;
+        public static final int title_activity_visualiza_receta=0x7f0a0021;
         public static final int title_tab_profile=0x7f0a0018;
         public static final int title_tab_recipes=0x7f0a0019;
         public static final int title_tab_settings=0x7f0a001a;
-=======
-        public static final int action_compose=0x7f090024;
-        public static final int action_search=0x7f090023;
-        public static final int action_settings=0x7f090021;
-        public static final int busca_receta_result=0x7f090000;
-        public static final int fav_lista=0x7f090003;
-        public static final int ing_buscar=0x7f090006;
-        public static final int ingredientes_busca=0x7f090005;
-        public static final int listView1=0x7f090019;
-        public static final int listaMenu=0x7f090010;
-        public static final int loginPassword=0x7f09000b;
-        public static final int loginUsername=0x7f090009;
-        public static final int login_boton_register=0x7f09000e;
-        public static final int login_forgot=0x7f09000d;
-        public static final int logout=0x7f090022;
-        public static final int main_boton_entrar=0x7f09000f;
-        public static final int main_boton_ingreso=0x7f09000c;
-        public static final int mis_recetas_lista=0x7f090011;
-        public static final int receta_boton_agrega=0x7f090014;
-        public static final int receta_imagen=0x7f090012;
-        public static final int receta_instrucciones=0x7f090001;
-        public static final int receta_nombre=0x7f090013;
-        public static final int receta_publicar=0x7f090017;
-        public static final int receta_spinner_cat=0x7f090016;
-        public static final int recetas_buscar=0x7f090002;
-        public static final int recetas_ver_ingredientes=0x7f090015;
-        public static final int registro_boton_confirma=0x7f090020;
-        public static final int registro_confirma=0x7f09001f;
-        public static final int registro_email=0x7f09001b;
-        public static final int registro_nombre=0x7f09001c;
-        public static final int registro_pass=0x7f09001d;
-        public static final int registro_username=0x7f09001a;
-        public static final int scrollView1=0x7f090007;
-        public static final int textView1=0x7f090004;
-        public static final int textView2=0x7f090008;
-        public static final int textView3=0x7f09000a;
-        public static final int textView4=0x7f090018;
-        public static final int textView5=0x7f09001e;
-    }
-    public static final class layout {
-        public static final int activity_busca_recetas=0x7f030000;
-        public static final int activity_ejercicios=0x7f030001;
-        public static final int activity_favoritas=0x7f030002;
-        public static final int activity_forgot_data=0x7f030003;
-        public static final int activity_ingredientes=0x7f030004;
-        public static final int activity_login=0x7f030005;
-        public static final int activity_main=0x7f030006;
-        public static final int activity_medidor=0x7f030007;
-        public static final int activity_menu_principal=0x7f030008;
-        public static final int activity_mis_recetas=0x7f030009;
-        public static final int activity_perfil=0x7f03000a;
-        public static final int activity_publica_receta=0x7f03000b;
-        public static final int activity_recetas_propias=0x7f03000c;
-        public static final int activity_registro=0x7f03000d;
-        public static final int activity_visualiza_receta=0x7f03000e;
-    }
-    public static final class menu {
-        public static final int busca_recetas=0x7f080000;
-        public static final int ejercicios=0x7f080001;
-        public static final int favoritas=0x7f080002;
-        public static final int forgot_data=0x7f080003;
-        public static final int ingredientes=0x7f080004;
-        public static final int login=0x7f080005;
-        public static final int main=0x7f080006;
-        public static final int medidor=0x7f080007;
-        public static final int menu_principal=0x7f080008;
-        public static final int mimenu=0x7f080009;
-        public static final int mis_recetas=0x7f08000a;
-        public static final int perfil=0x7f08000b;
-        public static final int publica_receta=0x7f08000c;
-        public static final int recetas_propias=0x7f08000d;
-        public static final int registrar=0x7f08000e;
-        public static final int registro=0x7f08000f;
-        public static final int visualiza_receta=0x7f080010;
-    }
-    public static final class string {
-        public static final int action_settings=0x7f050001;
-        public static final int app_name=0x7f050000;
-        public static final int hello_world=0x7f050002;
-        public static final int title_activity_busca_recetas=0x7f050005;
-        public static final int title_activity_ejercicios=0x7f050008;
-        public static final int title_activity_favoritas=0x7f05000f;
-        public static final int title_activity_forgot_data=0x7f05000b;
-        public static final int title_activity_ingredientes=0x7f05000d;
-        public static final int title_activity_login=0x7f050003;
-        public static final int title_activity_medidor=0x7f05000a;
-        public static final int title_activity_menu_principal=0x7f050004;
-        public static final int title_activity_mis_recetas=0x7f050007;
-        public static final int title_activity_perfil=0x7f050009;
-        public static final int title_activity_publica_receta=0x7f050006;
-        public static final int title_activity_recetas_propias=0x7f05000e;
-        public static final int title_activity_registrar=0x7f05000c;
-        public static final int title_activity_registro=0x7f050010;
-        public static final int title_activity_visualiza_receta=0x7f050011;
->>>>>>> origin/master
     }
     public static final class style {
         public static final int ActionBar_Solid_Healthyfood=0x7f0b0090;
