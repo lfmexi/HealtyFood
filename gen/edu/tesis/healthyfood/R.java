@@ -24,12 +24,17 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int ic_launcher_imagen=0x7f020001;
-        public static final int ic_launcher_start=0x7f020002;
-        public static final int ic_stat_icono_camara=0x7f020003;
+        public static final int ic_action_action_assignment=0x7f020000;
+        public static final int ic_action_action_perm_identity=0x7f020001;
+        public static final int ic_action_action_settings=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int ic_launcher_imagen=0x7f020004;
+        public static final int ic_launcher_start=0x7f020005;
+        public static final int ic_stat_icono_camara=0x7f020006;
     }
     public static final class id {
+        public static final int action_compose=0x7f090024;
+        public static final int action_search=0x7f090023;
         public static final int action_settings=0x7f090021;
         public static final int busca_receta_result=0x7f090000;
         public static final int fav_lista=0x7f090003;
@@ -93,6 +98,7 @@ public final class R {
         public static final int main=0x7f080006;
         public static final int medidor=0x7f080007;
         public static final int menu_principal=0x7f080008;
+<<<<<<< HEAD
         public static final int mis_recetas=0x7f080009;
         public static final int perfil=0x7f08000a;
         public static final int publica_receta=0x7f08000b;
@@ -100,6 +106,15 @@ public final class R {
         public static final int registrar=0x7f08000d;
         public static final int registro=0x7f08000e;
         public static final int visualiza_receta=0x7f08000f;
+=======
+        public static final int mimenu=0x7f080009;
+        public static final int mis_recetas=0x7f08000a;
+        public static final int perfil=0x7f08000b;
+        public static final int publica_receta=0x7f08000c;
+        public static final int recetas_propias=0x7f08000d;
+        public static final int registrar=0x7f08000e;
+        public static final int registro=0x7f08000f;
+>>>>>>> 88927829d51ff088da55e6e1d9a29c9dd1acae69
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
@@ -130,6 +145,7 @@ public final class R {
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+            
         
 
         Base application theme for API 11+. This theme completely replaces
@@ -145,8 +161,9 @@ public final class R {
          */
         public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
+        public static final int AppTheme=0x7f070002;
+        public static final int NoTitleText=0x7f070003;
+        public static final int estilo=0x7f070001;
     }
 }

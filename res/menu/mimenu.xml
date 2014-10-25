@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/action_search"
+          android:icon="@drawable/ic_action_action_perm_identity"
+          android:title="Mi Perfil"
+          android:showAsAction="ifRoom"  />
+    <item android:id="@+id/action_compose"
+          android:icon="@drawable/ic_action_action_assignment"
+          android:title="Recetas"
+          android:showAsAction="ifRoom"  />
+    <item android:id="@+id/action_compose"
+          android:icon="@drawable/ic_action_action_settings"
+          android:title="Configuración"
+          android:showAsAction="ifRoom"  />
+</menu>
