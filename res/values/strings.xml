@@ -27,5 +27,6 @@
     <string name="title_activity_recetas_propias">Recetas Propias</string>
     <string name="title_activity_favoritas">Favoritas</string>
     <string name="title_activity_registro">Registro</string>
+    <string name="title_activity_visualiza_receta">Receta</string>
 
 </resources>

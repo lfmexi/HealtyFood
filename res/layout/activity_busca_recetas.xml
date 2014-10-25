@@ -8,58 +8,30 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".BuscaRecetas" >
 
-    <ScrollView
-        android:id="@+id/scrollView1"
+    <ListView
+        android:id="@+id/busca_receta_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/receta_instrucciones" >
+
+    </ListView>
+
+    <Button
+        android:id="@+id/recetas_buscar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" >
+        android:layout_alignBaseline="@+id/receta_instrucciones"
+        android:layout_alignBottom="@+id/receta_instrucciones"
+        android:layout_alignRight="@+id/busca_receta_result"
+        android:text="Buscar" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="422dp" >
-
-                <EditText
-                    android:id="@+id/receta_intrucciones"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="23dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_toLeftOf="@+id/botonBuscar"
-                    android:ems="10" >
-
-                    <requestFocus />
-                </EditText>
-
-                <Button
-                    android:id="@+id/botonBuscar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/receta_intrucciones"
-                    android:layout_alignParentRight="true"
-                    android:text="Buscar" />
-
-                <ListView
-                    android:id="@+id/ingredientes_result"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/receta_intrucciones"
-                    android:layout_below="@+id/receta_intrucciones"
-                    android:layout_marginTop="15dp" >
-                </ListView>
-
-            </RelativeLayout>
-
-        </LinearLayout>
-    </ScrollView>
+    <EditText
+        android:id="@+id/receta_instrucciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="32dp"
+        android:layout_toLeftOf="@+id/recetas_buscar"
+        android:ems="10" />
 
 </RelativeLayout>

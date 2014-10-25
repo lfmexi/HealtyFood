@@ -8,67 +8,35 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Ingredientes" >
 
-    <ScrollView
-        android:id="@+id/scrollView1"
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" >
+        android:text="Busqueda de ingredientes" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+    <ListView
+        android:id="@+id/busca_receta_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ingredientes_busca" >
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="428dp" >
+    </ListView>
 
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:text="Busqueda de ingredientes" />
+    <Button
+        android:id="@+id/ing_buscar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ingredientes_busca"
+        android:layout_alignBottom="@+id/ingredientes_busca"
+        android:layout_alignRight="@+id/busca_receta_result"
+        android:text="Buscar" />
 
-                <EditText
-                    android:id="@+id/ingredientes_busca"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignRight="@+id/textView1"
-                    android:layout_below="@+id/textView1"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginTop="14dp"
-                    android:ems="10" >
-
-                    <requestFocus />
-                </EditText>
-
-                <Button
-                    android:id="@+id/ing_buscar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/textView1"
-                    android:layout_marginRight="22dp"
-                    android:text="Buscar" />
-
-                <ListView
-                    android:id="@+id/ingredientes_result"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/ingredientes_busca"
-                    android:layout_below="@+id/ingredientes_busca"
-                    android:layout_marginTop="16dp" >
-                </ListView>
-
-            </RelativeLayout>
-
-        </LinearLayout>
-    </ScrollView>
+    <EditText
+        android:id="@+id/ingredientes_busca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:ems="10" />
 
 </RelativeLayout>
