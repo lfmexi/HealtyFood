@@ -54,7 +54,7 @@ public class Ingredientes extends Activity {
 		
 		campoBusqueda = (EditText)this.findViewById(R.id.ingredientes_busca);
 		botonBusqueda = (Button)this.findViewById(R.id.ing_buscar);
-		listaRes = (ListView)this.findViewById(R.id.ingredientes_result);
+		listaRes = (ListView)this.findViewById(R.id.busca_receta_result);
 		
 		botonBusqueda.setOnClickListener(new OnClickListener(){
 			@Override

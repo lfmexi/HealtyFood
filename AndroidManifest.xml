@@ -77,6 +77,10 @@
             android:name="edu.tesis.healthyfood.Registro"
             android:label="@string/title_activity_registro" >
         </activity>
+        <activity
+            android:name="edu.tesis.healthyfood.VisualizaReceta"
+            android:label="@string/title_activity_visualiza_receta" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

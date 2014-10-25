@@ -106,7 +106,7 @@
                     android:text="Ingredientes" />
 
                 <EditText
-                    android:id="@+id/receta_intrucciones"
+                    android:id="@+id/receta_instrucciones"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/textView3"
@@ -120,7 +120,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/receta_intrucciones"
+                    android:layout_above="@+id/receta_instrucciones"
                     android:layout_alignRight="@+id/textView4"
                     android:text="Instrucciones" />
 

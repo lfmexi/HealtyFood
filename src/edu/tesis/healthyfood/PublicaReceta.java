@@ -51,7 +51,7 @@ public class PublicaReceta extends Activity {
 		contenedor = new ContenedorIngredientes();
 		selector_categoria = (Spinner)this.findViewById(R.id.receta_spinner_cat);
 		campo_nombre = (EditText)this.findViewById(R.id.receta_nombre);
-		campo_instrucciones = (EditText)this.findViewById(R.id.receta_intrucciones);
+		campo_instrucciones = (EditText)this.findViewById(R.id.receta_instrucciones);
 		imagen = (ImageView)this.findViewById(R.id.receta_imagen);
 		boton_registrar = (Button)this.findViewById(R.id.receta_publicar);
 		boton_ingredientes = (Button)this.findViewById(R.id.receta_boton_agrega);
