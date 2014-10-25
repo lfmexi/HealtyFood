@@ -98,15 +98,6 @@ public final class R {
         public static final int main=0x7f080006;
         public static final int medidor=0x7f080007;
         public static final int menu_principal=0x7f080008;
-<<<<<<< HEAD
-        public static final int mis_recetas=0x7f080009;
-        public static final int perfil=0x7f08000a;
-        public static final int publica_receta=0x7f08000b;
-        public static final int recetas_propias=0x7f08000c;
-        public static final int registrar=0x7f08000d;
-        public static final int registro=0x7f08000e;
-        public static final int visualiza_receta=0x7f08000f;
-=======
         public static final int mimenu=0x7f080009;
         public static final int mis_recetas=0x7f08000a;
         public static final int perfil=0x7f08000b;
@@ -114,7 +105,7 @@ public final class R {
         public static final int recetas_propias=0x7f08000d;
         public static final int registrar=0x7f08000e;
         public static final int registro=0x7f08000f;
->>>>>>> 88927829d51ff088da55e6e1d9a29c9dd1acae69
+        public static final int visualiza_receta=0x7f080010;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
