@@ -50,8 +50,8 @@ public class MainActivity extends ActionBarActivity implements TabListener  {
 				this.startActivity(i);
 			}
 		}else{
-		//	Intent i = new Intent(this,Login.class);
-		//	this.startActivity(i);
+			Intent i = new Intent(this,Login.class);
+			this.startActivity(i);
 		}
 	}
 	

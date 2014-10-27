@@ -45,7 +45,7 @@ public class MenuPrincipal extends ActionBarActivity implements TabListener {
 		user = i.getExtras().getString("infoUser");
 		
 		String listado[]=new String[]{
-				"Publicar receta","Buscar recetas","Mis recetas","Ejercicios recomendados","Mi Perfil","Medidor de calorÃ­as"
+				"Publicar receta","Buscar recetas","Mis recetas","Ejercicios recomendados","Mi Perfil","Medidor de calorías"
 		};
 		listaMenu=(ListView)this.findViewById(R.id.listaMenu);
 		listaMenu.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,android.R.id.text1,listado));
