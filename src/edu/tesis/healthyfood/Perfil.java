@@ -45,7 +45,6 @@ public class Perfil extends Activity {
 		i.putExtra("infoUser", user);
 		i.putExtra("ambito","perfil");
 		this.startActivity(i);
-		this.finish();
 	}
 	
 	private void progreso(){
