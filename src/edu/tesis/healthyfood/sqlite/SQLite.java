@@ -2,6 +2,8 @@ package edu.tesis.healthyfood.sqlite;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import android.content.ContentValues;
@@ -38,6 +40,70 @@ public class SQLite {
 			return(db.insert(sqlh.tabla, null, cv)!=-1)?true:false;
 		}
 		return false;
+	}
+	
+	public boolean addObjetivo(String username,String newOb){
+		if(username!=null){
+			ContentValues cv = new ContentValues();
+			cv.put(sqlh.username, username);
+			cv.put(sqlh.objetivo, newOb);
+			cv.put(sqlh.fecha_ob, new SimpleDateFormat("yyy-MM-dd HH:mm:ss").format(new Date()));
+			return(db.insert(sqlh.tablaObjetivo, null, cv)!=-1)?true:false;
+		}
+		return false;
+	}
+	
+	public boolean addMedicion(String username,double peso,double altura,double imc){
+		if(username!=null){
+			ContentValues cv = new ContentValues();
+			cv.put(sqlh.username, username);
+			cv.put(sqlh.altura, altura);
+			cv.put(sqlh.peso, peso);
+			cv.put(sqlh.imc, imc);
+			cv.put(sqlh.fecha,new SimpleDateFormat("yyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()));
+			return(db.insert(sqlh.tablaMedicion, null,cv)!=-1)?true:false;
+		}
+		return false;
+	}
+	
+	public String getLastObjetivo(String usr){
+		String res=null;
+		Cursor cursor = db.query(sqlh.tablaObjetivo,
+				new String[]{sqlh.objetivo},
+							sqlh.username+"=?",
+				new String[]{usr},
+							null,null,
+							sqlh.fecha_ob+" DESC ","1");
+		if(cursor.moveToFirst()){
+			do{
+				res = cursor.getString(0);
+			}while(cursor.moveToNext());
+		}
+		return res;
+	}
+	
+	public ArrayList<Medicion> getMediciones(String usr){
+		ArrayList<Medicion> med = new ArrayList<Medicion>();
+		Cursor cursor = db.query(sqlh.tablaMedicion,
+				new String[]{sqlh.fecha,sqlh.imc,sqlh.altura,sqlh.peso},
+					sqlh.username+"=?",
+				new String[]{usr},
+					null,null,
+					sqlh.fecha+" ASC ");
+		if(cursor.moveToFirst()){
+			do{
+				Medicion m = new Medicion();
+				try{
+					m.setFecha(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(cursor.getString(0)));
+				}catch(ParseException e){}
+				m.setImc(cursor.getDouble(1));
+				m.setAltura(cursor.getDouble(2));
+				m.setPeso(cursor.getDouble(3));
+				med.add(m);
+			}while(cursor.moveToNext());
+		}
+		
+		return med;
 	}
 	
 	public Sesion getLastSesion(){

@@ -28,8 +28,10 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class Registro extends Activity {
 
@@ -43,6 +45,13 @@ public class Registro extends Activity {
 		campoconfpass = (EditText)this.findViewById(R.id.registro_confirma);
 		campoNombre = (EditText)this.findViewById(R.id.registro_nombre);
 		botonRegistro = (Button)this.findViewById(R.id.registro_boton_confirma);
+		selectSexo = (Spinner)this.findViewById(R.id.selectorSexo);
+		
+		ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,
+		        R.array.gender_array, android.R.layout.simple_spinner_item);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		
+		selectSexo.setAdapter(adapter);
 		
 		botonRegistro.setOnClickListener(new OnClickListener(){
 
@@ -66,8 +75,9 @@ public class Registro extends Activity {
 		if(!campouser.getText().toString().equals("")&&!campoemail.getText().toString().equals("")&&!campopass.getText().toString().equals("")
 				&&!campoconfpass.getText().toString().equals("")&&!campoNombre.getText().toString().equals("")){
 			if(campoconfpass.getText().toString().equals(campopass.getText().toString())){
+				String sex=selectSexo.getSelectedItem().toString();
 				RegistroAsyncTask r = new RegistroAsyncTask(this,campouser.getText().toString());
-				r.execute(campouser.getText().toString(),campoNombre.getText().toString(),campopass.getText().toString(),campoemail.getText().toString());
+				r.execute(campouser.getText().toString(),campoNombre.getText().toString(),campopass.getText().toString(),campoemail.getText().toString(),sex);
 			}
 		}
 	}
@@ -77,6 +87,7 @@ public class Registro extends Activity {
 	private EditText campopass;
 	private EditText campoconfpass;
 	private EditText campoNombre;
+	private Spinner selectSexo;
 	private Button botonRegistro;
 
 	private class RegistroAsyncTask extends AsyncTask<String,Void,String>{
@@ -100,6 +111,7 @@ public class Registro extends Activity {
 	        params.add(new BasicNameValuePair("name",arg0[1]));
 	        params.add(new BasicNameValuePair("pass",arg0[2]));
 	        params.add(new BasicNameValuePair("email",arg0[3]));
+	        params.add(new BasicNameValuePair("sex",arg0[4]));
 	        try {
 				post.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 			} catch (UnsupportedEncodingException e) {
@@ -141,13 +153,14 @@ public class Registro extends Activity {
 		protected void onPostExecute(String result){
 			if(result!=null){
 				if(result.indexOf("Insertado")!=-1){
-					Intent i = new Intent(padre,MenuPrincipal.class);
+					Intent i = new Intent(padre,Medidor.class);
 					i.putExtra("infoUser", user);
+					i.putExtra("ambito", "registro");
 					padre.startActivity(i);
 					padre.finish();
 				}else{
 					AlertDialog.Builder alert=new AlertDialog.Builder(padre);
-					alert.setTitle("Error de autenticaciÃ³n");
+					alert.setTitle("Error de autenticación");
 					alert.setMessage("El usuario ya existe en el sistema o ha ocurrido un error");
 					alert.show();
 				}

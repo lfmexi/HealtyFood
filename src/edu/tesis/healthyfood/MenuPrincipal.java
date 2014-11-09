@@ -29,6 +29,10 @@ public class MenuPrincipal extends ActionBarActivity implements TabListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		Intent i=this.getIntent();
+		user = i.getExtras().getString("infoUser");
+		
 		ActionBar Bar=getSupportActionBar();
 		Bar.setDisplayHomeAsUpEnabled(true);
 		Bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);;
@@ -40,9 +44,6 @@ public class MenuPrincipal extends ActionBarActivity implements TabListener {
 		Bar.addTab(p);
 		
 		setContentView(R.layout.activity_menu_principal);
-		
-		Intent i=this.getIntent();
-		user = i.getExtras().getString("infoUser");
 		
 		String listado[]=new String[]{
 				"Publicar receta","Buscar recetas","Mis recetas","Ejercicios recomendados","Mi Perfil","Medidor de calorías"

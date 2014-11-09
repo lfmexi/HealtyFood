@@ -15,13 +15,24 @@
     <string name="title_tab_profile">Mi perfil</string>
     <string name="title_tab_recipes">Recetas</string>
     <string name="title_tab_settings">Configuración</string>
-    
+
     <string-array name="categories_array">
         <item>Entrada</item>
+        <item>Ensalada</item>
         <item>Plato Fuerte</item>
         <item>Desayuno</item>
         <item>Cena</item>
+        <item>Postre</item>
         <item>Bebida</item>
+    </string-array>
+    <string-array name="gender_array">
+        <item>Hombre</item>
+        <item>Mujer</item>
+    </string-array>
+    <string-array name="objective_array">
+        <item>Bajar peso</item>
+        <item>Mantener peso</item>
+        <item>Ganar peso</item>
     </string-array>
 
     <string name="title_activity_forgot_data">Datos olvidados</string>
@@ -31,5 +42,6 @@
     <string name="title_activity_favoritas">Favoritas</string>
     <string name="title_activity_registro">Registro</string>
     <string name="title_activity_visualiza_receta">Receta</string>
+    <string name="title_activity_progreso_imc">Progreso IMC</string>
 
 </resources>
