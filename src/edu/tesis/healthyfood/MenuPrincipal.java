@@ -36,17 +36,14 @@ public class MenuPrincipal extends ActionBarActivity implements TabListener {
 		ActionBar Bar=getSupportActionBar();
 		Bar.setDisplayHomeAsUpEnabled(true);
 		Bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);;
-		Tab p=Bar.newTab().setText(R.string.title_tab_profile).setIcon(R.drawable.ic_action_action_perm_identity).setTabListener(this);
+		Tab p=Bar.newTab().setText(R.string.title_tab_recipes).setIcon(R.drawable.ic_action_action_assignment).setTabListener(new MyTabListener(new Recetas(user)));
 		Bar.addTab(p);
-		p=Bar.newTab().setText(R.string.title_tab_recipes).setIcon(R.drawable.ic_action_action_assignment).setTabListener(this);
+		p=Bar.newTab().setText(R.string.title_tab_profile).setIcon(R.drawable.ic_action_action_perm_identity).setTabListener(new MyTabListener(new Perfil(user)));
 		Bar.addTab(p);
-		p=Bar.newTab().setText(R.string.title_tab_settings).setIcon(R.drawable.ic_action_action_settings).setTabListener(this);
-		Bar.addTab(p);
-		
 		setContentView(R.layout.activity_menu_principal);
 		
 		String listado[]=new String[]{
-				"Publicar receta","Buscar recetas","Mis recetas","Ejercicios recomendados","Mi Perfil","Medidor de calorías"
+				"Publicar receta","Buscar recetas","Mis recetas","Ejercicios recomendados","Mi Perfil","Medidor de calorï¿½as"
 		};
 		listaMenu=(ListView)this.findViewById(R.id.listaMenu);
 		listaMenu.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,android.R.id.text1,listado));
@@ -112,7 +109,7 @@ public class MenuPrincipal extends ActionBarActivity implements TabListener {
 			i.putExtra("infoUser", user);
 			this.startActivity(i);
 		}else if(nombreMenu.equals("Mi Perfil")){
-			Intent i = new Intent(this,Perfil.class);
+			Intent i = new Intent(this,Perfila.class);
 			i.putExtra("infoUser", user);
 			this.startActivity(i);
 		}else if(nombreMenu.equals("Medidor de calorÃ­as")){
