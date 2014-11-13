@@ -43,19 +43,19 @@ public class MenuPrincipal extends ActionBarActivity implements TabListener {
 		setContentView(R.layout.activity_menu_principal);
 		
 		String listado[]=new String[]{
-				"Publicar receta","Buscar recetas","Mis recetas","Ejercicios recomendados","Mi Perfil","Medidor de calor�as"
+				"Publicar receta","Buscar recetas","Mis recetas","Ejercicios recomendados","Mi Perfil","Medidor de calorías"
 		};
-		listaMenu=(ListView)this.findViewById(R.id.listaMenu);
-		listaMenu.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,android.R.id.text1,listado));
+	//	listaMenu=(ListView)this.findViewById(R.id.listaMenu);
+	//	listaMenu.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,android.R.id.text1,listado));
 		
-		listaMenu.setOnItemClickListener(new OnItemClickListener(){
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// TODO Auto-generated method stub
-				listaOnClick(arg1);
-			}
-		});
+	//	listaMenu.setOnItemClickListener(new OnItemClickListener(){
+	//		@Override
+	//		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+	//				long arg3) {
+	//			// TODO Auto-generated method stub
+	//			listaOnClick(arg1);
+	//		}
+	//	});
 	}
 
 	@Override
