@@ -16,8 +16,8 @@ public class Perfila extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_perfil);
 
-		Intent i=this.getIntent();
-		user = i.getExtras().getString("infoUser");
+//		Intent i=this.getIntent();
+//		user = i.getExtras().getString("infoUser");
 		
 		botonMedir=(Button)this.findViewById(R.id.botonNuevaMedida);
 		botonProgreso=(Button)this.findViewById(R.id.botonGetProgreso);
