@@ -27,7 +27,7 @@
                 android:layout_height="428dp" >
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/textTipoReceta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
@@ -38,8 +38,8 @@
                     android:id="@+id/loginUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/textView2"
-                    android:layout_below="@+id/textView2"
+                    android:layout_alignLeft="@+id/textTipoReceta"
+                    android:layout_below="@+id/textTipoReceta"
                     android:layout_marginTop="16dp"
                     android:ems="10" >
 

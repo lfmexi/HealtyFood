@@ -140,11 +140,12 @@ public class ProgresoIMC extends ActionBarActivity {
         LineDataSet set1 = new LineDataSet(yVals, "IMC por medición");
 
         // set the line to be drawn like this "- - - - - -"
-        set1.enableDashedLine(10f, 5f, 0f);
+        
+        set1.enableDashedLine(15f, 1f, 0f);
         set1.setColor(Color.BLACK);
         set1.setCircleColor(Color.BLACK);
-        set1.setLineWidth(1f);
-        set1.setCircleSize(4f);
+        set1.setLineWidth(5f);
+        set1.setCircleSize(10f);
         set1.setFillAlpha(65);
         set1.setFillColor(Color.BLACK);
 
@@ -155,36 +156,36 @@ public class ProgresoIMC extends ActionBarActivity {
         LineData data = new LineData(xVals, dataSets);
 
         LimitLine infraPeso = new LimitLine(18.49f);
-        infraPeso.setLineWidth(4f);
-        infraPeso.enableDashedLine(10f, 10f, 0f);
+        infraPeso.setLineWidth(1f);
+        infraPeso.enableDashedLine(10f, 2f, 0f);
         infraPeso.setDrawValue(true);
         infraPeso.setLabelPosition(LimitLabelPosition.RIGHT);
         infraPeso.setLineColor(Color.BLUE);
         
         LimitLine delgadezSevera = new LimitLine(15.99f);
-        delgadezSevera.setLineWidth(4f);
-        delgadezSevera.enableDashedLine(10f, 10f, 0f);
+        delgadezSevera.setLineWidth(1f);
+        delgadezSevera.enableDashedLine(10f, 2f, 0f);
         delgadezSevera.setDrawValue(true);
         delgadezSevera.setLabelPosition(LimitLabelPosition.RIGHT);
         delgadezSevera.setLineColor(Color.GRAY);
         
         LimitLine sobrePeso =new LimitLine(25f);
-        sobrePeso.setLineWidth(4f);
-        sobrePeso.enableDashedLine(10f, 10f, 0f);
+        sobrePeso.setLineWidth(1f);
+        sobrePeso.enableDashedLine(10f, 2f, 0f);
         sobrePeso.setDrawValue(true);
         sobrePeso.setLabelPosition(LimitLabelPosition.RIGHT);
         sobrePeso.setLineColor(Color.RED);
 
         LimitLine obesidad =new LimitLine(30f);
-        obesidad.setLineWidth(4f);
-        obesidad.enableDashedLine(10f, 10f, 0f);
+        obesidad.setLineWidth(1f);
+        obesidad.enableDashedLine(10f, 2f, 0f);
         obesidad.setDrawValue(true);
         obesidad.setLabelPosition(LimitLabelPosition.RIGHT);
         obesidad.setLineColor(Color.MAGENTA);
         
         LimitLine obesidadM =new LimitLine(40f);
-        obesidadM.setLineWidth(4f);
-        obesidadM.enableDashedLine(10f, 10f, 0f);
+        obesidadM.setLineWidth(1f);
+        obesidadM.enableDashedLine(10f, 2f, 0f);
         obesidadM.setDrawValue(true);
         obesidadM.setLabelPosition(LimitLabelPosition.RIGHT);
         obesidadM.setLineColor(Color.DKGRAY);
@@ -195,7 +196,6 @@ public class ProgresoIMC extends ActionBarActivity {
         data.addLimitLine(obesidad);
         data.addLimitLine(obesidadM);
         
-
         pChart.setData(data);
     }
 

@@ -9,7 +9,7 @@
     tools:context=".Ingredientes" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tituloReceta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Busqueda de ingredientes" />
@@ -35,8 +35,8 @@
         android:id="@+id/ingredientes_busca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/tituloReceta"
+        android:layout_below="@+id/tituloReceta"
         android:ems="10" />
 
 </RelativeLayout>

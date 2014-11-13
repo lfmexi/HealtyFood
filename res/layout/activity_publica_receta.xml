@@ -37,7 +37,7 @@
                     android:src="@drawable/ic_stat_icono_camara" />
 
                 <TextView
-                    android:id="@+id/textView1"
+                    android:id="@+id/tituloReceta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/receta_imagen"
@@ -49,9 +49,9 @@
                     android:id="@+id/receta_nombre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/textView1"
+                    android:layout_alignLeft="@+id/tituloReceta"
                     android:layout_alignParentRight="true"
-                    android:layout_below="@+id/textView1"
+                    android:layout_below="@+id/tituloReceta"
                     android:ems="10" />
 
                 <Button
@@ -72,7 +72,7 @@
                     android:layout_below="@+id/receta_boton_agrega" />
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/textTipoReceta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/receta_boton_agrega"
@@ -84,9 +84,9 @@
                     android:id="@+id/receta_publicar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/textView1"
+                    android:layout_above="@+id/tituloReceta"
                     android:layout_marginLeft="15dp"
-                    android:layout_toRightOf="@+id/textView1"
+                    android:layout_toRightOf="@+id/tituloReceta"
                     android:text="Publicar" />
 
                 <Button
@@ -98,7 +98,7 @@
                     android:text="Ver" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/textCalorias"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_above="@+id/recetas_ver_ingredientes"
@@ -121,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_above="@+id/receta_instrucciones"
-                    android:layout_alignRight="@+id/textView4"
+                    android:layout_alignRight="@+id/textCalorias"
                     android:text="Instrucciones" />
 
             </RelativeLayout>
