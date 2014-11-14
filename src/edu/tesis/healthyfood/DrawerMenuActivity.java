@@ -89,6 +89,9 @@ public class DrawerMenuActivity extends ActionBarActivity {
        }
        // Handle action buttons
        switch(item.getItemId()) {
+	   case R.id.logout:
+			Logout();
+			return true;
        default:
            return super.onOptionsItemSelected(item);
        }
@@ -169,5 +172,6 @@ String user="";
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+    
 
 }
