@@ -77,7 +77,7 @@ public class DrawerMenuActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.menu_principal, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
