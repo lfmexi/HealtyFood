@@ -42,7 +42,7 @@ public class MainActivity extends ActionBarActivity implements TabListener  {
 				Intent i = new Intent(this,Login.class);
 				this.startActivity(i);
 			}else{
-				Intent i = new Intent(this,MenuPrincipal.class);
+				Intent i = new Intent(this,DrawerMenuActivity.class);
 				i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 				i.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
 				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

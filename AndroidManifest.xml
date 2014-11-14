@@ -27,6 +27,10 @@
             android:label="@string/title_activity_login" >
         </activity>
         <activity
+            android:name=".DrawerMenuActivity"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
             android:name=".MenuPrincipal"
             android:label="@string/title_activity_menu_principal" >
         </activity>
@@ -47,7 +51,7 @@
             android:label="@string/title_activity_ejercicios" >
         </activity>
         <activity
-            android:name=".Perfil"
+            android:name=".Perfila"
             android:label="@string/title_activity_perfil" >
         </activity>
         <activity

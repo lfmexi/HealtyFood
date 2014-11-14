@@ -25,6 +25,12 @@
         <item>Postre</item>
         <item>Bebida</item>
     </string-array>
+    <string-array name="option_list">
+        <item>Mi perfil</item>
+        <item>Recetas</item>
+        <item>Configuración</item>
+        <item>Ejercicios</item>
+    </string-array>
     <string-array name="gender_array">
         <item>Hombre</item>
         <item>Mujer</item>

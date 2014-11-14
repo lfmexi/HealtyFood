@@ -27,15 +27,6 @@
                 android:layout_height="409dp" >
 
                 <Button
-                    android:id="@+id/botonNuevaMedida"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="56dp"
-                    android:text="Medición Nueva" />
-
-                <Button
                     android:id="@+id/botonGetProgreso"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -43,6 +34,15 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="39dp"
                     android:text="Progreso" />
+
+                <Button
+                    android:id="@+id/botonNuevaMedida"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="110dp"
+                    android:text="Medición Nueva" />
 
             </RelativeLayout>
 
