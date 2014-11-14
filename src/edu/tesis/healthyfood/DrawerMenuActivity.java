@@ -135,7 +135,7 @@ String user="";
     			break;
     		case 2:
     			fragment = new Perfil(user);
-    	        setTitle("Configuración");
+    	        setTitle("ConfiguraciÃ³n");
     	        break;
     		case 3:
     			fragment = new Ejercicios(user);
