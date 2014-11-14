@@ -1,5 +1,6 @@
 package edu.tesis.healthyfood;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -32,6 +33,9 @@ public class DrawerMenuActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        Intent i = this.getIntent();
+        user = i.getExtras().getString("infoUser");
+        
         mTitle = mDrawerTitle = getTitle();
         mPlanetTitles = getResources().getStringArray(R.array.option_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
