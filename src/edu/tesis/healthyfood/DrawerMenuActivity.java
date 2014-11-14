@@ -81,7 +81,7 @@ public class DrawerMenuActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.menu_principal, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -93,6 +93,9 @@ public class DrawerMenuActivity extends ActionBarActivity {
        }
        // Handle action buttons
        switch(item.getItemId()) {
+	   case R.id.logout:
+			Logout();
+			return true;
        default:
            return super.onOptionsItemSelected(item);
        }
@@ -141,6 +144,9 @@ String user="";
     			fragment = new Ejercicios(user);
     	        setTitle("Ejercicios");
     	        break;
+    		case 4:
+    			Logout();
+    			break;
     	
     	}
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -173,5 +179,6 @@ String user="";
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+    
 
 }

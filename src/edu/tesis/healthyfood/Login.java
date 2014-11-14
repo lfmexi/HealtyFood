@@ -185,7 +185,7 @@ public class Login extends Activity {
 				sql.abrir();
 				sql.addReg(result);
 				sql.cerrar();
-				Intent i= new Intent(padre,MenuPrincipal.class);
+				Intent i= new Intent(padre,DrawerMenuActivity.class);
 				i.putExtra("infoUser", result);
 				padre.startActivity(i);
 				padre.finish();
