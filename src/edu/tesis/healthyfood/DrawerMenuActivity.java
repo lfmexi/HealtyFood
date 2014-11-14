@@ -140,6 +140,9 @@ String user="";
     			fragment = new Ejercicios(user);
     	        setTitle("Ejercicios");
     	        break;
+    		case 4:
+    			Logout();
+    			break;
     	
     	}
         FragmentManager fragmentManager = getSupportFragmentManager();

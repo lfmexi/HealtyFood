@@ -30,6 +30,7 @@
         <item>Recetas</item>
         <item>Configuración</item>
         <item>Ejercicios</item>
+        <item>Cerrar Sesión</item>
     </string-array>
     <string-array name="gender_array">
         <item>Hombre</item>
