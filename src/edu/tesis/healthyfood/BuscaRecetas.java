@@ -38,7 +38,7 @@ import android.widget.TextView;
 public class BuscaRecetas extends Activity {
 
 	
-	String user="";
+	private String user="";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

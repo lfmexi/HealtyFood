@@ -28,7 +28,6 @@
     <string-array name="option_list">
         <item>Mi perfil</item>
         <item>Recetas</item>
-        <item>Configuración</item>
         <item>Ejercicios</item>
         <item>Cerrar Sesión</item>
     </string-array>

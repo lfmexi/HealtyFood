@@ -10,7 +10,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,13 +32,12 @@ public class DrawerMenuActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-		Intent i=this.getIntent();
-		user = i.getExtras().getString("infoUser");
 
         Intent i = this.getIntent();
         user = i.getExtras().getString("infoUser");
         
-        mTitle = mDrawerTitle = getTitle();
+        //mTitle = mDrawerTitle = getTitle();
+        mTitle = mDrawerTitle = "HealthyFood";
         mPlanetTitles = getResources().getStringArray(R.array.option_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -83,8 +81,7 @@ public class DrawerMenuActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-		getMenuInflater().inflate(R.menu.menu_principal, menu);
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -127,7 +124,6 @@ public class DrawerMenuActivity extends ActionBarActivity {
     }
     private void selectItem(int position) {
         // update the main content by replacing fragments
-        Bundle args = new Bundle();
         Fragment fragment=new Fragment();
     	switch(position){
     		case 0:
@@ -139,10 +135,6 @@ public class DrawerMenuActivity extends ActionBarActivity {
     	        setTitle("Recetas");
     			break;
     		case 2:
-    			fragment = new Perfil(user);
-    	        setTitle("Configuración");
-    	        break;
-    		case 3:
     			fragment = new Ejercicios(user);
     	        setTitle("Ejercicios");
     	        break;

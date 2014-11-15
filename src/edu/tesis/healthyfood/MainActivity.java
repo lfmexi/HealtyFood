@@ -1,19 +1,16 @@
 package edu.tesis.healthyfood;
 
-import edu.tesis.healthyfood.sqlite.SQLite;
-import edu.tesis.healthyfood.sqlite.Sesion;
-import android.os.Bundle;
-import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.ActionBar.Tab;
+import android.support.v7.app.ActionBar.TabListener;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.*;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar.Tab;
-import android.support.v7.app.ActionBar.TabListener;
+import android.widget.ImageButton;
+import edu.tesis.healthyfood.sqlite.SQLite;
+import edu.tesis.healthyfood.sqlite.Sesion;
 
 
 public class MainActivity extends ActionBarActivity implements TabListener  {
