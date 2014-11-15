@@ -27,11 +27,14 @@ public class DrawerMenuActivity extends ActionBarActivity {
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mPlanetTitles;
+    String user="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+		Intent i=this.getIntent();
+		user = i.getExtras().getString("infoUser");
 
         Intent i = this.getIntent();
         user = i.getExtras().getString("infoUser");
@@ -122,7 +125,6 @@ public class DrawerMenuActivity extends ActionBarActivity {
             selectItem(position);
         }
     }
-String user="";
     private void selectItem(int position) {
         // update the main content by replacing fragments
         Bundle args = new Bundle();

@@ -41,7 +41,10 @@
         <item>Mantener peso</item>
         <item>Ganar peso</item>
     </string-array>
-
+    
+    <string name="drawer_open">Abrir</string>
+    <string name="drawer_close">Cerrar</string>
+    
     <string name="title_activity_forgot_data">Datos olvidados</string>
     <string name="title_activity_registrar">Registrar</string>
     <string name="title_activity_ingredientes">Ingredientes</string>

@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class Perfil extends Fragment {
 	String user="";
@@ -26,6 +27,8 @@ public class Perfil extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View view = inflater.inflate(R.layout.activity_perfil, container, false);
 		botonMedir=(Button)view.findViewById(R.id.botonNuevaMedida);
+		TextView txt=(TextView)view.findViewById(R.id.textUser);
+		txt.setText(user);
 		botonProgreso=(Button)view.findViewById(R.id.botonGetProgreso);
 		botonMedir.setOnClickListener(new OnClickListener(){
 			@Override
