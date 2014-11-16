@@ -58,7 +58,7 @@
                     android:layout_height="match_parent" >
 
                     <ImageView
-                        android:id="@+id/imageView1"
+                        android:id="@+id/visualizaImagen"
                         android:layout_width="0dp"
                         android:layout_height="84dp"
                         android:layout_weight="0.15"
@@ -120,13 +120,11 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textVerIngredientes"
-                    android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/verIngredientes"
+                    android:layout_width="172dp"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:text="Ver ingredientes >"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:text="Ver Ingredientes >" />
 
                 <Button
                     android:id="@+id/botonConsumir"

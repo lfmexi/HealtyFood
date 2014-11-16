@@ -20,22 +20,33 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import edu.tesis.healthyfood.sobj.ContenedorIngredientes;
+import edu.tesis.healthyfood.sobj.Ingrediente_Receta;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class VisualizaReceta extends Activity {
 
-	String user="";
-	String receta="";
-	String[]info_receta;
+	private String user="";
+	private String receta="";
+	private String[]info_receta;
+	
+	private ContenedorIngredientes ingredientes;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,10 +60,11 @@ public class VisualizaReceta extends Activity {
 		textUsuario = (TextView)this.findViewById(R.id.textUsuario);
 		textTipoReceta = (TextView)this.findViewById(R.id.textTipoReceta);
 		textCalorias = (TextView)this.findViewById(R.id.textCalorias);
-		verIngredientes = (TextView)this.findViewById(R.id.textVerIngredientes);
+		verIngredientes = (Button)this.findViewById(R.id.verIngredientes);
 		campoInstrucciones = (EditText)this.findViewById(R.id.textoInstrucciones);
 		botonFavorito = (Button)this.findViewById(R.id.botonFavorito);
 		botonAgrega = (Button)this.findViewById(R.id.botonConsumir);
+		imagen = (ImageView)this.findViewById(R.id.visualizaImagen);
 		
 		textNombreReceta.setText(receta);
 		textUsuario.setText("Cargando");
@@ -99,7 +111,30 @@ public class VisualizaReceta extends Activity {
 	
 	
 	private void verIngredientesOnClick(){
-		
+		if(ingredientes==null){
+			IngredientesAsync ing = new IngredientesAsync(this);
+			ing.execute(receta);
+		}else{
+			String ingr="";
+			for(Ingrediente_Receta ir :ingredientes.lista.values()){
+				ingr+=ir.getNombre_ingrediente();
+				
+				if(ir.getGramos()!=0){
+					ingr = ingr + " -> " +ir.getGramos() + "g";
+				}
+				if(ir.getUnidades()!=0){
+					ingr = ingr + " -> " +ir.getUnidades() + " unidades";
+				}
+				if(ir.getLitros()!=0){
+					ingr = ingr + " -> " +ir.getLitros() + " litros";
+				}
+				ingr+="\n";
+			}
+			AlertDialog.Builder b = new AlertDialog.Builder(this);
+			b.setTitle("Ingredientes en la receta");
+			b.setMessage(ingr);
+			b.show();
+		}
 	}
 
 	private void favoritoOnClick(){
@@ -114,7 +149,8 @@ public class VisualizaReceta extends Activity {
 	private TextView textUsuario;
 	private TextView textTipoReceta;
 	private TextView textCalorias;
-	private TextView verIngredientes;
+	private Button verIngredientes;
+	private ImageView imagen; 
 	private EditText campoInstrucciones;
 	private Button botonFavorito;
 	private Button botonAgrega;
@@ -196,7 +232,139 @@ public class VisualizaReceta extends Activity {
 				padre.campoInstrucciones.setText(result[4]);
 				padre.info_receta=result;
 				//enviar a pedir la imagen
+				new DownloadImage(padre).execute(Login.url+"/"+result[5]);
 			}
 		}
+	}
+
+	private class IngredientesAsync extends AsyncTask<String,Void,String[]>{
+
+		private VisualizaReceta padre;
+		
+		public IngredientesAsync(VisualizaReceta v){
+			padre = v;
+		}
+		
+		@Override
+		protected String[] doInBackground(String... arg0) {
+			String[] response = null;
+			HttpClient cliente = new DefaultHttpClient();
+			HttpPost post = new HttpPost(Login.url+"/getIngRec.php");
+			List<NameValuePair> params = new ArrayList<NameValuePair>(2);
+			params.add(new BasicNameValuePair("receta",arg0[0]));
+			try {
+				post.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response = getValores(cliente,post);
+			return response;
+		}
+		
+		private StringBuilder inputStreamToString(InputStream is) {
+		    String rLine = "";
+		    StringBuilder answer = new StringBuilder();
+		    BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+		    try {
+		     while ((rLine = rd.readLine()) != null) {
+		      answer.append(rLine);
+		       }
+		    }
+		    catch (IOException e) {
+		        e.printStackTrace();
+		     }
+		    return answer;
+		}
+		
+		private String []getValores(HttpClient cliente, HttpPost post){
+			String []regs=null;
+			try{
+		    	HttpResponse response = cliente.execute(post);
+		    	String jsonResult = inputStreamToString(response.getEntity().getContent()).toString();
+		    	JSONArray mArray = new JSONArray(jsonResult);
+		    	int num_registros=mArray.length();
+		    	regs=new String[num_registros];
+		    	for (int i = 0; i < num_registros; i++) {
+		    	    JSONObject object = mArray.getJSONObject(i);
+		    	    
+		    	    regs[i] = object.getString("ingrediente")+","+object.getString("gramos")+','
+		    	    		+object.getString("litros")+","+object.getString("unidades");
+		    	}
+		    }catch(JSONException e){
+		    	e.printStackTrace();
+		    } catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return regs;
+		}
+		
+		protected void onPostExecute(String[] result){
+			if(result!=null){
+				
+				padre.ingredientes = new ContenedorIngredientes();
+				
+				for(int i = 0;i<result.length;i++){
+					String res = result[i];
+					String attr[]=res.split(",");
+					Ingrediente_Receta ir = new Ingrediente_Receta(attr[0],Integer.parseInt(attr[3]),Double.parseDouble(attr[1]));
+					ir.setLitros(Double.parseDouble(attr[2]));
+					padre.ingredientes.lista.put(attr[0], ir);
+				}
+				
+				String ingr="";
+				
+				for(Ingrediente_Receta ir :padre.ingredientes.lista.values()){
+					ingr+=ir.getNombre_ingrediente();
+					
+					if(ir.getGramos()!=0){
+						ingr = ingr + " -> " +ir.getGramos() + "g";
+					}
+					if(ir.getUnidades()!=0){
+						ingr = ingr + " -> " +ir.getUnidades() + " unidades";
+					}
+					if(ir.getLitros()!=0){
+						ingr = ingr + " -> " +ir.getLitros() + " litros";
+					}
+					ingr+="\n";
+				}
+				AlertDialog.Builder b = new AlertDialog.Builder(padre);
+				b.setTitle("Ingredientes en la receta");
+				b.setMessage(ingr);
+				b.show();
+			}
+		}
+		
+	}
+
+	private class DownloadImage extends AsyncTask<String,Void,Bitmap>{
+
+		VisualizaReceta padre;
+		
+		public DownloadImage(VisualizaReceta p){
+			padre = p;
+		}
+		
+		@Override
+		protected Bitmap doInBackground(String... arg0) {
+			// TODO Auto-generated method stub
+			String urldisplay = arg0[0];
+	        Bitmap mIcon11 = null;
+	        try{
+	        	InputStream in = new java.net.URL(urldisplay).openStream();
+	            mIcon11 = BitmapFactory.decodeStream(in);
+	        }catch(Exception e){
+	        	 Log.e("Error", e.getMessage());
+	             e.printStackTrace();
+	        }
+	        return mIcon11;
+		}
+		
+		protected void onPostExecute(Bitmap result) {
+	        if(result!=null)
+	        	padre.imagen.setImageBitmap(result);
+	    }
 	}
 }
