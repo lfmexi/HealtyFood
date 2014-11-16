@@ -15,31 +15,38 @@ import com.github.mikephil.charting.utils.LimitLine.LimitLabelPosition;
 import edu.tesis.healthyfood.sqlite.Medicion;
 import edu.tesis.healthyfood.sqlite.SQLite;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-public class ProgresoIMC extends ActionBarActivity {
+public class ProgresoIMC extends Fragment {
 
 	private LineChart pChart;
 	private String user="";
 	
+	public ProgresoIMC (String us){
+		user=us;
+	}
+	
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_progreso_imc);
-		
-		Intent i=this.getIntent();
-		user = i.getExtras().getString("infoUser");
-		
-		pChart = (LineChart)this.findViewById(R.id.chartProgresoIMC);
-		
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+		View view = inflater.inflate(R.layout.activity_progreso_imc, container, false);
+		pChart = (LineChart)view.findViewById(R.id.chartProgresoIMC);
 		pChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener(){
-
 			@Override
 			public void onValueSelected(Entry e, int dataSetIndex) {
 				// TODO Auto-generated method stub
@@ -52,6 +59,8 @@ public class ProgresoIMC extends ActionBarActivity {
 				
 			}
 		});
+
+
 		
 		pChart.setStartAtZero(false);
 		
@@ -76,47 +85,50 @@ public class ProgresoIMC extends ActionBarActivity {
 		pChart.setHighlightIndicatorEnabled(true);
 		setData();
 		pChart.animateX(2500);
+
+		return view;
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.progreso_imc, menu);
-		return true;
-	}
+	
+	//@Override
+	//public boolean onCreateOptionsMenu(Menu menu) {
+	//	// Inflate the menu; this adds items to the action bar if it is present.
+	//	getMenuInflater().inflate(R.menu.progreso_imc, menu);
+	//	return true;
+	//}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		// Handle action bar item clicks here. The action bar will
+//		// automatically handle clicks on the Home/Up button, so long
+//		// as you specify a parent activity in AndroidManifest.xml.
+//		int id = item.getItemId();
+//		if (id == R.id.action_settings) {
+//			return true;
+//		}
+//		return super.onOptionsItemSelected(item);
+//	}
 	
 	private void onSelected(Entry e){
 		float val = e.getVal();
 		if(val<16f){
-			Toast.makeText(this, "Se encuentra en delgadez severa", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), "Se encuentra en delgadez severa", Toast.LENGTH_SHORT).show();
 		}else if(val<18.5f){
-			Toast.makeText(this, "Se encuentra bajo peso", Toast.LENGTH_SHORT).show();	
+			Toast.makeText(getActivity(), "Se encuentra bajo peso", Toast.LENGTH_SHORT).show();	
 		}else if(val<25f){
-			Toast.makeText(this, "Se encuentra normal", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), "Se encuentra normal", Toast.LENGTH_SHORT).show();
 		}else if(val<30f){
-			Toast.makeText(this, "Se encuentra en sobrepeso", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), "Se encuentra en sobrepeso", Toast.LENGTH_SHORT).show();
 		}else if(val<40f){
-			Toast.makeText(this, "Se encuentra obeso", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), "Se encuentra obeso", Toast.LENGTH_SHORT).show();
 		}else{
-			Toast.makeText(this, "Se encuentra en obesidad mórbida", Toast.LENGTH_SHORT).show();		
+			Toast.makeText(getActivity(), "Se encuentra en obesidad mï¿½rbida", Toast.LENGTH_SHORT).show();		
 		}
 	}
 	
 	private void setData() {
 		
-		SQLite sql = new SQLite(this);
+		SQLite sql = new SQLite(getActivity());
 		sql.abrir();
 		ArrayList<Medicion> mediciones=sql.getMediciones(user);
 		sql.cerrar();
@@ -137,7 +149,7 @@ public class ProgresoIMC extends ActionBarActivity {
         }
 
         // create a dataset and give it a type
-        LineDataSet set1 = new LineDataSet(yVals, "IMC por medición");
+        LineDataSet set1 = new LineDataSet(yVals, "IMC por mediciï¿½n");
 
         // set the line to be drawn like this "- - - - - -"
         

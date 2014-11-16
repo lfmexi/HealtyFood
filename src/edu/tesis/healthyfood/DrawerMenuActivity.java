@@ -138,7 +138,7 @@ public class DrawerMenuActivity extends ActionBarActivity {
     			fragment = new Ejercicios(user);
     	        setTitle("Ejercicios");
     	        break;
-    		case 4:
+    		case 3:
     			Logout();
     			break;
     	

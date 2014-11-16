@@ -3,6 +3,8 @@ package edu.tesis.healthyfood;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -46,16 +48,17 @@ public class Perfil extends Fragment {
 
 	
 	private void medir(){
-		Intent i = new Intent(getActivity(),Medidor.class);
-		i.putExtra("infoUser", user);
-		i.putExtra("ambito","perfil");
-		this.startActivity(i);
+        final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
+        ft.replace(R.id.content_frame, new Medidor(user, "perfil",getActivity()), "Medidor"); 
+        ft.addToBackStack(null);
+        ft.commit();
 	}
 	
 	private void progreso(){
-		Intent i = new Intent(getActivity(),ProgresoIMC.class);
-		i.putExtra("infoUser", user);
-		this.startActivity(i);
+        final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
+        ft.replace(R.id.content_frame, new ProgresoIMC(user), "Progreso IMC"); 
+        ft.addToBackStack(null);
+        ft.commit();
 	}
 	
 
