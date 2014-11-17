@@ -28,6 +28,8 @@ public class DrawerMenuActivity extends ActionBarActivity {
     private CharSequence mTitle;
     private String[] mPlanetTitles;
     String user="";
+    String sex="";
+    String birth="";
     String ambito="";
 
     @Override
@@ -37,6 +39,9 @@ public class DrawerMenuActivity extends ActionBarActivity {
 
         Intent i = this.getIntent();
         user = i.getExtras().getString("infoUser");
+        sex = i.getExtras().getString("sex");
+        birth = i.getExtras().getString("birth");
+        
         try{
         	ambito = i.getExtras().getString("ambito");        	
         }
@@ -86,7 +91,7 @@ public class DrawerMenuActivity extends ActionBarActivity {
             if(ambito!=null){
 			if(ambito.equals("registro")){
                 final FragmentTransaction ft = getSupportFragmentManager().beginTransaction(); 
-                ft.replace(R.id.content_frame, new Medidor(user, "perfil",this), "Medidor"); 
+                ft.replace(R.id.content_frame, new Medidor(user,sex,birth, "perfil",this), "Medidor"); 
                 ft.addToBackStack(null);
                 ft.commit();
             }}
@@ -142,7 +147,7 @@ public class DrawerMenuActivity extends ActionBarActivity {
         Fragment fragment=new Fragment();
     	switch(position){
     		case 0:
-    	        fragment = new Perfil(user);
+    	        fragment = new Perfil(user,sex,birth);
     	        setTitle("Mi Perfil");
     	        break;
     		case 1:

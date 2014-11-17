@@ -1,5 +1,7 @@
 package edu.tesis.healthyfood;
 
+import java.util.Calendar;
+
 import edu.tesis.healthyfood.sqlite.SQLite;
 import android.os.Bundle;
 import android.app.Activity;
@@ -15,14 +17,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Medidor extends Fragment {
 	private String user;
+	private String sex;
+	private String birth;
 	private String ambito="";
 	private Activity act;
 	
-	public Medidor(String usuario, String ambit, Activity acto){
+	public Medidor(String usuario,String sex,String birth, String ambit, Activity acto){
 		user=usuario;
+		this.sex = sex;
+		this.birth = birth;
 		ambito=ambit;
 		act=acto;
 	}
@@ -62,6 +69,24 @@ public class Medidor extends Fragment {
 			
 			sql.abrir();
 			sql.addObjetivo(user, this.selectObjetivo.getSelectedItem().toString());
+			sql.cerrar();
+			
+			String [] fecha = birth.split("-");
+			int year = Integer.parseInt(fecha[0]);
+			
+			Calendar c = Calendar.getInstance();
+			
+			int year_today=c.get(Calendar.YEAR);
+			
+			int diferencia = year_today-year;
+			double tmb_val=(10*peso)+(6.25*altura*100)-(5*diferencia);
+			if(sex.equals("Hombre")){
+				tmb_val+=5;
+			}else{
+				tmb_val-=161;
+			}
+			sql.abrir();
+			if(sql.addTMB(user, tmb_val))Toast.makeText(getActivity(), "Usted necesita "+(tmb_val*1.2)+" cal para mantener su peso", Toast.LENGTH_SHORT).show();
 			sql.cerrar();
 
 			if(ambito.equals("registro")){

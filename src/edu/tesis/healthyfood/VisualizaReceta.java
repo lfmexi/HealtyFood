@@ -22,6 +22,8 @@ import org.json.JSONObject;
 
 import edu.tesis.healthyfood.sobj.ContenedorIngredientes;
 import edu.tesis.healthyfood.sobj.Ingrediente_Receta;
+import edu.tesis.healthyfood.sqlite.SQLite;
+import edu.tesis.healthyfood.sqlite.TMB;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -38,6 +40,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class VisualizaReceta extends Activity {
 
@@ -55,6 +58,16 @@ public class VisualizaReceta extends Activity {
 		Intent i=this.getIntent();
 		user = i.getExtras().getString("infoUser");
 		receta = i.getExtras().getString("receta");
+		
+		SQLite sql=new SQLite(this);
+		sql.abrir();
+		TMB last =sql.getLastTMB(user);
+		sql.cerrar();
+		
+		if(last!=null){
+			double calorias = last.value*1.2;
+			Toast.makeText(this, "Usted necesita "+calorias+" cal", Toast.LENGTH_SHORT).show();
+		}
 		
 		textNombreReceta = (TextView)this.findViewById(R.id.textoNombreReceta);
 		textUsuario = (TextView)this.findViewById(R.id.textUsuario);

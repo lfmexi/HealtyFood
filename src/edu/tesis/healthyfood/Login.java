@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -24,7 +25,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import edu.tesis.healthyfood.sqlite.Medicion;
 import edu.tesis.healthyfood.sqlite.SQLite;
+import edu.tesis.healthyfood.sqlite.TMB;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -115,7 +118,7 @@ public class Login extends Activity {
 	private EditText campo_username;
 	private EditText campo_password;
 	
-	private class LoginAsyncTask extends AsyncTask<String,Void,String>{
+	private class LoginAsyncTask extends AsyncTask<String,Void,String[]>{
 
 		private Login padre;
 		
@@ -124,7 +127,7 @@ public class Login extends Activity {
 		}
 		
 		@Override
-		protected String doInBackground(String... arg0) {
+		protected String[] doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
 			HttpClient cliente = new DefaultHttpClient();
 			HttpPost post = new HttpPost(url+"/login.php");
@@ -156,17 +159,22 @@ public class Login extends Activity {
 		    return answer;
 		}
 		
-		private String getValores(HttpClient cliente, HttpPost post){
-			String regs=null;
+		private String[] getValores(HttpClient cliente, HttpPost post){
+			String [] regs=null;
 			try{
 		    	HttpResponse response = cliente.execute(post);
 		    	String jsonResult = inputStreamToString(response.getEntity().getContent()).toString();
 		    	JSONArray mArray = new JSONArray(jsonResult);
 		    	int num_registros=mArray.length();
+		    	regs = new String[3];
 		    	for (int i = 0; i < num_registros; i++) {
 		    	    JSONObject object = mArray.getJSONObject(i);
 		    	    String campo1 = object.getString("nick");
-		    	    regs=campo1;
+		    	    String campo2 = object.getString("sex");
+		    	    String campo3 = object.getString("birth");
+		    	    regs[0]=campo1;
+		    	    regs[1]=campo2;
+		    	    regs[2]=campo3;
 		    	}
 		    }catch(JSONException e){
 		    	e.printStackTrace();
@@ -179,14 +187,79 @@ public class Login extends Activity {
 			return regs;
 		}
 		
-		protected void onPostExecute(String result){
+		protected void onPostExecute(String[] result){
 			if(result!=null){
 				SQLite sql = new SQLite(padre);
 				sql.abrir();
-				sql.addReg(result);
+				sql.addReg(result[0],result[1],result[2]);
 				sql.cerrar();
+				
+				String [] fecha = result[2].split("-");
+				int year = Integer.parseInt(fecha[0]);
+				int month = Integer.parseInt(fecha[1]);
+				int day = Integer.parseInt(fecha[2]);
+				
+				Calendar c = Calendar.getInstance();
+				
+				int year_today=c.get(Calendar.YEAR);
+				int month_today=c.get(Calendar.MONTH);
+				int day_today = c.get(Calendar.DAY_OF_MONTH);
+				
+				sql.abrir();
+				TMB tmb = sql.getLastTMB(result[0]);
+				Medicion med = sql.getLastMedicion(result[0]);
+				sql.cerrar();
+				
+				if(tmb!=null && med!=null){
+					String[] lastFecha = tmb.fecha_tomado.split("-");
+					
+					int yearlast = Integer.parseInt(lastFecha[0]);
+					
+					boolean calcular = false;
+					
+					if(yearlast<year_today){
+						if(year==yearlast+1){
+							if((month_today-month)>=0 && (day_today-day)>=0){
+								calcular = true;
+							}
+						}else{
+							calcular =false;
+						}
+					}
+					if(calcular){
+						int edad = year_today-year;
+						if((month_today-month)<0){
+							edad -=1;
+						}else if((day_today-day)<0){
+							edad-=1;
+						}
+						double tmb_val=(10*med.getPeso())+(6.25*med.getAltura()*100)-(5*edad);
+						if(result[1].equals("Hombre")){
+							tmb_val+=5;
+						}else{
+							tmb_val-=161;
+						}
+						sql.abrir();
+						sql.addTMB(result[0], tmb_val);
+						sql.cerrar();
+					}
+				}else if(med!=null){
+					int diferencia = year_today-year;
+					double tmb_val=(10*med.getPeso())+(6.25*med.getAltura()*100)-(5*diferencia);
+					if(result[1].equals("Hombre")){
+						tmb_val+=5;
+					}else{
+						tmb_val-=161;
+					}
+					sql.abrir();
+					sql.addTMB(result[0], tmb_val);
+					sql.cerrar();
+				}
+				
 				Intent i= new Intent(padre,DrawerMenuActivity.class);
-				i.putExtra("infoUser", result);
+				i.putExtra("infoUser", result[0]);
+				i.putExtra("sex",result[1]);
+				i.putExtra("birth", result[2]);
 				padre.startActivity(i);
 				padre.finish();
 			}else{

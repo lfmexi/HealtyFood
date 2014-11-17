@@ -32,11 +32,50 @@ public class SQLite {
 		sqlh.close();		
 	}
 	
-	public boolean addReg(String username){
+	public boolean addTMB(String username,double tmb){
 		if(username!=null){
 			ContentValues cv = new ContentValues();
 			cv.put(sqlh.username, username);
+			cv.put(sqlh.tmb, tmb);
+			cv.put(sqlh.fecha_tmb, new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+			return(db.insert(sqlh.tablaTMB, null, cv)!=-1)?true:false;
+		}
+		return false;
+	}
+	
+	public TMB getLastTMB(String username){
+		TMB t = null;
+		if(username!=null){
+			Cursor cursor = db.query(sqlh.tablaTMB,
+				new String[]{sqlh.tmb,sqlh.fecha_tmb},
+					sqlh.username+"=?",
+					new String[]{username},
+					null,null,
+					sqlh.id_tmb+" DESC ","1");
+			if(cursor.moveToFirst()){
+				do{
+					t=new TMB();
+					try{
+						t.value = Double.parseDouble(cursor.getString(0));
+						t.fecha_tomado=cursor.getString(1);
+						//return t;
+					}catch(NumberFormatException nfe){
+						return null;
+					}
+				}while(cursor.moveToNext());
+			}
+		}
+		return t;
+	}
+	
+	public boolean addReg(String username,String sex,String birth){
+		if(username!=null){
+			ContentValues cv = new ContentValues();
+			cv.put(sqlh.username, username);
+			cv.put(sqlh.sex,sex);
+			cv.put(sqlh.birth, birth);
 			cv.put(sqlh.fecha_inicio, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+			
 			return(db.insert(sqlh.tabla, null, cv)!=-1)?true:false;
 		}
 		return false;
@@ -82,6 +121,29 @@ public class SQLite {
 		return res;
 	}
 	
+	public Medicion getLastMedicion(String usr){
+		Medicion med = null;
+		Cursor cursor = db.query(sqlh.tablaMedicion,
+			new String[]{sqlh.fecha,sqlh.imc,sqlh.altura,sqlh.peso},
+				sqlh.username+"=?",
+				new String[]{usr},
+				null,null,
+				sqlh.fecha+" DESC ","1");
+		if(cursor.moveToFirst()){
+			do{
+				med = new Medicion();
+				try{
+					med.setFecha(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(cursor.getString(0)));
+				}catch(ParseException e){}
+				med.setImc(cursor.getDouble(1));
+				med.setAltura(cursor.getDouble(2));
+				med.setPeso(cursor.getDouble(3));
+				
+			}while(cursor.moveToNext());
+		}
+		return med;
+	}
+	
 	public ArrayList<Medicion> getMediciones(String usr){
 		ArrayList<Medicion> med = new ArrayList<Medicion>();
 		Cursor cursor = db.query(sqlh.tablaMedicion,
@@ -109,7 +171,8 @@ public class SQLite {
 	public Sesion getLastSesion(){
 		Sesion ses=null;
 		Cursor cursor = db.query(sqlh.tabla,
-				new String[]{sqlh.id_sesion,sqlh.username,sqlh.fecha_inicio,sqlh.fecha_fin},
+				new String[]{sqlh.id_sesion,sqlh.username,sqlh.fecha_inicio,sqlh.fecha_fin
+							,sqlh.sex,sqlh.birth},
 							null,null,null,null,
 							sqlh.id_sesion+" DESC ","1");
 		if(cursor.moveToFirst()){
@@ -117,6 +180,7 @@ public class SQLite {
 				ses = new Sesion(null,null,null);
 				ses.setId(cursor.getInt(0));
 				ses.setUser(cursor.getString(1));
+				
 				if(cursor.getString(2)!=null){
 					try {
 						ses.setFecha_inicio(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(cursor.getString(1)));
@@ -133,6 +197,10 @@ public class SQLite {
 						e.printStackTrace();
 					}
 				}
+				
+				ses.setSex(cursor.getString(4));
+				ses.setBirth(cursor.getString(5));
+				
 			}while(cursor.moveToNext());
 		}
 		return ses;

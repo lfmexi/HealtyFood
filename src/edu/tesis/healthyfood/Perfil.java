@@ -14,9 +14,13 @@ import android.widget.TextView;
 
 public class Perfil extends Fragment {
 	String user="";
+	String sex;
+	String birth;
 
-	public Perfil(String user) {
+	public Perfil(String user,String sex,String birth) {
 		this.user=user;
+		this.sex=sex;
+		this.birth = birth;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -49,7 +53,7 @@ public class Perfil extends Fragment {
 	
 	private void medir(){
         final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
-        ft.replace(R.id.content_frame, new Medidor(user, "perfil",getActivity()), "Medidor"); 
+        ft.replace(R.id.content_frame, new Medidor(user,sex,birth, "perfil",getActivity()), "Medidor"); 
         ft.addToBackStack(null);
         ft.commit();
 	}

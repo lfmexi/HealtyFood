@@ -5,6 +5,8 @@ import java.util.Date;
 public class Sesion {
 	private int id;
 	private String user;
+	private String sex;
+	private String birth;
 	private Date fecha_inicio;
 	private Date fecha_fin;
 	
@@ -44,6 +46,22 @@ public class Sesion {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getBirth() {
+		return birth;
+	}
+
+	public void setBirth(String birth) {
+		this.birth = birth;
 	}
 	
 	
