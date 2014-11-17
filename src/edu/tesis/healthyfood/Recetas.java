@@ -30,7 +30,7 @@ public class Recetas extends Fragment{
 		
 		View view = inflater.inflate(R.layout.activity_recetas, container, false);
 		String listado[]=new String[]{
-				"Publicar receta","Buscar recetas","Mis recetas"};
+				"Publicar receta","Buscar recetas","Mis recetas","Recetas favoritas"};
 		//,"Ejercicios recomendados","Mi Perfil","Medidor de calorías"
 		listaMenu=(ListView)view.findViewById(R.id.listaMenu);
 		listaMenu.setAdapter(new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, listado));
@@ -49,7 +49,8 @@ public class Recetas extends Fragment{
 	}
 	
 	private void listaOnClick(View view){
-		String nombreMenu=((TextView) view).getText().toString();
+        final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
+        String nombreMenu=((TextView) view).getText().toString();
 		if(nombreMenu.equals("Publicar receta")){
 			Intent i = new Intent(getActivity(),PublicaReceta.class);
 			i.putExtra("infoUser", user);
@@ -74,6 +75,10 @@ public class Recetas extends Fragment{
 			Intent i = new Intent(getActivity(),Medidor.class);
 			i.putExtra("infoUser", user);
 			this.startActivity(i);
+		}else if(nombreMenu.equals("Recetas favoritas")){
+			ft.replace(R.id.content_frame, new Favoritas(user,getActivity()), "Medidor"); 
+	        ft.addToBackStack(null);
+	        ft.commit();
 		}
 	}
 

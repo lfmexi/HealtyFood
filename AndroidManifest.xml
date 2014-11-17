@@ -71,7 +71,7 @@
             android:label="@string/title_activity_ingredientes" >
         </activity>
         <activity
-            android:name=".RecetasPropias"
+            android:name=".MisRecetas"
             android:label="@string/title_activity_recetas_propias" >
         </activity>
         <activity
