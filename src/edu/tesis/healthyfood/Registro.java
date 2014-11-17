@@ -20,6 +20,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import edu.tesis.healthyfood.sqlite.SQLite;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -153,6 +155,10 @@ public class Registro extends Activity {
 		protected void onPostExecute(String result){
 			if(result!=null){
 				if(result.indexOf("Insertado")!=-1){
+					SQLite sql = new SQLite(padre);
+					sql.abrir();
+					sql.addReg(user);
+					sql.cerrar();
 					Intent i = new Intent(padre,DrawerMenuActivity.class);
 					i.putExtra("infoUser", user);
 					i.putExtra("ambito", "registro");

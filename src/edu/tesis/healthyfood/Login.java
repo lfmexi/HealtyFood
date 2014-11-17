@@ -191,8 +191,8 @@ public class Login extends Activity {
 				padre.finish();
 			}else{
 				AlertDialog.Builder alert=new AlertDialog.Builder(padre);
-				alert.setTitle("Error de autenticaci√≥n");
-				alert.setMessage("Usuario o contrase√±a no v√°lidos");
+				alert.setTitle("Error de autenticaciÛn");
+				alert.setMessage("Usuario o contraseÒa no v·lidos");
 				alert.show();				
 			}
 		}

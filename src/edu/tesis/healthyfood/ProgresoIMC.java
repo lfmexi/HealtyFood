@@ -122,7 +122,7 @@ public class ProgresoIMC extends Fragment {
 		}else if(val<40f){
 			Toast.makeText(getActivity(), "Se encuentra obeso", Toast.LENGTH_SHORT).show();
 		}else{
-			Toast.makeText(getActivity(), "Se encuentra en obesidad mï¿½rbida", Toast.LENGTH_SHORT).show();		
+			Toast.makeText(getActivity(), "Se encuentra en obesidad mórbida", Toast.LENGTH_SHORT).show();		
 		}
 	}
 	
@@ -149,7 +149,7 @@ public class ProgresoIMC extends Fragment {
         }
 
         // create a dataset and give it a type
-        LineDataSet set1 = new LineDataSet(yVals, "IMC por mediciï¿½n");
+        LineDataSet set1 = new LineDataSet(yVals, "IMC por medición");
 
         // set the line to be drawn like this "- - - - - -"
         
