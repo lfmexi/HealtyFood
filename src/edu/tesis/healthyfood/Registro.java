@@ -153,14 +153,14 @@ public class Registro extends Activity {
 		protected void onPostExecute(String result){
 			if(result!=null){
 				if(result.indexOf("Insertado")!=-1){
-					Intent i = new Intent(padre,Medidor.class);
+					Intent i = new Intent(padre,DrawerMenuActivity.class);
 					i.putExtra("infoUser", user);
 					i.putExtra("ambito", "registro");
 					padre.startActivity(i);
 					padre.finish();
 				}else{
 					AlertDialog.Builder alert=new AlertDialog.Builder(padre);
-					alert.setTitle("Error de autenticación");
+					alert.setTitle("Error de autenticaciï¿½n");
 					alert.setMessage("El usuario ya existe en el sistema o ha ocurrido un error");
 					alert.show();
 				}

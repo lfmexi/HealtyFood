@@ -24,27 +24,29 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class MisRecetas extends Activity {
+public class MisRecetas extends Fragment {
 
 	private String user="";
+	private Activity act;
 	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_recetas_propias);
-		Intent i =getIntent();
-		user = i.getExtras().getString("infoUser");
-		
-		lista = (ListView)this.findViewById(R.id.listaPropias);
-		
+	public MisRecetas(String u, Activity a){
+		user=u;
+		act=a;
+	}
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+		View view = inflater.inflate(R.layout.activity_recetas_propias, container, false);
+		lista = (ListView)view.findViewById(R.id.listaPropias);
 		lista.setOnItemClickListener(new OnItemClickListener(){
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -53,20 +55,20 @@ public class MisRecetas extends Activity {
 				listaOnClick(arg1);
 			}
 		});
-		
 		new BuscaPropiaAsync(this).execute(user);
+		return view;
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.recetas_propias, menu);
-		return true;
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getMenuInflater().inflate(R.menu.recetas_propias, menu);
+//		return true;
+//	}
 	
 	private void listaOnClick(View v){
 		String nombre = ((TextView) v).getText().toString();
-		Intent i = new Intent(this,VisualizaReceta.class);
+		Intent i = new Intent(getActivity(),VisualizaReceta.class);
 		i.putExtra("infoUser", user);
 		i.putExtra("receta", nombre);
 		this.startActivity(i);
@@ -144,7 +146,7 @@ public class MisRecetas extends Activity {
 				for(int i = 0;i<result.length;i++){
 					adaptador[i] = result[i];
 				}
-				padre.lista.setAdapter(new ArrayAdapter<String>(padre,android.R.layout.simple_list_item_1,android.R.id.text1,adaptador));
+			padre.lista.setAdapter(new ArrayAdapter<String>(act,android.R.layout.simple_list_item_1,android.R.id.text1,adaptador));
 			}
 		}
 	}

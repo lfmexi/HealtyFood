@@ -52,17 +52,17 @@ public class Recetas extends Fragment{
         final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
         String nombreMenu=((TextView) view).getText().toString();
 		if(nombreMenu.equals("Publicar receta")){
-			Intent i = new Intent(getActivity(),PublicaReceta.class);
-			i.putExtra("infoUser", user);
-			this.startActivity(i);
+			ft.replace(R.id.content_frame, new PublicaReceta(user,getActivity()), "Medidor"); 
+	        ft.addToBackStack(null);
+	        ft.commit();
 		}else if(nombreMenu.equals("Buscar recetas")){
-			Intent i = new Intent(getActivity(),BuscaRecetas.class);
-			i.putExtra("infoUser", user);
-			this.startActivity(i);
+			ft.replace(R.id.content_frame, new BuscaRecetas(user,getActivity()), "Medidor"); 
+	        ft.addToBackStack(null);
+	        ft.commit();
 		}else if(nombreMenu.equals("Mis recetas")){
-			Intent i = new Intent(getActivity(),MisRecetas.class);
-			i.putExtra("infoUser", user);
-			this.startActivity(i);
+			ft.replace(R.id.content_frame, new MisRecetas(user,getActivity()), "Medidor"); 
+	        ft.addToBackStack(null);
+	        ft.commit();
 		}else if(nombreMenu.equals("Ejercicios recomendados")){
 			Intent i = new Intent(getActivity(),Ejercicios.class);
 			i.putExtra("infoUser", user);

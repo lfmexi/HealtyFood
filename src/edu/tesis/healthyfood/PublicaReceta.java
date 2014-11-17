@@ -21,6 +21,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -29,8 +30,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -38,30 +41,32 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-public class PublicaReceta extends Activity {
+public class PublicaReceta extends Fragment {
 
 	String user="";
-
+	Activity act;
 	static ContenedorIngredientes contenedor = new ContenedorIngredientes();
 	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_publica_receta);
+	public PublicaReceta(String u, Activity a){
+		user=u;
+		act=a;
+	}
+	
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+		View view = inflater.inflate(R.layout.activity_publica_receta, container, false);
 		contenedor = new ContenedorIngredientes();
-		selector_categoria = (Spinner)this.findViewById(R.id.receta_spinner_cat);
-		campo_nombre = (EditText)this.findViewById(R.id.receta_nombre);
-		campo_instrucciones = (EditText)this.findViewById(R.id.receta_instrucciones);
-		imagen = (ImageView)this.findViewById(R.id.receta_imagen);
-		boton_registrar = (Button)this.findViewById(R.id.receta_publicar);
-		boton_ingredientes = (Button)this.findViewById(R.id.receta_boton_agrega);
-		boton_ver = (Button)this.findViewById(R.id.recetas_ver_ingredientes);
-		
-		ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,
+		selector_categoria = (Spinner)view.findViewById(R.id.receta_spinner_cat);
+		campo_nombre = (EditText)view.findViewById(R.id.receta_nombre);
+		campo_instrucciones = (EditText)view.findViewById(R.id.receta_instrucciones);
+		imagen = (ImageView)view.findViewById(R.id.receta_imagen);
+		boton_registrar = (Button)view.findViewById(R.id.receta_publicar);
+		boton_ingredientes = (Button)view.findViewById(R.id.receta_boton_agrega);
+		boton_ver = (Button)view.findViewById(R.id.recetas_ver_ingredientes);
+		ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(act,
 		        R.array.categories_array, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		
-		Intent i=this.getIntent();
+
+		Intent i=act.getIntent();
 		user = i.getExtras().getString("infoUser");
 		
 		imagen.setOnClickListener(new OnClickListener(){
@@ -97,24 +102,27 @@ public class PublicaReceta extends Activity {
 				verOnClick();
 			}
 		});
-	}
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.publica_receta, menu);
-		return true;
+
+		return view;
 	}
 
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getMenuInflater().inflate(R.menu.publica_receta, menu);
+//		return true;
+//	}
+
 	
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data){
-		if(requestCode==1 && resultCode==Activity.RESULT_OK){
-			Uri selectImageUri=data.getData();
-			path_imagen = getPath(selectImageUri);
-			bitmap=BitmapFactory.decodeFile(path_imagen);
-			imagen.setImageBitmap(bitmap);
-		}
-	}
+//	@Override
+//	protected void onActivityResult(int requestCode, int resultCode, Intent data){
+//		if(requestCode==1 && resultCode==Activity.RESULT_OK){
+//			Uri selectImageUri=data.getData();
+//			path_imagen = getPath(selectImageUri);
+//			bitmap=BitmapFactory.decodeFile(path_imagen);
+//			imagen.setImageBitmap(bitmap);
+//		}
+//	}
 
 	private void verOnClick(){
 		String ingredientes = "";
@@ -132,15 +140,15 @@ public class PublicaReceta extends Activity {
 			}
 			ingredientes+="\n";
 		}
-		AlertDialog.Builder b = new AlertDialog.Builder(this);
+		AlertDialog.Builder b = new AlertDialog.Builder(act);
 		b.setTitle("Ingredientes en la receta");
 		b.setMessage(ingredientes);
 		b.show();
 	}
 	
 	private void agregarOnClick(){
-		Intent i = new Intent(this,Ingredientes.class);
-		this.startActivity(i);
+		Intent i = new Intent(act,Ingredientes.class);
+		act.startActivity(i);
 	}
 	
 	private String constructIngredientes(){
@@ -163,7 +171,7 @@ public class PublicaReceta extends Activity {
         	
         	if(!campo_nombre.getText().toString().equals("")&& !campo_instrucciones.getText().toString().equals("") && !contenedor.lista.isEmpty()){
 
-            	AlertDialog.Builder b= new AlertDialog.Builder(this);
+            	AlertDialog.Builder b= new AlertDialog.Builder(act);
                 b.setTitle("Carga en progreso");
                 b.setMessage("Espere mientras se cargan los datos al servidor");
                 AlertDialog a = b.show();
@@ -171,13 +179,13 @@ public class PublicaReceta extends Activity {
         		String ingredientes = constructIngredientes();
         		ut.execute(path_imagen,user,campo_nombre.getText().toString(),campo_instrucciones.getText().toString(),selector_categoria.getSelectedItem().toString(),ingredientes);
         	}else {
-            	AlertDialog.Builder b= new AlertDialog.Builder(this);
+            	AlertDialog.Builder b= new AlertDialog.Builder(act);
                 b.setTitle("Error en la carga");
                 b.setMessage("Todos los campos son obligatorios");
                 b.show();
             }
         }else {
-        	AlertDialog.Builder b= new AlertDialog.Builder(this);
+        	AlertDialog.Builder b= new AlertDialog.Builder(act);
             b.setTitle("Error en la carga");
             b.setMessage("Todos los campos son obligatorios");
             b.show();
@@ -186,7 +194,7 @@ public class PublicaReceta extends Activity {
 	
 	public String getPath(Uri uri) {
         String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        Cursor cursor = act.managedQuery(uri, projection, null, null, null);
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
         return cursor.getString(column_index);
@@ -196,7 +204,7 @@ public class PublicaReceta extends Activity {
 		Intent intent=new Intent();
 		intent.setType("image/*");
 		intent.setAction(Intent.ACTION_GET_CONTENT);
-		this.startActivityForResult(Intent.createChooser(intent, "Completar seleccionando"), 1);
+		act.startActivityForResult(Intent.createChooser(intent, "Completar seleccionando"), 1);
 	}
 	
 	
@@ -262,7 +270,7 @@ public class PublicaReceta extends Activity {
 		protected void onPostExecute(String result){
 			alerta.dismiss();
 			if(result!=null){
-				AlertDialog.Builder b= new AlertDialog.Builder(padre);
+				AlertDialog.Builder b= new AlertDialog.Builder(act);
 		        b.setTitle("Carga exitosa");
 		        b.setMessage("La receta ha sido publicada con éxito");
 		        b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -270,12 +278,12 @@ public class PublicaReceta extends Activity {
 					@Override
 					public void onClick(DialogInterface arg0, int arg1) {
 						// TODO Auto-generated method stub
-				        padre.finish();
+						getActivity().getSupportFragmentManager().popBackStack();
 					}
 		        });
 		        b.show();
 			}else{
-				AlertDialog.Builder b= new AlertDialog.Builder(padre);
+				AlertDialog.Builder b= new AlertDialog.Builder(act);
 		        b.setTitle("Error");
 		        b.setMessage("La receta no ha sido publicada con éxito");
 		        b.show();

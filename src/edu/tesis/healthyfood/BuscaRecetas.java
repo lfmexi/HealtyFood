@@ -19,13 +19,15 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -35,21 +37,25 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class BuscaRecetas extends Activity {
+public class BuscaRecetas extends Fragment {
 
 	
 	private String user="";
+	private Activity act;
 	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_busca_recetas);
+	public BuscaRecetas(String u, Activity a){
+		user=u;
+		act=a;
 		
-		campoReceta = (EditText)this.findViewById(R.id.receta_instrucciones);
-		botonBusqueda =(Button)this.findViewById(R.id.recetas_buscar);
-		resultado = (ListView)this.findViewById(R.id.busca_receta_result);
+	}
+	
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+		View view = inflater.inflate(R.layout.activity_busca_recetas, container, false);
+		campoReceta = (EditText)view.findViewById(R.id.receta_instrucciones);
+		botonBusqueda =(Button)view.findViewById(R.id.recetas_buscar);
+		resultado = (ListView)view.findViewById(R.id.busca_receta_result);
 		
-		Intent i=this.getIntent();
+		Intent i=act.getIntent();
 		user = i.getExtras().getString("infoUser");
 		
 		botonBusqueda.setOnClickListener(new OnClickListener(){
@@ -69,15 +75,16 @@ public class BuscaRecetas extends Activity {
 				listaOnItemClick(arg1);
 			}
 		});
-
+		return view;
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.busca_recetas, menu);
-		return true;
-	}
+
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getMenuInflater().inflate(R.menu.busca_recetas, menu);
+//		return true;
+//	}
 
 	private void botonOnClick(){
 		String patron = campoReceta.getText().toString();
@@ -87,7 +94,7 @@ public class BuscaRecetas extends Activity {
 	
 	private void listaOnItemClick(View v){
 		String nombre = ((TextView) v).getText().toString();
-		Intent i = new Intent(this,VisualizaReceta.class);
+		Intent i = new Intent(act,VisualizaReceta.class);
 		i.putExtra("infoUser", user);
 		i.putExtra("receta", nombre);
 		this.startActivity(i);
@@ -169,7 +176,7 @@ public class BuscaRecetas extends Activity {
 				for(int i = 0;i<result.length;i++){
 					adaptador[i] = result[i];
 				}
-				padre.resultado.setAdapter(new ArrayAdapter<String>(padre,android.R.layout.simple_list_item_1,android.R.id.text1,adaptador));
+				padre.resultado.setAdapter(new ArrayAdapter<String>(act,android.R.layout.simple_list_item_1,android.R.id.text1,adaptador));
 			}
 		}
 	}
