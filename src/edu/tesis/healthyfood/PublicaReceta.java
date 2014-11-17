@@ -114,15 +114,15 @@ public class PublicaReceta extends Fragment {
 //	}
 
 	
-//	@Override
-//	protected void onActivityResult(int requestCode, int resultCode, Intent data){
-//		if(requestCode==1 && resultCode==Activity.RESULT_OK){
-//			Uri selectImageUri=data.getData();
-//			path_imagen = getPath(selectImageUri);
-//			bitmap=BitmapFactory.decodeFile(path_imagen);
-//			imagen.setImageBitmap(bitmap);
-//		}
-//	}
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data){
+		if(requestCode==1 && resultCode==Activity.RESULT_OK){
+			Uri selectImageUri=data.getData();
+			path_imagen = getPath(selectImageUri);
+			bitmap=BitmapFactory.decodeFile(path_imagen);
+			imagen.setImageBitmap(bitmap);
+		}
+	}
 
 	private void verOnClick(){
 		String ingredientes = "";
@@ -204,7 +204,7 @@ public class PublicaReceta extends Fragment {
 		Intent intent=new Intent();
 		intent.setType("image/*");
 		intent.setAction(Intent.ACTION_GET_CONTENT);
-		act.startActivityForResult(Intent.createChooser(intent, "Completar seleccionando"), 1);
+		this.startActivityForResult(Intent.createChooser(intent, "Completar seleccionando"), 1);
 	}
 	
 	
