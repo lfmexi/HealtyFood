@@ -32,6 +32,25 @@ public class SQLite {
 		sqlh.close();		
 	}
 	
+	public boolean addDiario(String usuario,String receta, double calorias){
+		if(usuario!=null){
+			ContentValues cv=new ContentValues();
+			cv.put(sqlh.username, usuario);
+			cv.put(sqlh.receta, receta);
+			cv.put(sqlh.calorias, calorias);
+			cv.put(sqlh.fecha_Diario, new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+			Calendar c=Calendar.getInstance();
+			int hora=c.get(Calendar.HOUR_OF_DAY);
+			int minuto=c.get(Calendar.MINUTE);
+			int segundo=c.get(Calendar.SECOND);
+			cv.put(sqlh.hora_Diario, hora);
+			cv.put(sqlh.minuto_diario, minuto);
+			cv.put(sqlh.segundo_diario, segundo);
+			return(db.insert(sqlh.tablaDiario, null, cv)!=-1)?true:false;
+		}
+		return false;
+	}
+	
 	public boolean addTMB(String username,double tmb){
 		if(username!=null){
 			ContentValues cv = new ContentValues();

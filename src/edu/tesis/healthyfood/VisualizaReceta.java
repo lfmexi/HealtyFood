@@ -155,7 +155,17 @@ public class VisualizaReceta extends Activity {
 	}
 	
 	private void agregaOnClick(){
-		
+		SQLite sql=new SQLite(this);
+		double caloria=Double.parseDouble(info_receta[3]);
+		sql.abrir();
+		boolean agregado=sql.addDiario(user, receta, caloria);
+		sql.cerrar();
+		if(agregado){
+			AlertDialog.Builder b=new AlertDialog.Builder(this);
+			b.setTitle("Éxito");
+			b.setMessage("Receta agregada al diario");
+			b.show();
+		}
 	}
 	
 	private TextView textNombreReceta;

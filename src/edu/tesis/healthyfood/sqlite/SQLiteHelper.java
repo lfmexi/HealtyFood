@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SQLiteHelper extends SQLiteOpenHelper {
 
 	private static final String database="HealthyFoodDB";
-	private static final int version = 10;
+	private static final int version = 11;
 	
 	public final String tabla = "Sesion";
 	public final String id_sesion = "idSesion";
@@ -33,6 +33,15 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	public final String fecha_tmb = "fecha_tmb";
 	public final String tmb = "tmb";
 	
+	public final String tablaDiario="Diario";
+	public final String fecha_Diario = "fecha_diario";
+	public final String hora_Diario = "hora_diario";
+	public final String minuto_diario= "minuto_diario";
+	public final String segundo_diario = "segundo_diario";
+	public final String receta="receta";
+	public final String calorias="calorias";
+	public final String idDiario = "idDiario";
+	
 	private final String ddl ="CREATE TABLE "+tabla+" ( "
 			+id_sesion+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "+
 			username +" TEXT NOT NULL, "+
@@ -55,10 +64,20 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 			objetivo+" TEXT NOT NULL)";
 	
 	private final String ddlTMB = "CREATE TABLE "+tablaTMB+" ( "
-			+id_tmb+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
-			+username+" TEXT NOT NULL, "+
+			+id_tmb+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "+
+			username+" TEXT NOT NULL, "+
 			fecha_tmb+" DATE NOT NULL, "+
 			tmb+" REAL NOT NULL)";
+	
+	private final String ddlDiario = "CREATE TABLE "+tablaDiario+" ( "
+			+idDiario+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "+
+			username+" TEXT NOT NULL, "+
+			fecha_Diario+" DATE NOT NULL, "+
+			hora_Diario+" INTEGER NOT NULL, "+
+			minuto_diario+" INTEGER NOT NULL, "+
+			segundo_diario+" INTEGER NOT NULL, "+
+			receta+" TEXT NOT NULL, "+
+			calorias+" REAL NOT NULL)";
 	
 	public SQLiteHelper(Context context, String name, CursorFactory factory,
 			int version) {
@@ -77,6 +96,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 		db.execSQL(ddlMedicion);
 		db.execSQL(ddlObjetivo);
 		db.execSQL(ddlTMB);
+		db.execSQL(ddlDiario);
 	}
 
 	@Override
@@ -106,6 +126,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 			db.execSQL( "DROP TABLE IF EXISTS " + tablaTMB );
 			//y luego creamos la nueva tabla
 			db.execSQL( ddlTMB);
+			
+			//elimina tabla
+			db.execSQL( "DROP TABLE IF EXISTS " + tablaDiario );
+			//y luego creamos la nueva tabla
+			db.execSQL( ddlDiario);
 		}
 	}
 
