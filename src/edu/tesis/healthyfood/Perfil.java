@@ -1,5 +1,6 @@
 package edu.tesis.healthyfood;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -74,10 +75,13 @@ public class Perfil extends Fragment {
 	}
 	
 	private void progreso(){
-        final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
+        /*final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
         ft.replace(R.id.content_frame, new ProgresoIMC(user), "Progreso IMC"); 
         ft.addToBackStack(null);
-        ft.commit();
+        ft.commit();*/
+		Intent i = new Intent(this.getActivity(),ProgresoIMC.class);
+		i.putExtra("infoUser", user);
+		this.startActivity(i);
 	}
 	
 

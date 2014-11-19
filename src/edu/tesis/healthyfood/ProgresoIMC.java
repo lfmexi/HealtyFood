@@ -1,38 +1,33 @@
 package edu.tesis.healthyfood;
 
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import com.github.mikephil.charting.charts.LineChart;
+public class ProgresoIMC extends FragmentActivity {
 
-public class ProgresoIMC extends Fragment {
-
-	private LineChart pChart;
 	private String user="";
-	
-	public ProgresoIMC (String us){
-		user=us;
-	}
 	
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-		View view = inflater.inflate(R.layout.activity_progreso_imc, container, false);
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_progreso_imc);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+		Intent i = this.getIntent();
+		user = i.getExtras().getString("infoUser");
 		
-		ViewPager pager = (ViewPager)view.findViewById(R.id.pager);
+		ViewPager pager = (ViewPager)findViewById(R.id.pager);
 		pager.setOffscreenPageLimit(3);
 		
-		PageAdapter a = new PageAdapter(getActivity().getSupportFragmentManager());
+		PageAdapter a = new PageAdapter(getSupportFragmentManager());
 		pager.setAdapter(a);
-		
-
-		return view;
 	}
 
 	private class PageAdapter extends FragmentPagerAdapter {
