@@ -1,9 +1,7 @@
 package edu.tesis.healthyfood;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +29,9 @@ public class Perfil extends Fragment {
 		botonMedir=(Button)view.findViewById(R.id.botonNuevaMedida);
 		TextView txt=(TextView)view.findViewById(R.id.textUser);
 		txt.setText(user);
+		
+		Button boton = (Button)view.findViewById(R.id.button1);
+		
 		botonProgreso=(Button)view.findViewById(R.id.botonGetProgreso);
 		botonMedir.setOnClickListener(new OnClickListener(){
 			@Override
@@ -47,9 +48,23 @@ public class Perfil extends Fragment {
 			}
 		});
 
+		boton.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				calorias();
+			}
+		});
 		return view;
 	}
 
+	private void calorias(){
+		final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
+        ft.replace(R.id.content_frame, new ConsumoDiario(user),"Consumo diario de calorías"); 
+        ft.addToBackStack(null);
+        ft.commit();
+	}
 	
 	private void medir(){
         final FragmentTransaction ft = getFragmentManager().beginTransaction(); 

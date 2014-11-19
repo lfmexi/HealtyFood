@@ -56,8 +56,8 @@ public class SQLite {
 		if(user!=null){
 			Cursor cursor = db.query(sqlh.tablaDiario,
 					new String[]{sqlh.receta,sqlh.calorias,sqlh.fecha_Diario,sqlh.hora_Diario,sqlh.minuto_diario,sqlh.segundo_diario},
-						sqlh.username+"=? AND "+sqlh.fecha_Diario+"=?",
-						new String[]{user,new SimpleDateFormat("yyyy-MM-dd").format(d)},
+						sqlh.username+"=? AND "+sqlh.fecha_Diario+" LIKE ? ",
+						new String[]{user,"%"+new SimpleDateFormat("yyyy-MM-dd").format(d)+"%"},
 						null,null,
 						sqlh.idDiario+" ASC ");
 			if(cursor.moveToFirst()){
@@ -66,7 +66,8 @@ public class SQLite {
 					try{
 						String rec = cursor.getString(0);
 						double cal = cursor.getDouble(1);
-						Date fecha =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(cursor.getString(2));
+						String date=cursor.getString(2);
+						Date fecha =new SimpleDateFormat("yyyy-MM-dd").parse(date);
 						int hora = cursor.getInt(3);
 						int minuto = cursor.getInt(4);
 						int segundo = cursor.getInt(5);

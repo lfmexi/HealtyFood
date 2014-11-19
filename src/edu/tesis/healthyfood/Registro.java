@@ -218,7 +218,6 @@ public class Registro extends Activity {
 					sql.addReg(user,sex,birth);
 					sql.cerrar();
 					
-					
 					Intent i = new Intent(padre,DrawerMenuActivity.class);
 					i.putExtra("infoUser", user);
 					i.putExtra("sex",sex);
@@ -228,8 +227,8 @@ public class Registro extends Activity {
 					padre.finish();
 				}else{
 					AlertDialog.Builder alert=new AlertDialog.Builder(padre);
-					alert.setTitle("Error de autenticaciï¿½n");
-					alert.setMessage("El usuario ya existe en el sistema o ha ocurrido un error");
+					alert.setTitle("Error de autenticación");
+					alert.setMessage("El usuario ya existe en el sistema");
 					alert.show();
 				}
 			}

@@ -3,6 +3,14 @@ package edu.tesis.healthyfood;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
 import com.github.mikephil.charting.charts.BarLineChartBase.BorderPosition;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -14,23 +22,6 @@ import com.github.mikephil.charting.utils.LimitLine.LimitLabelPosition;
 
 import edu.tesis.healthyfood.sqlite.Medicion;
 import edu.tesis.healthyfood.sqlite.SQLite;
-
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 public class ProgresoIMC extends Fragment {
 
@@ -90,25 +81,6 @@ public class ProgresoIMC extends Fragment {
 	}
 
 	
-	//@Override
-	//public boolean onCreateOptionsMenu(Menu menu) {
-	//	// Inflate the menu; this adds items to the action bar if it is present.
-	//	getMenuInflater().inflate(R.menu.progreso_imc, menu);
-	//	return true;
-	//}
-
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		// Handle action bar item clicks here. The action bar will
-//		// automatically handle clicks on the Home/Up button, so long
-//		// as you specify a parent activity in AndroidManifest.xml.
-//		int id = item.getItemId();
-//		if (id == R.id.action_settings) {
-//			return true;
-//		}
-//		return super.onOptionsItemSelected(item);
-//	}
-	
 	private void onSelected(Entry e){
 		float val = e.getVal();
 		if(val<16f){
@@ -148,10 +120,8 @@ public class ProgresoIMC extends Fragment {
             yVals.add(new Entry((float) mediciones.get(i).getImc(), i));
         }
 
-        // create a dataset and give it a type
         LineDataSet set1 = new LineDataSet(yVals, "IMC por medición");
 
-        // set the line to be drawn like this "- - - - - -"
         
         set1.enableDashedLine(15f, 1f, 0f);
         set1.setColor(Color.BLACK);
@@ -162,9 +132,8 @@ public class ProgresoIMC extends Fragment {
         set1.setFillColor(Color.BLACK);
 
         ArrayList<LineDataSet> dataSets = new ArrayList<LineDataSet>();
-        dataSets.add(set1); // add the datasets
+        dataSets.add(set1); 
 
-        // create a data object with the datasets
         LineData data = new LineData(xVals, dataSets);
 
         LimitLine infraPeso = new LimitLine(18.49f);

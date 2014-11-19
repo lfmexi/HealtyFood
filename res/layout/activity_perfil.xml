@@ -52,6 +52,15 @@
                     android:layout_alignParentTop="true"
                     android:text="Usuario" />
 
+                <Button
+                    android:id="@+id/button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/botonGetProgreso"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="34dp"
+                    android:text="Medidor de calorías" />
+
             </RelativeLayout>
 
         </LinearLayout>

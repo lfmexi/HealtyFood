@@ -43,10 +43,10 @@ public class PieChartItem extends ChartItem {
         }
         
         holder.chart.setDescription(descripcion);
-        holder.chart.setHoleRadius(60f);
-        holder.chart.setTransparentCircleRadius(65f);
+        holder.chart.setHoleRadius(40f);
+        holder.chart.setTransparentCircleRadius(40f);
         holder.chart.setCenterText("Calorías totales\nconsumidas");
-        holder.chart.setCenterTextSize(18f);
+        holder.chart.setCenterTextSize(20f);
         holder.chart.setDrawXValues(true);
         holder.chart.setUsePercentValues(true);
         
