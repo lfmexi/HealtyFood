@@ -75,22 +75,25 @@
                     android:text="Inciar Sesión" />
 
                 <Button
-                    android:id="@+id/login_forgot"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/main_boton_ingreso"
-                    android:layout_below="@+id/main_boton_ingreso"
-                    android:text="Olvidé mis datos" />
-
-                <Button
                     android:id="@+id/login_boton_register"
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/login_forgot"
-                    android:layout_below="@+id/login_forgot"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/main_boton_ingreso"
+                    android:layout_marginTop="14dp"
                     android:text="Soy nuevo, Regístrame" />
+
+                <Button
+                    android:id="@+id/login_forgot"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/main_boton_ingreso"
+                    android:layout_below="@+id/login_boton_register"
+                    android:layout_marginTop="20dp"
+                    android:text="Olvidé mis datos" />
+                
             </RelativeLayout>
 
         </LinearLayout>

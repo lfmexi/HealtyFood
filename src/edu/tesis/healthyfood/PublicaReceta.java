@@ -285,7 +285,7 @@ public class PublicaReceta extends Fragment {
 			}else{
 				AlertDialog.Builder b= new AlertDialog.Builder(act);
 		        b.setTitle("Error");
-		        b.setMessage("La receta no ha sido publicada con Ã©xito");
+		        b.setMessage("La receta no ha sido publicada con éxito");
 		        b.show();
 			}
 		}

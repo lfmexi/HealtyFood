@@ -127,12 +127,20 @@ public class Registro extends Activity {
 		if(!campouser.getText().toString().equals("")&&!campoemail.getText().toString().equals("")&&!campopass.getText().toString().equals("")
 				&&!campoconfpass.getText().toString().equals("")&&!campoNombre.getText().toString().equals("")){
 			if(campoconfpass.getText().toString().equals(campopass.getText().toString())){
-				String birth = year+"-"+month+"-"+day;				
-				String sex=selectSexo.getSelectedItem().toString();
-				RegistroAsyncTask r = new RegistroAsyncTask(this,campouser.getText().toString());
-				r.execute(campouser.getText().toString(),campoNombre.getText().toString(),
-						campopass.getText().toString(),campoemail.getText().toString(),
-						sex,birth);
+				CharSequence c_email=campoemail.getText().toString();
+				if(android.util.Patterns.EMAIL_ADDRESS.matcher(c_email).matches()){
+					String birth = year+"-"+month+"-"+day;				
+					String sex=selectSexo.getSelectedItem().toString();
+					RegistroAsyncTask r = new RegistroAsyncTask(this,campouser.getText().toString());
+					r.execute(campouser.getText().toString(),campoNombre.getText().toString(),
+							campopass.getText().toString(),campoemail.getText().toString(),
+							sex,birth);
+				}else{
+					AlertDialog.Builder alert=new AlertDialog.Builder(this);
+					alert.setTitle("Email");
+					alert.setMessage("El email ingresado no es válido");
+					alert.show();
+				}
 			}
 		}
 	}
