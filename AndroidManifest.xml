@@ -90,6 +90,10 @@
             android:name=".ProgresoIMC"
             android:label="@string/title_activity_progreso_imc" >
         </activity>
+        <activity
+            android:name=".ConsumoDiario"
+            android:label="@string/title_activity_consumo_diario" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

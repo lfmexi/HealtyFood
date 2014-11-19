@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SQLiteHelper extends SQLiteOpenHelper {
 
 	private static final String database="HealthyFoodDB";
-	private static final int version = 11;
+	private static final int version = 12;
 	
 	public final String tabla = "Sesion";
 	public final String id_sesion = "idSesion";

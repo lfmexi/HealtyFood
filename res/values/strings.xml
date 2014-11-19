@@ -40,10 +40,9 @@
         <item>Mantener peso</item>
         <item>Ganar peso</item>
     </string-array>
-    
+
     <string name="drawer_open">Abrir</string>
     <string name="drawer_close">Cerrar</string>
-    
     <string name="title_activity_forgot_data">Datos olvidados</string>
     <string name="title_activity_registrar">Registrar</string>
     <string name="title_activity_ingredientes">Ingredientes</string>
@@ -52,5 +51,6 @@
     <string name="title_activity_registro">Registro</string>
     <string name="title_activity_visualiza_receta">Receta</string>
     <string name="title_activity_progreso_imc">Progreso IMC</string>
+    <string name="title_activity_consumo_diario">Consumo diario de calorías</string>
 
 </resources>

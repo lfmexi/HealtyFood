@@ -51,6 +51,48 @@ public class SQLite {
 		return false;
 	}
 	
+	public ArrayList<EntradaDiario> getEntradasDia(String user,Date d){
+		ArrayList<EntradaDiario> lista=null;
+		if(user!=null){
+			Cursor cursor = db.query(sqlh.tablaDiario,
+					new String[]{sqlh.receta,sqlh.calorias,sqlh.fecha_Diario,sqlh.hora_Diario,sqlh.minuto_diario,sqlh.segundo_diario},
+						sqlh.username+"=? AND "+sqlh.fecha_Diario+"=?",
+						new String[]{user,new SimpleDateFormat("yyyy-MM-dd").format(d)},
+						null,null,
+						sqlh.idDiario+" ASC ");
+			if(cursor.moveToFirst()){
+				lista = new ArrayList<EntradaDiario>();
+				do{
+					try{
+						String rec = cursor.getString(0);
+						double cal = cursor.getDouble(1);
+						Date fecha =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(cursor.getString(2));
+						int hora = cursor.getInt(3);
+						int minuto = cursor.getInt(4);
+						int segundo = cursor.getInt(5);
+						
+						EntradaDiario ed = new EntradaDiario();
+						ed.receta=rec;
+						ed.calorias=cal;
+						ed.fecha=fecha;
+						ed.hora=hora;
+						ed.minuto=minuto;
+						ed.segundo=segundo;
+						ed.usuario=user;
+						
+						lista.add(ed);
+					}catch(NumberFormatException nfe){
+						nfe.printStackTrace();
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}while(cursor.moveToNext());
+			}
+		}
+		return lista;
+	}
+	
 	public boolean addTMB(String username,double tmb){
 		if(username!=null){
 			ContentValues cv = new ContentValues();
