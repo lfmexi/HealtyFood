@@ -23,7 +23,7 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/textNombreEjercicio"
                 android:layout_width="192dp"
                 android:layout_height="wrap_content"
                 android:text="Ingrese su correo electrónico"

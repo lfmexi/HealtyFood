@@ -94,6 +94,10 @@
             android:name=".ConsumoDiario"
             android:label="@string/title_activity_consumo_diario" >
         </activity>
+        <activity
+            android:name=".VisualizaEjercicio"
+            android:label="@string/title_activity_visualiza_ejercicio" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
