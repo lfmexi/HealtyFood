@@ -91,7 +91,7 @@ public class ForgotData extends Activity {
 		protected String doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
 			HttpClient cliente = new DefaultHttpClient();
-			HttpPost post = new HttpPost(Login.url+"/aqui.php");
+			HttpPost post = new HttpPost(Login.url+"/getData.php");
 			List<NameValuePair> params = new ArrayList<NameValuePair>(2);
 	        params.add(new BasicNameValuePair("email",arg0[0]));
 	        try {
