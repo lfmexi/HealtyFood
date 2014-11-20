@@ -166,7 +166,7 @@ public class Login extends Activity {
 		    	String jsonResult = inputStreamToString(response.getEntity().getContent()).toString();
 		    	JSONArray mArray = new JSONArray(jsonResult);
 		    	int num_registros=mArray.length();
-		    	regs = new String[3];
+		    	if(num_registros>0)regs = new String[3];
 		    	for (int i = 0; i < num_registros; i++) {
 		    	    JSONObject object = mArray.getJSONObject(i);
 		    	    String campo1 = object.getString("nick");
