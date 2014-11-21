@@ -128,7 +128,7 @@ private Activity act;
 		    		regs = new String[num_registros];
 		    		for (int i = 0; i < num_registros; i++) {
 			    	    JSONObject object = mArray.getJSONObject(i);
-			    	    regs[i] = object.getString("receta");
+			    	    regs[i] = object.getString("nombre");
 			    	}
 		    	}
 		    }catch(JSONException e){
