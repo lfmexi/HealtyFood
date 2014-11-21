@@ -402,25 +402,7 @@ public class VisualizaReceta extends Activity {
 		}
 		
 		protected void onPostExecute(String result){
-			if(result!=null){
-			//	AlertDialog.Builder b= new AlertDialog.Builder(padre);
-		     //   b.setTitle("Receta calificada");
-		      //  b.setMessage(result);
-		     //   b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//
-	//				@Override
-		//			public void onClick(DialogInterface arg0, int arg1) {
-			//			// TODO Auto-generated method stub
-				//		//this.getSupportFragmentManager().popBackStack();
-					//}
-		        //});
-		        b.show();
-			}else{
-			//	AlertDialog.Builder b= new AlertDialog.Builder(padre);
-		     //   b.setTitle("Error");
-		      //  b.setMessage("La receta no fue calificada publicada con éxito");
-		       // b.show();
-			}
+			
 		}
 	}
 
