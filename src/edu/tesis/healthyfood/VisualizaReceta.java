@@ -286,6 +286,79 @@ public class VisualizaReceta extends Activity {
 		}
 	}
 
+	private class RatingAsync extends AsyncTask<String,Void,String[]>{
+
+		private VisualizaReceta padre;
+		
+		public RatingAsync(VisualizaReceta v){
+			padre = v;
+		}
+		
+		@Override
+		protected String[] doInBackground(String... arg0) {
+			String[] response = null;
+			HttpClient cliente = new DefaultHttpClient();
+			HttpPost post = new HttpPost(Login.url+"/getRating.php");
+			List<NameValuePair> params = new ArrayList<NameValuePair>(2);
+			params.add(new BasicNameValuePair("receta",arg0[0]));
+			params.add(new BasicNameValuePair("user",arg0[1]));
+			try {
+				post.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response = getValores(cliente,post);
+			return response;
+		}
+		
+		private StringBuilder inputStreamToString(InputStream is) {
+		    String rLine = "";
+		    StringBuilder answer = new StringBuilder();
+		    BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+		    try {
+		     while ((rLine = rd.readLine()) != null) {
+		      answer.append(rLine);
+		       }
+		    }
+		    catch (IOException e) {
+		        e.printStackTrace();
+		     }
+		    return answer;
+		}
+		
+		private String []getValores(HttpClient cliente, HttpPost post){
+			String []regs=null;
+			try{
+		    	HttpResponse response = cliente.execute(post);
+		    	String jsonResult = inputStreamToString(response.getEntity().getContent()).toString();
+		    	JSONArray mArray = new JSONArray(jsonResult);
+		    	int num_registros=mArray.length();
+		    	if(num_registros>0){
+		    		JSONObject object = mArray.getJSONObject(0);
+		    		regs = new String[6];
+		    		regs[0] = object.getString("rating");
+		    	}
+		    }catch(JSONException e){
+		    	e.printStackTrace();
+		    } catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return regs;
+		}
+		
+		protected void onPostExecute(String[] result){
+			if(result!=null){
+				if (result[0]!=null){
+					padre.bar.setRating(Float.parseFloat(result[0]));
+				}
+			}
+		}
+	}
+
+	
 	private class RatingTask extends AsyncTask<String,Void,String>{
 
 		private  VisualizaReceta padre;
