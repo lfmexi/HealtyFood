@@ -123,6 +123,8 @@ public class VisualizaReceta extends Activity {
 	
 		LoaderAsync l = new LoaderAsync(this);
 		l.execute(receta);
+		RatingAsync l1 = new RatingAsync(this);
+		l1.execute(receta,user);
 	}
 	
 	@Override
@@ -298,7 +300,7 @@ public class VisualizaReceta extends Activity {
 			String[] response = null;
 			HttpClient cliente = new DefaultHttpClient();
 			HttpPost post = new HttpPost(Login.url+"/getRating.php");
-			List<NameValuePair> params = new ArrayList<NameValuePair>(2);
+			List<NameValuePair> params = new ArrayList<NameValuePair>(3);
 			params.add(new BasicNameValuePair("receta",arg0[0]));
 			params.add(new BasicNameValuePair("user",arg0[1]));
 			try {
@@ -335,7 +337,7 @@ public class VisualizaReceta extends Activity {
 		    	int num_registros=mArray.length();
 		    	if(num_registros>0){
 		    		JSONObject object = mArray.getJSONObject(0);
-		    		regs = new String[6];
+		    		regs = new String[1];
 		    		regs[0] = object.getString("rating");
 		    	}
 		    }catch(JSONException e){
@@ -401,9 +403,9 @@ public class VisualizaReceta extends Activity {
 		
 		protected void onPostExecute(String result){
 			if(result!=null){
-				AlertDialog.Builder b= new AlertDialog.Builder(padre);
-		        b.setTitle("Receta calificada");
-		        b.setMessage(result);
+			//	AlertDialog.Builder b= new AlertDialog.Builder(padre);
+		     //   b.setTitle("Receta calificada");
+		      //  b.setMessage(result);
 		     //   b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 //
 	//				@Override
@@ -414,10 +416,10 @@ public class VisualizaReceta extends Activity {
 		        //});
 		        b.show();
 			}else{
-				AlertDialog.Builder b= new AlertDialog.Builder(padre);
-		        b.setTitle("Error");
-		        b.setMessage("La receta no fue calificada publicada con éxito");
-		        b.show();
+			//	AlertDialog.Builder b= new AlertDialog.Builder(padre);
+		     //   b.setTitle("Error");
+		      //  b.setMessage("La receta no fue calificada publicada con éxito");
+		       // b.show();
 			}
 		}
 	}
