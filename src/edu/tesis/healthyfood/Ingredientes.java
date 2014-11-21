@@ -41,6 +41,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Ingredientes extends Activity {
 
@@ -82,7 +83,7 @@ public class Ingredientes extends Activity {
 	}
 
 	private void listaOnItemClick(View v){
-		AlertDialog.Builder b = new AlertDialog.Builder(this);
+		final AlertDialog.Builder b = new AlertDialog.Builder(this);
 		final String nombre = ((TextView) v).getText().toString();
 		if(!PublicaReceta.contenedor.lista.containsKey(nombre)){
 			if(ingredientes.containsKey(nombre)){
@@ -103,8 +104,12 @@ public class Ingredientes extends Activity {
 							try{
 								
 								int entero = Integer.parseInt(input.getText().toString());
-								ir.setUnidades(entero);
-								PublicaReceta.contenedor.lista.put(nombre, ir);
+								if(entero>=0){
+									ir.setUnidades(entero);
+									PublicaReceta.contenedor.lista.put(nombre, ir);
+								}else{
+									Toast.makeText(b.getContext(), "Ingrese un número; mayor a 0",20).show();
+								}
 							}catch(NumberFormatException nfe){
 								//nada
 							}
@@ -121,8 +126,12 @@ public class Ingredientes extends Activity {
 							// TODO Auto-generated method stub
 							try{
 								double entero = Double.parseDouble(input.getText().toString());
-								ir.setGramos(entero);
-								PublicaReceta.contenedor.lista.put(nombre, ir);
+								if(entero>=0){
+									ir.setGramos(entero);
+									PublicaReceta.contenedor.lista.put(nombre, ir);
+								}else{
+									Toast.makeText(b.getContext(), "Ingrese un número; mayor a 0",20).show();
+								}
 							}catch(NumberFormatException nfe){
 								//nada
 							}
@@ -139,8 +148,12 @@ public class Ingredientes extends Activity {
 							// TODO Auto-generated method stub
 							try{
 								double entero = Double.parseDouble(input.getText().toString());
-								ir.setLitros(entero);
-								PublicaReceta.contenedor.lista.put(nombre, ir);
+								if(entero>=0){
+									ir.setLitros(entero);
+									PublicaReceta.contenedor.lista.put(nombre, ir);
+								}else{
+									Toast.makeText(b.getContext(), "Ingrese un número; mayor a 0",20).show();
+								}
 							}catch(NumberFormatException nfe){
 								//nada
 							}
