@@ -29,6 +29,7 @@ import edu.tesis.healthyfood.charts.LineChartItem;
 import edu.tesis.healthyfood.charts.PieChartItem;
 import edu.tesis.healthyfood.sqlite.EntradaDiario;
 import edu.tesis.healthyfood.sqlite.SQLite;
+import edu.tesis.healthyfood.sqlite.TMB;
 
 public class ConsumoDiario extends Fragment {
 
@@ -83,7 +84,10 @@ public class ConsumoDiario extends Fragment {
 		SQLite sql = new SQLite(this.getActivity());
 		sql.abrir();
 		ArrayList<EntradaDiario> mediciones=sql.getEntradasDia(user, d);
-		double idr=sql.getLastTMB(user).value*1.2;
+		TMB last = sql.getLastTMB(user);
+		double idr=0;
+		if(last!=null)
+			idr=last.value*1.2;
 		sql.cerrar();
 		
 		int count= 0;
