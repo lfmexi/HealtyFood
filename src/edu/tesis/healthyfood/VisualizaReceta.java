@@ -120,14 +120,6 @@ public class VisualizaReceta extends Activity {
 				favoritoOnClick();
 			}
 		});
-		
-		botonAgrega.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				agregaOnClick();
-			}
-		});
 	
 		LoaderAsync l = new LoaderAsync(this);
 		l.execute(receta);
@@ -280,6 +272,13 @@ public class VisualizaReceta extends Activity {
 				padre.textCalorias.setText(result[3]);
 				padre.campoInstrucciones.setText(result[4]);
 				padre.info_receta=result;
+				padre.botonAgrega.setOnClickListener(new OnClickListener(){
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						agregaOnClick();
+					}
+				});
 				//enviar a pedir la imagen
 				new DownloadImage(padre).execute(Login.url+"/"+result[5]);
 			}
