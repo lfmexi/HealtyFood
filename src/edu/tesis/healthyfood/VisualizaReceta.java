@@ -1,6 +1,7 @@
 package edu.tesis.healthyfood;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -8,12 +9,17 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -29,6 +35,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
@@ -40,6 +47,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,7 +89,7 @@ public class VisualizaReceta extends Activity {
 		botonFavorito = (Button)this.findViewById(R.id.botonFavorito);
 		botonAgrega = (Button)this.findViewById(R.id.botonConsumir);
 		imagen = (ImageView)this.findViewById(R.id.visualizaImagen);
-		
+		bar = (RatingBar)this.findViewById(R.id.ratingReceta);
 		textNombreReceta.setText(receta);
 		textUsuario.setText("Cargando");
 		textTipoReceta.setText("Cargando");
@@ -94,6 +103,13 @@ public class VisualizaReceta extends Activity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				verIngredientesOnClick();
+			}
+		});
+		
+		bar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+			public void onRatingChanged(RatingBar ratingBar, float rating,
+				boolean fromUser) {
+				RateOnClick(rating);
 			}
 		});
 		
@@ -153,7 +169,14 @@ public class VisualizaReceta extends Activity {
 	}
 
 	private void favoritoOnClick(){
+		FaveTask ut = new FaveTask(this);
+		ut.execute(user,receta);		
 		
+	}
+	
+	private void RateOnClick(Float val){
+		RatingTask ut = new RatingTask(this);
+		ut.execute(user,receta,String.valueOf(val));		
 	}
 	
 	private void agregaOnClick(){
@@ -179,6 +202,7 @@ public class VisualizaReceta extends Activity {
 	private EditText campoInstrucciones;
 	private Button botonFavorito;
 	private Button botonAgrega;
+	private RatingBar bar;
 
 	
 	private class LoaderAsync extends AsyncTask<String,Void,String[]>{
@@ -258,6 +282,133 @@ public class VisualizaReceta extends Activity {
 				padre.info_receta=result;
 				//enviar a pedir la imagen
 				new DownloadImage(padre).execute(Login.url+"/"+result[5]);
+			}
+		}
+	}
+
+	private class RatingTask extends AsyncTask<String,Void,String>{
+
+		private  VisualizaReceta padre;
+		public RatingTask(VisualizaReceta p){
+			padre = p;
+		}
+		
+		protected String doInBackground(String... arg0) {
+			// TODO Auto-generated method stub
+			try {
+				postFile(arg0[0],arg0[1],arg0[2]);
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
+			return "ok";
+		}
+		
+		private void postFile(String username, String nombre, String rating) throws ClientProtocolException, IOException{
+			String url=Login.url+"/raterecipe.php";
+			HttpClient cliente = new DefaultHttpClient();
+			HttpPost post = new HttpPost(url);
+	        MultipartEntityBuilder me = MultipartEntityBuilder.create();
+	        
+	        me.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);       
+	        me.addPart("user", new StringBody(username));
+	        me.addPart("receta", new StringBody(nombre));
+	        me.addPart("rating", new StringBody(rating));
+	        post.setEntity(me.build());
+	        HttpResponse response=cliente.execute(post);
+	        HttpEntity entidad = response.getEntity();
+	        
+	        entidad.consumeContent();
+	        cliente.getConnectionManager().shutdown();
+		}
+		
+		protected void onPostExecute(String result){
+			if(result!=null){
+				AlertDialog.Builder b= new AlertDialog.Builder(padre);
+		        b.setTitle("Receta calificada");
+		        b.setMessage(result);
+		     //   b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//
+	//				@Override
+		//			public void onClick(DialogInterface arg0, int arg1) {
+			//			// TODO Auto-generated method stub
+				//		//this.getSupportFragmentManager().popBackStack();
+					//}
+		        //});
+		        b.show();
+			}else{
+				AlertDialog.Builder b= new AlertDialog.Builder(padre);
+		        b.setTitle("Error");
+		        b.setMessage("La receta no fue calificada publicada con éxito");
+		        b.show();
+			}
+		}
+	}
+
+	private class FaveTask extends AsyncTask<String,Void,String>{
+
+		private  VisualizaReceta padre;
+		public FaveTask(VisualizaReceta p){
+			padre = p;
+		}
+		
+		protected String doInBackground(String... arg0) {
+			// TODO Auto-generated method stub
+			try {
+				postFile(arg0[0],arg0[1]);
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
+			return "ok";
+		}
+		
+		private void postFile(String username, String nombre) throws ClientProtocolException, IOException{
+			String url=Login.url+"/faverecipe.php";
+			HttpClient cliente = new DefaultHttpClient();
+			HttpPost post = new HttpPost(url);
+	        MultipartEntityBuilder me = MultipartEntityBuilder.create();
+	        
+	        me.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);       
+	        me.addPart("user", new StringBody(username));
+	        me.addPart("receta", new StringBody(nombre));
+	        post.setEntity(me.build());
+	        HttpResponse response=cliente.execute(post);
+	        HttpEntity entidad = response.getEntity();
+	        
+	        entidad.consumeContent();
+	        cliente.getConnectionManager().shutdown();
+		}
+		
+		protected void onPostExecute(String result){
+			if(result!=null){
+				AlertDialog.Builder b= new AlertDialog.Builder(padre);
+		        b.setTitle("Has marcado una receta como favorita");
+		        b.setMessage(result);
+		     //   b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//
+	//				@Override
+		//			public void onClick(DialogInterface arg0, int arg1) {
+			//			// TODO Auto-generated method stub
+				//		//this.getSupportFragmentManager().popBackStack();
+					//}
+		        //});
+		        b.show();
+			}else{
+				AlertDialog.Builder b= new AlertDialog.Builder(padre);
+		        b.setTitle("Error");
+		        b.setMessage("La receta no ha sido favorecida con éxito");
+		        b.show();
 			}
 		}
 	}
