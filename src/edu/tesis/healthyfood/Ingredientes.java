@@ -90,7 +90,7 @@ public class Ingredientes extends Activity {
 				b.setTitle("Agregue el ingrediente");
 				
 				final EditText input = new EditText(this);
-				
+				input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 				
 				final Ingrediente_Receta ir = ingredientes.get(nombre);
 				if(ir.getTipoMedida().equals("u")){
@@ -118,7 +118,6 @@ public class Ingredientes extends Activity {
 					b.setNegativeButton("Cancel", null);
 				}else if(ir.getTipoMedida().equals("g")){
 					b.setMessage("Agregue los gramos utilizados del ingrediente");
-					input.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 					b.setView(input);
 					b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 						@Override
@@ -140,7 +139,6 @@ public class Ingredientes extends Activity {
 					b.setNegativeButton("Cancel", null);
 				}else {
 					b.setMessage("Agregue los litros utilizados del ingrediente");
-					input.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 					b.setView(input);
 					b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 						@Override
@@ -165,7 +163,7 @@ public class Ingredientes extends Activity {
 			}
 		}else{
 			b.setTitle("Eliminar ingrediente");
-			b.setMessage("El ingrediente ya ha sido agregado, Â¿desea eliminarlo?");
+			b.setMessage("El ingrediente ya ha sido agregado, ¿desea eliminarlo?");
 			b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
