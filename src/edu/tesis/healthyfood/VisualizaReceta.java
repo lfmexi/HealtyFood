@@ -282,7 +282,11 @@ public class VisualizaReceta extends Activity {
 					}
 				});
 				//enviar a pedir la imagen
-				new DownloadImage(padre).execute(Login.url+"/"+result[5]);
+				AlertDialog.Builder b= new AlertDialog.Builder(padre);
+                b.setTitle("Carga en progreso");
+                b.setMessage("Espere mientras carga la imagen de la receta");
+                AlertDialog a = b.show();
+				new DownloadImage(padre,a).execute(Login.url+"/"+result[5]);
 			}
 		}
 	}
@@ -574,9 +578,11 @@ public class VisualizaReceta extends Activity {
 	private class DownloadImage extends AsyncTask<String,Void,Bitmap>{
 
 		VisualizaReceta padre;
+		AlertDialog alert;
 		
-		public DownloadImage(VisualizaReceta p){
+		public DownloadImage(VisualizaReceta p,AlertDialog a){
 			padre = p;
+			alert = a;
 		}
 		
 		@Override
@@ -595,7 +601,8 @@ public class VisualizaReceta extends Activity {
 		}
 		
 		protected void onPostExecute(Bitmap result) {
-	        if(result!=null)
+			alert.dismiss();
+			if(result!=null)
 	        	padre.imagen.setImageBitmap(result);
 	    }
 	}
