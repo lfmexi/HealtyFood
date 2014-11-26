@@ -8,13 +8,32 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Ejercicios" >
 
-    <Button
-        android:id="@+id/button1"
+    <TextView
+        android:id="@+id/textoUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textoObjetivo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textoUsuario"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="57dp"
-        android:text="Ver ejercicio" />
+        android:text="Objetivo: "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textoUsuario"
+        android:layout_below="@+id/textoUsuario"
+        android:layout_marginTop="24dp" >
+    </ListView>
 
 </RelativeLayout>

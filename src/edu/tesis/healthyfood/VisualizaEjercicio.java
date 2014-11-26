@@ -5,33 +5,40 @@ import com.google.android.youtube.player.YouTubePlayer.Provider;
 import com.google.android.youtube.player.YouTubePlayerView;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class VisualizaEjercicio extends YouTubeFailureRecoveryActivity {
 
+	String user;
+	private String ejercicio;
+	private String objetivo;
+	private String idVideo;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_visualiza_ejercicio);
-		Button b = (Button)this.findViewById(R.id.button1);
 		YouTubePlayerView yp = (YouTubePlayerView)this.findViewById(R.id.youtube_view);
+		TextView tEjercicio = (TextView)this.findViewById(R.id.textNombreEjercicio);
+		TextView tObjetivo = (TextView)this.findViewById(R.id.textObjetivo);
+		
+		Intent i = this.getIntent();
+		user = i.getExtras().getString("infoUser");
+		ejercicio = i.getExtras().getString("ejercicio");
+		objetivo = i.getExtras().getString("objetivo");
+		idVideo = i.getExtras().getString("idVideo");
+		
+		tEjercicio.setText(ejercicio);
+		tObjetivo.setText(objetivo);
 		
 		yp.initialize(DeveloperKey.DEVELOPER_KEY, this);
-		
-		b.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				registrar();
-			}
-		});
-		
+			
 	}
 
 	@Override
@@ -39,7 +46,7 @@ public class VisualizaEjercicio extends YouTubeFailureRecoveryActivity {
 			boolean arg2) {
 		// TODO Auto-generated method stub
 		if(!arg2){
-			arg1.cueVideo("rRgVtYHvJAE");
+			arg1.cueVideo(idVideo);
 		}
 	}
 
@@ -49,7 +56,4 @@ public class VisualizaEjercicio extends YouTubeFailureRecoveryActivity {
 		return (YouTubePlayerView) findViewById(R.id.youtube_view);
 	}
 	
-	private void registrar(){
-		
-	}
 }

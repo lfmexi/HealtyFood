@@ -234,9 +234,10 @@ public class Registro extends Activity {
 					padre.startActivity(i);
 					padre.finish();
 				}else{
+					
 					AlertDialog.Builder alert=new AlertDialog.Builder(padre);
 					alert.setTitle("Error de autenticación");
-					alert.setMessage("El usuario ya existe en el sistema");
+					alert.setMessage(result);
 					alert.show();
 				}
 			}
