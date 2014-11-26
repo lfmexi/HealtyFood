@@ -132,7 +132,7 @@
                     android:layout_width="88dp"
                     android:layout_height="81dp"
                     android:background="@drawable/ic_action_action_assignment"
-                    android:text="Agregar al diario" />
+                    android:text="Agregar al diario de consumo" />
 
                 <TextView
                     android:id="@+id/textoFecha"
