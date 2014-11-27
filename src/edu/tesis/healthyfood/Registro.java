@@ -141,6 +141,11 @@ public class Registro extends Activity {
 					alert.setMessage("El email ingresado no es válido");
 					alert.show();
 				}
+			}else{
+				AlertDialog.Builder alert=new AlertDialog.Builder(this);
+				alert.setTitle("Password");
+				alert.setMessage("Las contraseñas no coinciden");
+				alert.show();
 			}
 		}
 	}

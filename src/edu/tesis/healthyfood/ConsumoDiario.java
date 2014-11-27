@@ -1,10 +1,15 @@
 package edu.tesis.healthyfood;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,8 +17,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -31,29 +40,111 @@ import edu.tesis.healthyfood.sqlite.EntradaDiario;
 import edu.tesis.healthyfood.sqlite.SQLite;
 import edu.tesis.healthyfood.sqlite.TMB;
 
-public class ConsumoDiario extends Fragment {
+public class ConsumoDiario extends Activity {
 
+	static final int DATE_PICKER_ID = 1111;
 	private String user;
+	private TextView textFecha;
+	private int year;
+	private int month;
+	private int day;
 	
-	public ConsumoDiario (String usr){
-		user =usr;
-	}
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.activity_consumo_diario,container, false);
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_consumo_diario);
 		
-		ListView lista = (ListView)view.findViewById(R.id.listView1);
+		ListView lista = (ListView)findViewById(R.id.listView1);
+		Button b = (Button)findViewById(R.id.button1);
+		textFecha = (TextView)findViewById(R.id.textView2);
+		
+		user= this.getIntent().getExtras().getString("infoUser");
+		
+		final Calendar c = Calendar.getInstance();
+		year = c.get(Calendar.YEAR);
+		month = c.get(Calendar.MONTH)+1;
+		day = c.get(Calendar.DAY_OF_MONTH);
+		
+		String fecha  = year+"-"+month+"-"+day;
+		
+		textFecha.setText(fecha);
 		
 		ArrayList<ChartItem> charts = new ArrayList<ChartItem>();
 		
-		charts.add(new LineChartItem(getDiario(),getActivity(),"Ingesta diaria recomendada"));
-		charts.add(new PieChartItem(this.getDiarioRecetas(),getActivity(),"Porcentaje consumido por receta"));
+		Date d= new Date();
+		try {
+			d = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		ChartDataAdapter cda = new ChartDataAdapter(this.getActivity(),charts);
+		charts.add(new LineChartItem(getDiario(d),this,"Ingesta diaria recomendada"));
+		charts.add(new PieChartItem(this.getDiarioRecetas(d),this,"Porcentaje consumido por receta"));
+		
+		ChartDataAdapter cda = new ChartDataAdapter(this,charts);
 		lista.setAdapter(cda);
-		return view;
+		
+		b.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				botonOnClick();
+			}
+		});
+		
+		pickerListener = new DatePickerDialog.OnDateSetListener() {
+		    @Override
+	        public void onDateSet(DatePicker view, int selectedYear,
+	                int selectedMonth, int selectedDay) {
+	            onDateChange(selectedYear,selectedMonth+1,selectedDay);
+	        }
+		};
 	}
+
+	
+	private void onDateChange(int y,int m,int d){
+		ListView lista = (ListView)findViewById(R.id.listView1);
+		year  = y;
+        month = m;
+        day   = d;
+        textFecha.setText(year+"-"+month+"-"+day);
+        String fecha  = year+"-"+month+"-"+day;
+		
+		ArrayList<ChartItem> charts = new ArrayList<ChartItem>();
+		
+		Date dt= new Date();
+		try {
+			dt = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		charts.add(new LineChartItem(getDiario(dt),this,"Ingesta diaria recomendada"));
+		charts.add(new PieChartItem(this.getDiarioRecetas(dt),this,"Porcentaje consumido por receta"));
+		
+		ChartDataAdapter cda = new ChartDataAdapter(this,charts);
+		lista.setAdapter(cda);
+		
+	}
+	
+	private void botonOnClick(){
+		this.showDialog(DATE_PICKER_ID);
+	}
+	
+	@Override
+	protected Dialog onCreateDialog(int id){
+		switch(id){
+		case DATE_PICKER_ID:
+			return new DatePickerDialog(this,pickerListener,year,month-1,day);
+		}
+		return null;
+	}
+	
+	private DatePickerDialog.OnDateSetListener pickerListener;
 
 	
 	private class ChartDataAdapter extends ArrayAdapter<ChartItem>{
@@ -78,10 +169,9 @@ public class ConsumoDiario extends Fragment {
 	    }
 	}
 
-	private LineData getDiario(){
+	private LineData getDiario(Date d){
 		ArrayList<Entry> yVals = new ArrayList<Entry>();
-		Date d = new Date();
-		SQLite sql = new SQLite(this.getActivity());
+		SQLite sql = new SQLite(this);
 		sql.abrir();
 		ArrayList<EntradaDiario> mediciones=sql.getEntradasDia(user, d);
 		TMB last = sql.getLastTMB(user);
@@ -106,7 +196,7 @@ public class ConsumoDiario extends Fragment {
             yVals.add(new Entry(acumulado, i));
         }
         
-        LineDataSet d1 = new LineDataSet(yVals, "Calorías consumidas el día de hoy: "+new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(d));
+        LineDataSet d1 = new LineDataSet(yVals, "Calorías consumidas el día: "+new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(d));
         d1.setLineWidth(3f);
         d1.setCircleSize(5f);
         d1.setHighLightColor(Color.rgb(244, 117, 117));
@@ -127,10 +217,9 @@ public class ConsumoDiario extends Fragment {
 		return data;
 	}
 	
-	private PieData getDiarioRecetas() {
+	private PieData getDiarioRecetas(Date d) {
 		
-		Date d = new Date();
-		SQLite sql = new SQLite(this.getActivity());
+		SQLite sql = new SQLite(this);
 		sql.abrir();
 		ArrayList<EntradaDiario> mediciones=sql.getEntradasDia(user, d);
 		sql.cerrar();
