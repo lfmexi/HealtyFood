@@ -33,6 +33,8 @@
                     android:layout_below="@+id/botonNuevaMedida"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="39dp"
+			        android:background="@drawable/roundbackground"
+			        android:textColor="@android:color/white"
                     android:text="Progreso" />
 
                 <Button
@@ -42,6 +44,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="110dp"
+			        android:background="@drawable/roundbackground"
+			        android:textColor="@android:color/white"
                     android:text="Medición Nueva" />
 
                 <TextView
@@ -59,7 +63,9 @@
                     android:layout_below="@+id/botonGetProgreso"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="34dp"
-                    android:text="Medidor de calorías" />
+			        android:background="@drawable/roundbackground"
+			        android:textColor="@android:color/white"
+			        android:text="Medidor de calorías" />
 
             </RelativeLayout>
 
