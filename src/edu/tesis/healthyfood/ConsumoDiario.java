@@ -7,17 +7,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -40,26 +39,26 @@ import edu.tesis.healthyfood.sqlite.EntradaDiario;
 import edu.tesis.healthyfood.sqlite.SQLite;
 import edu.tesis.healthyfood.sqlite.TMB;
 
-public class ConsumoDiario extends Activity {
+public class ConsumoDiario extends Fragment implements  OnDateSetListener{
 
-	static final int DATE_PICKER_ID = 1111;
 	private String user;
 	private TextView textFecha;
 	private int year;
 	private int month;
 	private int day;
+	private ListView lista;
 	
+	public ConsumoDiario(String usr){
+		user=usr;
+	}
 	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_consumo_diario);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.activity_consumo_diario,container,false);
 		
-		ListView lista = (ListView)findViewById(R.id.listView1);
-		Button b = (Button)findViewById(R.id.button1);
-		textFecha = (TextView)findViewById(R.id.textView2);
-		
-		user= this.getIntent().getExtras().getString("infoUser");
+		lista = (ListView)v.findViewById(R.id.listView1);
+		Button b = (Button)v.findViewById(R.id.button1);
+		textFecha = (TextView)v.findViewById(R.id.textView2);
 		
 		final Calendar c = Calendar.getInstance();
 		year = c.get(Calendar.YEAR);
@@ -80,10 +79,10 @@ public class ConsumoDiario extends Activity {
 			e.printStackTrace();
 		}
 		
-		charts.add(new LineChartItem(getDiario(d),this,"Ingesta diaria recomendada"));
-		charts.add(new PieChartItem(this.getDiarioRecetas(d),this,"Porcentaje consumido por receta"));
+		charts.add(new LineChartItem(getDiario(d),this.getActivity(),"Ingesta diaria recomendada"));
+		charts.add(new PieChartItem(this.getDiarioRecetas(d),this.getActivity(),"Porcentaje consumido por receta"));
 		
-		ChartDataAdapter cda = new ChartDataAdapter(this,charts);
+		ChartDataAdapter cda = new ChartDataAdapter(this.getActivity(),charts);
 		lista.setAdapter(cda);
 		
 		b.setOnClickListener(new OnClickListener(){
@@ -95,18 +94,11 @@ public class ConsumoDiario extends Activity {
 			}
 		});
 		
-		pickerListener = new DatePickerDialog.OnDateSetListener() {
-		    @Override
-	        public void onDateSet(DatePicker view, int selectedYear,
-	                int selectedMonth, int selectedDay) {
-	            onDateChange(selectedYear,selectedMonth+1,selectedDay);
-	        }
-		};
+		return v;
 	}
 
 	
 	private void onDateChange(int y,int m,int d){
-		ListView lista = (ListView)findViewById(R.id.listView1);
 		year  = y;
         month = m;
         day   = d;
@@ -123,30 +115,22 @@ public class ConsumoDiario extends Activity {
 			e.printStackTrace();
 		}
 		
-		charts.add(new LineChartItem(getDiario(dt),this,"Ingesta diaria recomendada"));
-		charts.add(new PieChartItem(this.getDiarioRecetas(dt),this,"Porcentaje consumido por receta"));
+		charts.add(new LineChartItem(getDiario(dt),this.getActivity(),"Ingesta diaria recomendada"));
+		charts.add(new PieChartItem(this.getDiarioRecetas(dt),this.getActivity(),"Porcentaje consumido por receta"));
 		
-		ChartDataAdapter cda = new ChartDataAdapter(this,charts);
+		ChartDataAdapter cda = new ChartDataAdapter(this.getActivity(),charts);
 		lista.setAdapter(cda);
 		
 	}
 	
 	private void botonOnClick(){
-		this.showDialog(DATE_PICKER_ID);
+		//this.showDialog(DATE_PICKER_ID);
+		
+		DatePickerDialog dp=new DatePickerDialog(this.getActivity(),this,year,month-1,day);
+		dp.show();
 	}
 	
-	@Override
-	protected Dialog onCreateDialog(int id){
-		switch(id){
-		case DATE_PICKER_ID:
-			return new DatePickerDialog(this,pickerListener,year,month-1,day);
-		}
-		return null;
-	}
-	
-	private DatePickerDialog.OnDateSetListener pickerListener;
 
-	
 	private class ChartDataAdapter extends ArrayAdapter<ChartItem>{
 
 		public ChartDataAdapter(Context context, List<ChartItem> objects) {
@@ -171,7 +155,7 @@ public class ConsumoDiario extends Activity {
 
 	private LineData getDiario(Date d){
 		ArrayList<Entry> yVals = new ArrayList<Entry>();
-		SQLite sql = new SQLite(this);
+		SQLite sql = new SQLite(this.getActivity());
 		sql.abrir();
 		ArrayList<EntradaDiario> mediciones=sql.getEntradasDia(user, d);
 		TMB last = sql.getLastTMB(user);
@@ -219,7 +203,7 @@ public class ConsumoDiario extends Activity {
 	
 	private PieData getDiarioRecetas(Date d) {
 		
-		SQLite sql = new SQLite(this);
+		SQLite sql = new SQLite(this.getActivity());
 		sql.abrir();
 		ArrayList<EntradaDiario> mediciones=sql.getEntradasDia(user, d);
 		sql.cerrar();
@@ -247,6 +231,14 @@ public class ConsumoDiario extends Activity {
         
         PieData cd = new PieData(recetas, data);
         return cd;
+	}
+
+
+	@Override
+	public void onDateSet(DatePicker view, int year, int monthOfYear,
+			int dayOfMonth) {
+		// TODO Auto-generated method stub
+		onDateChange(year,monthOfYear+1,dayOfMonth);
 	}
 }
 
