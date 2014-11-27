@@ -51,7 +51,7 @@ public class DrawerMenuActivity extends ActionBarActivity {
         	
         }
         //mTitle = mDrawerTitle = getTitle();
-        mTitle = mDrawerTitle = "HealthyFood";
+        mTitle = mDrawerTitle = "Menú";
         mPlanetTitles = getResources().getStringArray(R.array.option_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -64,6 +64,9 @@ public class DrawerMenuActivity extends ActionBarActivity {
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
+        getSupportActionBar().setDisplayUseLogoEnabled(false);
+        getSupportActionBar().setIcon(android.R.color.transparent);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -72,7 +75,7 @@ public class DrawerMenuActivity extends ActionBarActivity {
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
                 mDrawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_launcher,  /* nav drawer image to replace 'Up' caret */
+                R.drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
                 R.string.drawer_open,  /* "open drawer" description for accessibility */
                 R.string.drawer_close  /* "close drawer" description for accessibility */
                 ) {
