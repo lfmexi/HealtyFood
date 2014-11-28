@@ -42,7 +42,7 @@
                 <View
                     style="@style/Divider"
                     android:layout_alignTop="@+id/botonNuevaMedida"
-                    android:layout_marginBottom="38dp" />
+                    android:layout_marginTop="38dp" />
 
                 <Button
                     android:id="@+id/botonNuevaMedida"
@@ -90,6 +90,8 @@
                     android:paddingLeft="30dp"
                     android:text="Ver mis recetas"
                     android:textColor="@android:color/white" />
+                
+
                 
             </RelativeLayout>
 
