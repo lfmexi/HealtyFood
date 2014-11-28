@@ -26,6 +26,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="414dp" >
 
+                <ImageView
+                    android:id="@+id/receta_imagen"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginTop="18dp"
+                    android:src="@drawable/ic_stat_icono_camara" />
+
                 <TextView
                     android:id="@+id/tituloReceta"
                     android:layout_width="wrap_content"
@@ -52,9 +62,7 @@
                     android:layout_below="@+id/receta_nombre"
                     android:layout_marginTop="20dp"
                     android:layout_toLeftOf="@+id/recetas_ver_ingredientes"
-                    android:background="@drawable/roundbackground"
-                    android:text="Agregar o quitar"
-                    android:textColor="@android:color/white" />
+                    android:text="Agregar o quitar" />
 
                 <Spinner
                     android:id="@+id/receta_spinner_cat"
@@ -71,6 +79,36 @@
                     android:layout_alignRight="@+id/receta_imagen"
                     android:layout_alignTop="@+id/receta_spinner_cat"
                     android:text="Seleccionar una categoría" />
+
+                <Button
+                    android:id="@+id/receta_publicar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/tituloReceta"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@+id/tituloReceta"
+                    android:background="@drawable/roundbackground"
+                    android:drawableLeft="@drawable/ic_pencil"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="Guardar\ncambios"
+                    android:textColor="@android:color/white" />
+                
+                <Button
+                    android:id="@+id/receta_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/receta_publicar"
+                    android:layout_alignRight="@+id/receta_publicar"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@+id/tituloReceta"
+                    android:background="@drawable/roundbackground"
+                    android:drawableLeft="@drawable/ic_camera"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="Tomar\nfoto"
+                    android:textColor="@android:color/white" />
                 
                 <Button
                     android:id="@+id/recetas_ver_ingredientes"
@@ -78,9 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_alignTop="@+id/receta_boton_agrega"
-                    android:background="@drawable/roundbackground"
-                    android:text="Ver"
-                    android:textColor="@android:color/white" />
+                    android:text="Ver" />
 
                 <TextView
                     android:id="@+id/textCalorias"
@@ -108,41 +144,6 @@
                     android:layout_above="@+id/receta_instrucciones"
                     android:layout_alignRight="@+id/textCalorias"
                     android:text="Instrucciones" />
-
-                <android.widget.ImageView
-                    android:id="@+id/receta_imagen"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="18dp"
-                    android:src="@drawable/ic_stat_icono_camara" />
-
-                <Button
-                    android:id="@+id/receta_publicar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="16dp"
-                    android:layout_toRightOf="@+id/tituloReceta"
-                    android:background="@drawable/roundbackground"
-                    android:text="Publicar"
-                    android:textColor="@android:color/white" />
-
-                <Button
-                    android:id="@+id/receta_photo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@+id/tituloReceta"
-                    android:layout_alignLeft="@+id/receta_publicar"
-                    android:layout_alignParentRight="true"
-                    android:background="@drawable/roundbackground"
-                    android:drawableLeft="@drawable/ic_camera"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:text="Tomar\nfoto"
-                    android:textColor="@android:color/white" />
 
             </RelativeLayout>
 
