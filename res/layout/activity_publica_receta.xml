@@ -85,23 +85,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_above="@+id/tituloReceta"
-                    android:layout_marginLeft="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="15dp"
                     android:layout_toRightOf="@+id/tituloReceta"
-                    android:text="Publicar" />
+                    android:background="@drawable/roundbackground"
+                    android:drawableLeft="@drawable/ic_pencil"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="Publicar"
+                    android:textColor="@android:color/white" />
                 
                 <Button
                     android:id="@+id/receta_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_above="@+id/receta_publicar"
+                    android:layout_alignRight="@+id/receta_publicar"
                     android:layout_marginLeft="15dp"
-			        android:textColor="@android:color/white"
-           			android:paddingLeft="15dp"
-           			android:paddingRight="15dp"
-                    android:drawableLeft="@drawable/ic_camera"                    
-			        android:background="@drawable/roundbackground"
                     android:layout_toRightOf="@+id/tituloReceta"
-                    android:text="Tomar\nfoto" />
+                    android:background="@drawable/roundbackground"
+                    android:drawableLeft="@drawable/ic_camera"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="Tomar\nfoto"
+                    android:textColor="@android:color/white" />
                 
                 <Button
                     android:id="@+id/recetas_ver_ingredientes"

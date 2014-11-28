@@ -1,23 +1,17 @@
-<shape android:shape="rectangle"
-xmlns:android="http://schemas.android.com/apk/res/android"> 
+<shape android:shape="rectangle" xmlns:android="http://schemas.android.com/apk/res/android"> 
    <gradient
      android:startColor="#669900"
      android:endColor="#99CC00"
      android:angle="90">
    </gradient>
- 
-   <corners android:radius="20dip" />
-   
-   <stroke
+    <corners android:radius="20dip" />
+    <stroke
      android:width="5px"
      android:color="#669900" />
-<shape android:shape="rectangle"
-xmlns:android="http://schemas.android.com/apk/res/android">
- 
-     <solid android:color="#000000"/>
+	<shape android:shape="rectangle" xmlns:android="http://schemas.android.com/apk/res/android">
+ 	 <solid android:color="#000000"/>
      <corners android:radius="20dip"/>
- 
-</shape>
+	</shape>
 
 </shape>
 
