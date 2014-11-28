@@ -239,7 +239,7 @@ public class Ingredientes extends Activity {
 			    	    JSONObject object = mArray.getJSONObject(i);
 			    	    String campo1 = object.getString("nombre");
 			    	    String campo2 = object.getString("tipoMedida");
-			    	    regs[i] = campo1+","+campo2;
+			    	    regs[i] = campo1+"¬"+campo2;
 			    	}
 		    	}
 		    }catch(JSONException e){
@@ -258,7 +258,7 @@ public class Ingredientes extends Activity {
 				String adaptador[] = new String[result.length];
 				for(int i = 0;i<result.length;i++){
 					String linea_ingrediente = result[i];
-					String [] attr_ingrediente = linea_ingrediente.split(",");
+					String [] attr_ingrediente = linea_ingrediente.split("¬");
 					padre.ingredientes.put(attr_ingrediente[0], new Ingrediente_Receta(attr_ingrediente[0],attr_ingrediente[1]));
 					adaptador[i] = attr_ingrediente[0];
 				}
