@@ -51,9 +51,11 @@
                     android:layout_alignLeft="@+id/receta_nombre"
                     android:layout_below="@+id/receta_nombre"
                     android:layout_marginTop="20dp"
-                    android:layout_toLeftOf="@+id/recetas_ver_ingredientes"
                     android:background="@drawable/roundbackground"
-                    android:text="Agregar o quitar"
+                    android:drawableLeft="@drawable/ic_add"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="Agregar \no quitar"
                     android:textColor="@android:color/white" />
 
                 <Spinner
@@ -71,16 +73,6 @@
                     android:layout_alignRight="@+id/receta_imagen"
                     android:layout_alignTop="@+id/receta_spinner_cat"
                     android:text="Seleccionar una categoría" />
-                
-                <Button
-                    android:id="@+id/recetas_ver_ingredientes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignTop="@+id/receta_boton_agrega"
-                    android:background="@drawable/roundbackground"
-                    android:text="Ver"
-                    android:textColor="@android:color/white" />
 
                 <TextView
                     android:id="@+id/textCalorias"
@@ -125,7 +117,9 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="16dp"
+                    android:drawableLeft="@drawable/ic_pencil"
                     android:layout_toRightOf="@+id/tituloReceta"
+                    android:paddingLeft="15dp"
                     android:background="@drawable/roundbackground"
                     android:text="Publicar"
                     android:textColor="@android:color/white" />
@@ -140,8 +134,22 @@
                     android:background="@drawable/roundbackground"
                     android:drawableLeft="@drawable/ic_camera"
                     android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
+                    android:paddingRight="5dp"
                     android:text="Tomar\nfoto"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/recetas_ver_ingredientes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/receta_spinner_cat"
+                    android:layout_alignLeft="@+id/receta_spinner_cat"
+                    android:layout_marginLeft="29dp"
+                    android:background="@drawable/roundbackground"
+                    android:drawableLeft="@drawable/ic_eye"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="Ver"
                     android:textColor="@android:color/white" />
 
             </RelativeLayout>
