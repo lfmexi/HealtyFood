@@ -153,21 +153,19 @@ public class DrawerMenuActivity extends ActionBarActivity {
     	switch(position){
     		case 0:
     	        fragment = new Perfil(user,sex,birth);
-    	        setTitle("Mi Perfil");
     	        break;
     		case 1:
     			fragment = new Recetas(user);
-    	        setTitle("Recetas");
     			break;
     		case 2:
     			fragment = new Ejercicios(user);
-    	        setTitle("Ejercicios");
     	        break;
     		case 3:
     			Logout();
     			break;
     	
     	}
+    	setTitle("HealthyFood");
     	//agregado el addToBackStack
         FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction ft =fragmentManager.beginTransaction();

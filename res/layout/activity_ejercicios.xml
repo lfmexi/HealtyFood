@@ -9,16 +9,6 @@
     tools:context=".Ejercicios" >
 
     <TextView
-        android:id="@+id/textoUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="15dp"
-        android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
         android:id="@+id/textoObjetivo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,9 +21,27 @@
         android:id="@+id/listView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textoUsuario"
-        android:layout_below="@+id/textoUsuario"
-        android:layout_marginTop="24dp" >
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textoObjetivo" >
+
     </ListView>
+
+    <TextView
+        android:id="@+id/textoUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/listView1"
+        android:layout_alignParentTop="true"
+        android:text="Ejercicios Sugeridos"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
