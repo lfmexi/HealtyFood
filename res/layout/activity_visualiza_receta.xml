@@ -66,7 +66,11 @@
 
                     <Button
                         android:id="@+id/botonFavorito"
-                        android:layout_width="0dp"
+		                android:background="@drawable/roundbackground"
+        	            android:drawableLeft="@drawable/ic_like"
+            	        android:paddingLeft="15dp"
+                	    android:paddingRight="15dp"
+                	    android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.15"
                         android:text="Favorita" />
@@ -122,8 +126,12 @@
 
                 <Button
                     android:id="@+id/verIngredientes"
-                    android:layout_width="172dp"
+                    android:layout_width="220dp"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/roundbackground"
+                    android:drawableLeft="@drawable/ic_eye"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
                     android:text="Ver Ingredientes >" />
 
                 <Button
