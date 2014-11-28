@@ -2,6 +2,8 @@ package edu.tesis.healthyfood;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -20,13 +22,16 @@ import edu.tesis.healthyfood.sobj.Ingrediente_Receta;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -40,6 +45,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class PublicaReceta extends Fragment {
 
@@ -73,7 +79,7 @@ public class PublicaReceta extends Fragment {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				imagenOnClick();
+			imagenOnClick();
 			}
 		});
 		
@@ -206,6 +212,7 @@ public class PublicaReceta extends Fragment {
 		intent.setAction(Intent.ACTION_GET_CONTENT);
 		this.startActivityForResult(Intent.createChooser(intent, "Completar seleccionando"), 1);
 	}
+	
 	
 	
 	private Spinner selector_categoria;

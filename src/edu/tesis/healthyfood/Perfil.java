@@ -29,7 +29,7 @@ public class Perfil extends Fragment {
 		View view = inflater.inflate(R.layout.activity_perfil, container, false);
 		botonMedir=(Button)view.findViewById(R.id.botonNuevaMedida);
 		TextView txt=(TextView)view.findViewById(R.id.textUser);
-		txt.setText(user.toUpperCase());
+		txt.setText("BIENVENIDO "+user.toUpperCase());
 		
 		Button boton = (Button)view.findViewById(R.id.button1);
 		
