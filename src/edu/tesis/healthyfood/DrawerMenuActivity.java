@@ -168,6 +168,7 @@ public class DrawerMenuActivity extends ActionBarActivity {
     			break;
     	
     	}
+    	//agregado el addToBackStack
         FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction ft =fragmentManager.beginTransaction();
         ft.replace(R.id.content_frame, fragment);
