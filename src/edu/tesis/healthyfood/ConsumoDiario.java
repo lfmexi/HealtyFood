@@ -139,7 +139,6 @@ public class ConsumoDiario extends Fragment implements  OnDateSetListener{
 		DatePickerDialog dp=new DatePickerDialog(this.getActivity(),this,year,month-1,day);
 		dp.show();
 	}
-
 	private void botonOnClick2(){
 		//this.showDialog(DATE_PICKER_ID);
         final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
@@ -249,8 +248,6 @@ public class ConsumoDiario extends Fragment implements  OnDateSetListener{
         PieData cd = new PieData(recetas, data);
         return cd;
 	}
-
-
 	@Override
 	public void onDateSet(DatePicker view, int year, int monthOfYear,
 			int dayOfMonth) {
@@ -258,3 +255,4 @@ public class ConsumoDiario extends Fragment implements  OnDateSetListener{
 		onDateChange(year,monthOfYear+1,dayOfMonth);
 	}
 }
+
