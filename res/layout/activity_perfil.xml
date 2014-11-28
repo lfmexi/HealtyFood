@@ -32,7 +32,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/botonNuevaMedida"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="39dp"
+                    android:layout_marginTop="38dp"
+           			android:paddingLeft="30dp"
+                    android:drawableLeft="@drawable/ic_line_chart"                    
 			        android:background="@drawable/roundbackground"
 			        android:textColor="@android:color/white"
                     android:text="Progreso" />
@@ -63,6 +65,8 @@
                     android:layout_below="@+id/botonGetProgreso"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="34dp"
+			    	android:paddingLeft="30dp"
+                    android:drawableLeft="@drawable/ic_pie_chart"                    
 			        android:background="@drawable/roundbackground"
 			        android:textColor="@android:color/white"
 			        android:text="Medidor de calorías" />
