@@ -36,6 +36,7 @@ public class Perfil extends Fragment {
 		txt.setText("BIENVENIDO "+user.toUpperCase());
 		
 		Button boton = (Button)view.findViewById(R.id.button1);
+		Button botonrec = (Button)view.findViewById(R.id.button_misrecetas);
 		
 		botonProgreso=(Button)view.findViewById(R.id.botonGetProgreso);
 		botonMedir.setOnClickListener(new OnClickListener(){
@@ -50,6 +51,14 @@ public class Perfil extends Fragment {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				progreso();
+			}
+		});
+
+		botonProgreso.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				myrecipes();
 			}
 		});
 
@@ -81,6 +90,13 @@ public class Perfil extends Fragment {
         ft.commit();
 	}
 	
+	private void myrecipes(){
+        final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
+        ft.replace(R.id.content_frame, new MisRecetas(user,getActivity()), "Mis Recetas"); 
+        ft.addToBackStack(null);
+        ft.commit();
+	}
+
 	private void progreso(){
         /*final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
         ft.replace(R.id.content_frame, new ProgresoIMC(user), "Progreso IMC"); 

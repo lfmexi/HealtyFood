@@ -33,11 +33,16 @@
                     android:layout_below="@+id/botonNuevaMedida"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="38dp"
-           			android:paddingLeft="30dp"
-                    android:drawableLeft="@drawable/ic_line_chart"                    
-			        android:background="@drawable/roundbackground"
-			        android:textColor="@android:color/white"
-                    android:text="Progreso" />
+                    android:background="@drawable/roundbackground"
+                    android:drawableLeft="@drawable/ic_line_chart"
+                    android:paddingLeft="30dp"
+                    android:text="Progreso"
+                    android:textColor="@android:color/white" />
+
+                <View
+                    style="@style/Divider"
+                    android:layout_alignTop="@+id/botonNuevaMedida"
+                    android:layout_marginBottom="38dp" />
 
                 <Button
                     android:id="@+id/botonNuevaMedida"
@@ -46,11 +51,11 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="110dp"
-			        android:paddingLeft="30dp"
-                    android:drawableLeft="@drawable/ic_scales"                    
-			        android:background="@drawable/roundbackground"
-			        android:textColor="@android:color/white"
-                    android:text="Medición Nueva" />
+                    android:background="@drawable/roundbackground"
+                    android:drawableLeft="@drawable/ic_scales"
+                    android:paddingLeft="30dp"
+                    android:text="Medición Nueva"
+                    android:textColor="@android:color/white" />
 
                 <TextView
                     android:id="@+id/textUser"
@@ -67,12 +72,25 @@
                     android:layout_below="@+id/botonGetProgreso"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="34dp"
-			    	android:paddingLeft="30dp"
-                    android:drawableLeft="@drawable/ic_pie_chart"                    
-			        android:background="@drawable/roundbackground"
-			        android:textColor="@android:color/white"
-			        android:text="Medidor de calorías" />
+                    android:background="@drawable/roundbackground"
+                    android:drawableLeft="@drawable/ic_pie_chart"
+                    android:paddingLeft="30dp"
+                    android:text="Medidor de calorías"
+                    android:textColor="@android:color/white" />
 
+                <Button
+                    android:id="@+id/button_misrecetas"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/button1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="280dp"
+                    android:layout_marginTop="34dp"
+                    android:background="@drawable/roundbackground"
+                    android:drawableLeft="@drawable/ic_cook"
+                    android:paddingLeft="30dp"
+                    android:text="Ver mis recetas"
+                    android:textColor="@android:color/white" />
+                
             </RelativeLayout>
 
         </LinearLayout>
