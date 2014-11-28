@@ -86,7 +86,7 @@ public class Medidor extends Fragment {
 					tmb_val-=161;
 				}
 				sql.abrir();
-				if(sql.addTMB(user, tmb_val))Toast.makeText(getActivity(), "Usted necesita "+(tmb_val*1.2)+" cal para mantener su peso", Toast.LENGTH_SHORT).show();
+				if(sql.addTMB(user, tmb_val))Toast.makeText(getActivity(), "Usted necesita "+(tmb_val*1.2)+" cal para mantener su peso", Toast.LENGTH_LONG).show();
 				sql.cerrar();
 
 				if(ambito.equals("registro")){
