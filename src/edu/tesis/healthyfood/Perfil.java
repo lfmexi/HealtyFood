@@ -1,5 +1,6 @@
 package edu.tesis.healthyfood;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +12,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+
 public class Perfil extends Fragment {
+
+	
 	String user="";
 	String sex;
 	String birth;
@@ -59,7 +63,7 @@ public class Perfil extends Fragment {
 		});
 		return view;
 	}
-
+	
 	private void calorias(){
 		final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
         ft.replace(R.id.content_frame, new ConsumoDiario(user),"Consumo diario de calorías"); 

@@ -24,8 +24,10 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,6 +37,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 import edu.tesis.healthyfood.sobj.ContenedorIngredientes;
 import edu.tesis.healthyfood.sobj.Ingrediente_Receta;
 
@@ -60,6 +63,7 @@ public class PublicaReceta extends Fragment {
 		boton_registrar = (Button)view.findViewById(R.id.receta_publicar);
 		boton_ingredientes = (Button)view.findViewById(R.id.receta_boton_agrega);
 		boton_ver = (Button)view.findViewById(R.id.recetas_ver_ingredientes);
+		boton_foto = (Button)view.findViewById(R.id.receta_photo);
 		ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(act,
 		        R.array.categories_array, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -101,6 +105,14 @@ public class PublicaReceta extends Fragment {
 			}
 		});
 
+		boton_foto.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				onClickCamara();
+			}
+		});
+
 		return view;
 	}
 
@@ -114,12 +126,40 @@ public class PublicaReceta extends Fragment {
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
+		super.onActivityResult(requestCode, resultCode, data);
 		if(requestCode==1 && resultCode==Activity.RESULT_OK){
 			Uri selectImageUri=data.getData();
 			path_imagen = getPath(selectImageUri);
 			bitmap=BitmapFactory.decodeFile(path_imagen);
 			imagen.setImageBitmap(bitmap);
 		}
+		
+	    switch (requestCode)
+	    {
+		case REQUEST_CAMERA:		
+			if (!photoPath.equals("")&&(photoPath!=null))
+			{
+				Uri selectImageUri=data.getData();
+				path_imagen = getPath(selectImageUri);
+				bitmap=BitmapFactory.decodeFile(path_imagen);
+				imagen.setImageBitmap(bitmap);
+			}
+			break ;
+		case REQUEST_SELECT_PHOTO:
+			if( resultCode != 0 )
+			{
+			Cursor c = act.managedQuery(data.getData(),null,null,null,null) ;
+			if( c.moveToFirst() )
+			 {
+				path_imagen = c.getString(1) ;
+			  //oPunto.setPath(photoPath);
+			//TODO mensaje de foto seleccionada
+			  }
+			 }
+		default: break;
+							 
+		}			 					
+
 	}
 
 	private void verOnClick(){
@@ -205,6 +245,36 @@ public class PublicaReceta extends Fragment {
 		this.startActivityForResult(Intent.createChooser(intent, "Completar seleccionando"), 1);
 	}
 	
+	//METODO ONCREATE FOTO
+	public void onClickCamara() 
+	{
+		String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) 
+        {					
+            long captureTime = System.currentTimeMillis();					
+            photoPath = Environment.getExternalStorageDirectory() + "/DCIM/Camera/Photo" + captureTime + ".jpg";
+            try
+            {
+            	Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                File photo = new File(photoPath);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(photo));	                    
+                startActivityForResult(Intent.createChooser(intent, "Capture Image"), REQUEST_CAMERA);
+            } 
+            catch (Exception e) 
+            {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_LONG).show();
+                Log.e(e.getClass().getName(), e.getMessage(), e);
+            }
+        }
+    }
+
+	private static final int REQUEST_CAMERA = 1;
+	private static final int REQUEST_SELECT_PHOTO = 0;
+	
+	protected Uri imageUri;
+	private String photoPath="";
+
+	
 	
 	
 	private Spinner selector_categoria;
@@ -216,6 +286,7 @@ public class PublicaReceta extends Fragment {
 	private Button boton_ingredientes;
 	private Button boton_registrar;
 	private Button boton_ver;
+	private Button boton_foto;
 
 	
 	private class UploaderTask extends AsyncTask<String,Void,String>{
