@@ -54,7 +54,7 @@ public class Perfil extends Fragment {
 			}
 		});
 
-		botonProgreso.setOnClickListener(new OnClickListener(){
+		botonrec.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
