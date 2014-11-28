@@ -28,7 +28,7 @@
         <item>Bebida</item>
     </string-array>
     <string-array name="option_list">
-        <item>Mi perfil</item>
+        <item>Principal</item>
         <item>Recetas</item>
         <item>Ejercicios</item>
         <item>Cerrar Sesión</item>
