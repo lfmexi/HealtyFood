@@ -21,15 +21,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import edu.tesis.healthyfood.sobj.ContenedorIngredientes;
-import edu.tesis.healthyfood.sobj.Ingrediente_Receta;
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.View;
@@ -42,7 +38,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import edu.tesis.healthyfood.sobj.Ingrediente_Receta;
 
+@SuppressWarnings("deprecation")
 public class Ingredientes extends Activity {
 
 	private TreeMap<String,Ingrediente_Receta> ingredientes;

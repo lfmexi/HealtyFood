@@ -28,6 +28,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+@SuppressWarnings("deprecation")
 public class ForgotData extends Activity {
 	EditText editable;
 	@Override

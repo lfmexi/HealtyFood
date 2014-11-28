@@ -1,5 +1,6 @@
 package edu.tesis.healthyfood.charts;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ public class LineChartItem extends ChartItem{
 
 	private String descripcion;
 	
+	@SuppressWarnings("rawtypes")
 	public LineChartItem(ChartData cd,Context c,String desc) {
 		super(cd);
 		descripcion=desc;
@@ -29,7 +31,7 @@ public class LineChartItem extends ChartItem{
 		return TYPE_LINECHART;
 	}
 
-	@Override
+	@SuppressLint("InflateParams") @Override
 	public View getView(int pos, View convertView, Context c) {
 		// TODO Auto-generated method stub
 		ViewHolder holder = null;

@@ -14,32 +14,28 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import edu.tesis.healthyfood.sqlite.Medicion;
-import edu.tesis.healthyfood.sqlite.SQLite;
-import edu.tesis.healthyfood.sqlite.TMB;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import edu.tesis.healthyfood.sqlite.Medicion;
+import edu.tesis.healthyfood.sqlite.SQLite;
+import edu.tesis.healthyfood.sqlite.TMB;
 
+@SuppressWarnings("deprecation")
 public class Login extends Activity {
 
 	public static final String url="http://healthylifeapp.esy.es";

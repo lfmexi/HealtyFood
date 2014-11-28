@@ -10,9 +10,11 @@ public abstract class ChartItem {
     protected static final int TYPE_LINECHART = 1;
     protected static final int TYPE_PIECHART = 2;
     
-    protected ChartData chartData;
+    @SuppressWarnings("rawtypes")
+	protected ChartData chartData;
     
-    public ChartItem(ChartData cd) {
+    @SuppressWarnings("rawtypes")
+	public ChartItem(ChartData cd) {
         this.chartData = cd;      
     }
     

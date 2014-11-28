@@ -3,19 +3,15 @@ package edu.tesis.healthyfood;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import edu.tesis.healthyfood.sqlite.Medicion;
-import edu.tesis.healthyfood.sqlite.SQLite;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
+import edu.tesis.healthyfood.sqlite.Medicion;
+import edu.tesis.healthyfood.sqlite.SQLite;
 
 public class GridFragment extends Fragment{
 	

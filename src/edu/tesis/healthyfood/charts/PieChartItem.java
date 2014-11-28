@@ -8,6 +8,7 @@ import com.github.mikephil.charting.utils.Legend.LegendPosition;
 
 import edu.tesis.healthyfood.R;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.view.View;
 public class PieChartItem extends ChartItem {
 
 	String descripcion;
+	@SuppressWarnings("rawtypes")
 	public PieChartItem(ChartData cd,Context c,String desc) {
 		super(cd);
 		descripcion=desc;
@@ -25,7 +27,7 @@ public class PieChartItem extends ChartItem {
 		return ChartItem.TYPE_PIECHART;
 	}
 
-	@Override
+	@SuppressLint("InflateParams") @Override
 	public View getView(int pos, View convertView, Context c) {
 		// TODO Auto-generated method stub
 		

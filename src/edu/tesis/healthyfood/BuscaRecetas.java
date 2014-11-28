@@ -19,16 +19,16 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import android.os.AsyncTask;
-import android.os.Bundle;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -37,6 +37,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+@SuppressWarnings("deprecation")
 public class BuscaRecetas extends Fragment {
 
 	

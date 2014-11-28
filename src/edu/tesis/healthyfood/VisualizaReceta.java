@@ -1,7 +1,6 @@
 package edu.tesis.healthyfood;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -18,7 +17,6 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -26,20 +24,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import edu.tesis.healthyfood.sobj.ContenedorIngredientes;
-import edu.tesis.healthyfood.sobj.Ingrediente_Receta;
-import edu.tesis.healthyfood.sqlite.SQLite;
-import edu.tesis.healthyfood.sqlite.TMB;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -51,7 +43,12 @@ import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
+import edu.tesis.healthyfood.sobj.ContenedorIngredientes;
+import edu.tesis.healthyfood.sobj.Ingrediente_Receta;
+import edu.tesis.healthyfood.sqlite.SQLite;
+import edu.tesis.healthyfood.sqlite.TMB;
 
+@SuppressWarnings("deprecation")
 public class VisualizaReceta extends Activity {
 
 	private String user="";
