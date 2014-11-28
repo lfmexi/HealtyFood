@@ -1,6 +1,8 @@
 package edu.tesis.healthyfood;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.apache.http.HttpEntity;
@@ -16,6 +18,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -26,6 +30,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.MediaStore.Images;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -70,14 +75,6 @@ public class PublicaReceta extends Fragment {
 
 		Intent i=act.getIntent();
 		user = i.getExtras().getString("infoUser");
-		
-		imagen.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-			imagenOnClick();
-			}
-		});
 		
 		selector_categoria.setAdapter(adapter);
 
@@ -127,39 +124,16 @@ public class PublicaReceta extends Fragment {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
 		super.onActivityResult(requestCode, resultCode, data);
-		if(requestCode==1 && resultCode==Activity.RESULT_OK){
-			Uri selectImageUri=data.getData();
-			path_imagen = getPath(selectImageUri);
+		if(requestCode==REQUEST_CAMERA && resultCode==Activity.RESULT_OK){
+			if(photoPath==null){
+				Uri selectImageUri=data.getData();
+				path_imagen = getPath(selectImageUri);
+			}else{
+				path_imagen = photoPath;
+			}
 			bitmap=BitmapFactory.decodeFile(path_imagen);
 			imagen.setImageBitmap(bitmap);
 		}
-		
-	    switch (requestCode)
-	    {
-		case REQUEST_CAMERA:		
-			if (!photoPath.equals("")&&(photoPath!=null))
-			{
-				Uri selectImageUri=data.getData();
-				path_imagen = getPath(selectImageUri);
-				bitmap=BitmapFactory.decodeFile(path_imagen);
-				imagen.setImageBitmap(bitmap);
-			}
-			break ;
-		case REQUEST_SELECT_PHOTO:
-			if( resultCode != 0 )
-			{
-			Cursor c = act.managedQuery(data.getData(),null,null,null,null) ;
-			if( c.moveToFirst() )
-			 {
-				path_imagen = c.getString(1) ;
-			  //oPunto.setPath(photoPath);
-			//TODO mensaje de foto seleccionada
-			  }
-			 }
-		default: break;
-							 
-		}			 					
-
 	}
 
 	private void verOnClick(){
@@ -238,13 +212,6 @@ public class PublicaReceta extends Fragment {
         return cursor.getString(column_index);
     }
 	
-	private void imagenOnClick(){
-		Intent intent=new Intent();
-		intent.setType("image/*");
-		intent.setAction(Intent.ACTION_GET_CONTENT);
-		this.startActivityForResult(Intent.createChooser(intent, "Completar seleccionando"), 1);
-	}
-	
 	//METODO ONCREATE FOTO
 	public void onClickCamara() 
 	{
@@ -255,7 +222,7 @@ public class PublicaReceta extends Fragment {
             photoPath = Environment.getExternalStorageDirectory() + "/DCIM/Camera/Photo" + captureTime + ".jpg";
             try
             {
-            	Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+            	Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 File photo = new File(photoPath);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(photo));	                    
                 startActivityForResult(Intent.createChooser(intent, "Capture Image"), REQUEST_CAMERA);
@@ -266,13 +233,14 @@ public class PublicaReceta extends Fragment {
                 Log.e(e.getClass().getName(), e.getMessage(), e);
             }
         }
+		
     }
 
 	private static final int REQUEST_CAMERA = 1;
 	private static final int REQUEST_SELECT_PHOTO = 0;
 	
 	protected Uri imageUri;
-	private String photoPath="";
+	private String photoPath;
 
 	
 	
