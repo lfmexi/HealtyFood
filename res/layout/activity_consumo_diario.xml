@@ -27,15 +27,6 @@
 
     </ListView>
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/listView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginRight="16dp"
-        android:text="Cambiar Fecha" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -52,8 +43,25 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
-        android:layout_toLeftOf="@+id/button1"
+        android:layout_toLeftOf="@+id/textView2"
+        android:background="@drawable/roundbackground"
+        android:drawableLeft="@drawable/ic_fork"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="Agregar Consumo de hoy"
         android:textSize="13dp" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignRight="@+id/listView1"
+        android:layout_alignTop="@+id/button2"
+        android:background="@drawable/roundbackground"
+        android:drawableLeft="@drawable/ic_calendar"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Cambiar\nFecha" />
 
 </RelativeLayout>
