@@ -46,4 +46,13 @@
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13dp"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:text="Agregar Consumo" />
+
 </RelativeLayout>

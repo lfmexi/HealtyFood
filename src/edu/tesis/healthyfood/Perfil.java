@@ -61,13 +61,13 @@ public class Perfil extends Fragment {
 	}
 
 	private void calorias(){
-		/*final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
+		final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
         ft.replace(R.id.content_frame, new ConsumoDiario(user),"Consumo diario de calorías"); 
         ft.addToBackStack(null);
-        ft.commit();*/
-		Intent i = new Intent(this.getActivity(),ConsumoDiario.class);
+        ft.commit();
+/*		Intent i = new Intent(this.getActivity(),ConsumoDiario.class);
 		i.putExtra("infoUser", user);
-		this.startActivity(i);
+		this.startActivity(i);*/
 	}
 	
 	private void medir(){

@@ -3,7 +3,8 @@
     package="edu.tesis.healthyfood"
     android:versionCode="1"
     android:versionName="1.0" >
-
+	<uses-feature android:name="android.hardware.camera" android:required="true"/>
+    
     <uses-sdk
         android:minSdkVersion="9"
         android:targetSdkVersion="17" />
@@ -71,7 +72,7 @@
             android:label="@string/title_activity_ingredientes" >
         </activity>
         <activity
-            android:name=".MisRecetas"
+            android:name=".MisRecetas2"
             android:label="@string/title_activity_recetas_propias" >
         </activity>
         <activity
