@@ -3,6 +3,7 @@ package edu.tesis.healthyfood;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.apache.http.HttpEntity;
@@ -125,6 +126,7 @@ public class PublicaReceta extends Fragment {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
 		super.onActivityResult(requestCode, resultCode, data);
+		
 		if(requestCode==REQUEST_CAMERA && resultCode==Activity.RESULT_OK){
 			if(photoPath==null){
 				Uri selectImageUri=data.getData();
@@ -132,8 +134,18 @@ public class PublicaReceta extends Fragment {
 			}else{
 				path_imagen = photoPath;
 			}
+			
+			Bitmap bitmap = BitmapFactory.decodeFile(path_imagen);
+		    try{
+		        File file = new File(path_imagen);
+		        FileOutputStream fOut = new FileOutputStream(file);
+		        bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
+		        fOut.flush();
+		        fOut.close();}
+		    catch (Exception e) {
+		        e.printStackTrace();
+		    }
 			bitmap=BitmapFactory.decodeFile(path_imagen);
-			bitmap=getResizedBitmap(bitmap,400, 400);
 			imagen.setImageBitmap(bitmap);
 		}
 	}
@@ -241,7 +253,7 @@ public class PublicaReceta extends Fragment {
             {
             	Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 File photo = new File(photoPath);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(photo));	                    
+                intent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(photo));	 
                 startActivityForResult(Intent.createChooser(intent, "Capture Image"), REQUEST_CAMERA);
             } 
             catch (Exception e) 
