@@ -254,7 +254,8 @@ public class Ingredientes extends Activity {
 			    	    JSONObject object = mArray.getJSONObject(i);
 			    	    String campo1 = object.getString("nombre");
 			    	    String campo2 = object.getString("tipoMedida");
-			    	    regs[i] = campo1+"¬"+campo2;
+			    	    String campo3 = object.getString("calorias");
+			    	    regs[i] = campo1+"¬"+campo2+"¬"+campo3;
 			    	}
 		    	}
 		    }catch(JSONException e){
@@ -274,7 +275,9 @@ public class Ingredientes extends Activity {
 				for(int i = 0;i<result.length;i++){
 					String linea_ingrediente = result[i];
 					String [] attr_ingrediente = linea_ingrediente.split("¬");
-					padre.ingredientes.put(attr_ingrediente[0], new Ingrediente_Receta(attr_ingrediente[0],attr_ingrediente[1]));
+					Ingrediente_Receta ir =  new Ingrediente_Receta(attr_ingrediente[0],attr_ingrediente[1]);
+					ir.setCal_100g(Double.parseDouble(attr_ingrediente[2]));
+					padre.ingredientes.put(attr_ingrediente[0],ir);
 					adaptador[i] = attr_ingrediente[0];
 				}
 				padre.listaRes.setAdapter(new ArrayAdapter<String>(padre,android.R.layout.simple_list_item_1,android.R.id.text1,adaptador));
