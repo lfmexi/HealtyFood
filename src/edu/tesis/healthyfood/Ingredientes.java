@@ -24,6 +24,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
@@ -45,6 +46,8 @@ public class Ingredientes extends Activity {
 
 	private TreeMap<String,Ingrediente_Receta> ingredientes;
 	
+	private String ambito;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,6 +57,9 @@ public class Ingredientes extends Activity {
 		campoBusqueda = (EditText)this.findViewById(R.id.ingredientes_busca);
 		botonBusqueda = (Button)this.findViewById(R.id.ing_buscar);
 		listaRes = (ListView)this.findViewById(R.id.busca_receta_result);
+		
+		Intent i = this.getIntent();
+		ambito = i.getExtras().getString("ambito");
 		
 		botonBusqueda.setOnClickListener(new OnClickListener(){
 			@Override
@@ -83,94 +89,103 @@ public class Ingredientes extends Activity {
 	private void listaOnItemClick(View v){
 		final AlertDialog.Builder b = new AlertDialog.Builder(this);
 		final String nombre = ((TextView) v).getText().toString();
-		if(!PublicaReceta.contenedor.lista.containsKey(nombre)){
+		if(ambito!=null){
 			if(ingredientes.containsKey(nombre)){
-				b.setTitle("Agregue el ingrediente");
-				
-				final EditText input = new EditText(this);
-				input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-				
+				b.setTitle("Información sobre el ingrediente");
 				final Ingrediente_Receta ir = ingredientes.get(nombre);
-				if(ir.getTipoMedida().equals("u")){
-					b.setMessage("Agregue las unidades necesarias del ingrediente");
-					input.setInputType(InputType.TYPE_CLASS_NUMBER);
-					b.setView(input);
-					b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-							try{
-								
-								int entero = Integer.parseInt(input.getText().toString());
-								if(entero>=0){
-									ir.setUnidades(entero);
-									PublicaReceta.contenedor.lista.put(nombre, ir);
-								}else{
-									Toast.makeText(b.getContext(), "Ingrese un número; mayor a 0",20).show();
-								}
-							}catch(NumberFormatException nfe){
-								//nada
-							}
-						}
-					});
-					b.setNegativeButton("Cancel", null);
-				}else if(ir.getTipoMedida().equals("g")){
-					b.setMessage("Agregue los gramos utilizados del ingrediente");
-					b.setView(input);
-					b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-							try{
-								double entero = Double.parseDouble(input.getText().toString());
-								if(entero>=0){
-									ir.setGramos(entero);
-									PublicaReceta.contenedor.lista.put(nombre, ir);
-								}else{
-									Toast.makeText(b.getContext(), "Ingrese un número; mayor a 0",20).show();
-								}
-							}catch(NumberFormatException nfe){
-								//nada
-							}
-						}
-					});
-					b.setNegativeButton("Cancel", null);
-				}else {
-					b.setMessage("Agregue los litros utilizados del ingrediente");
-					b.setView(input);
-					b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-							try{
-								double entero = Double.parseDouble(input.getText().toString());
-								if(entero>=0){
-									ir.setLitros(entero);
-									PublicaReceta.contenedor.lista.put(nombre, ir);
-								}else{
-									Toast.makeText(b.getContext(), "Ingrese un número; mayor a 0",20).show();
-								}
-							}catch(NumberFormatException nfe){
-								//nada
-							}
-						}
-					});
-					b.setNegativeButton("Cancel", null);
-				}
+				b.setMessage("El ingrediente contiene "+ir.getCal_100g()+" calorías por cada 100 gramos");
 				b.show();
 			}
 		}else{
-			b.setTitle("Eliminar ingrediente");
-			b.setMessage("El ingrediente ya ha sido agregado, ¿desea eliminarlo?");
-			b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					PublicaReceta.contenedor.lista.remove(nombre);
+			if(!PublicaReceta.contenedor.lista.containsKey(nombre)){
+				if(ingredientes.containsKey(nombre)){
+					b.setTitle("Agregue el ingrediente");
+					
+					final EditText input = new EditText(this);
+					input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+					
+					final Ingrediente_Receta ir = ingredientes.get(nombre);
+					if(ir.getTipoMedida().equals("u")){
+						b.setMessage("Agregue las unidades necesarias del ingrediente");
+						input.setInputType(InputType.TYPE_CLASS_NUMBER);
+						b.setView(input);
+						b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+								try{
+									
+									int entero = Integer.parseInt(input.getText().toString());
+									if(entero>=0){
+										ir.setUnidades(entero);
+										PublicaReceta.contenedor.lista.put(nombre, ir);
+									}else{
+										Toast.makeText(b.getContext(), "Ingrese un número; mayor a 0",20).show();
+									}
+								}catch(NumberFormatException nfe){
+									//nada
+								}
+							}
+						});
+						b.setNegativeButton("Cancel", null);
+					}else if(ir.getTipoMedida().equals("g")){
+						b.setMessage("Agregue los gramos utilizados del ingrediente");
+						b.setView(input);
+						b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+								try{
+									double entero = Double.parseDouble(input.getText().toString());
+									if(entero>=0){
+										ir.setGramos(entero);
+										PublicaReceta.contenedor.lista.put(nombre, ir);
+									}else{
+										Toast.makeText(b.getContext(), "Ingrese un número; mayor a 0",20).show();
+									}
+								}catch(NumberFormatException nfe){
+									//nada
+								}
+							}
+						});
+						b.setNegativeButton("Cancel", null);
+					}else {
+						b.setMessage("Agregue los litros utilizados del ingrediente");
+						b.setView(input);
+						b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+								try{
+									double entero = Double.parseDouble(input.getText().toString());
+									if(entero>=0){
+										ir.setLitros(entero);
+										PublicaReceta.contenedor.lista.put(nombre, ir);
+									}else{
+										Toast.makeText(b.getContext(), "Ingrese un número; mayor a 0",20).show();
+									}
+								}catch(NumberFormatException nfe){
+									//nada
+								}
+							}
+						});
+						b.setNegativeButton("Cancel", null);
+					}
+					b.show();
 				}
-			});
-			b.setNegativeButton("No", null);
-			b.show();
+			}else{
+				b.setTitle("Eliminar ingrediente");
+				b.setMessage("El ingrediente ya ha sido agregado, ¿desea eliminarlo?");
+				b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						PublicaReceta.contenedor.lista.remove(nombre);
+					}
+				});
+				b.setNegativeButton("No", null);
+				b.show();
+			}
 		}
 	}
 	
