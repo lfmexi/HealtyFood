@@ -190,6 +190,7 @@ public class PublicaReceta extends Fragment {
 	
 	private void agregarOnClick(){
 		Intent i = new Intent(act,Ingredientes.class);
+		i.putExtra("ambito", "publica");
 		act.startActivity(i);
 	}
 	

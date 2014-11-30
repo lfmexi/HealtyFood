@@ -89,7 +89,7 @@ public class Ingredientes extends Activity {
 	private void listaOnItemClick(View v){
 		final AlertDialog.Builder b = new AlertDialog.Builder(this);
 		final String nombre = ((TextView) v).getText().toString();
-		if(ambito!=null){
+		if(ambito.equals("perfil")){
 			if(ingredientes.containsKey(nombre)){
 				b.setTitle("Información sobre el ingrediente");
 				final Ingrediente_Receta ir = ingredientes.get(nombre);
