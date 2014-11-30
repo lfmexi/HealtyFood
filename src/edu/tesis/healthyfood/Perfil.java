@@ -37,6 +37,7 @@ public class Perfil extends Fragment {
 		
 		Button boton = (Button)view.findViewById(R.id.button1);
 		Button botonrec = (Button)view.findViewById(R.id.button_misrecetas);
+		Button botonIngr = (Button)view.findViewById(R.id.button2);
 		
 		botonProgreso=(Button)view.findViewById(R.id.botonGetProgreso);
 		botonMedir.setOnClickListener(new OnClickListener(){
@@ -70,7 +71,23 @@ public class Perfil extends Fragment {
 				calorias();
 			}
 		});
+		
+		botonIngr.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				ingredientes();
+			}
+			
+		});
 		return view;
+	}
+	
+	private void ingredientes(){
+		Intent i = new Intent(this.getActivity(),Ingredientes.class);
+		i.putExtra("ambito", "perfil");
+		this.startActivity(i);
 	}
 	
 	private void calorias(){

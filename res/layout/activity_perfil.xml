@@ -44,19 +44,6 @@
                     android:layout_alignTop="@+id/botonNuevaMedida"
                     android:layout_marginTop="38dp" />
 
-                <Button
-                    android:id="@+id/botonNuevaMedida"
-                    android:layout_width="280dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="110dp"
-        			android:background="@drawable/selectable_background_button"
-                    android:drawableLeft="@drawable/ic_scales"
-                    android:paddingLeft="30dp"
-                    android:text="Medición Nueva"
-                    android:textColor="@android:color/white" />
-
                 <TextView
                     android:id="@+id/textUser"
                     android:layout_width="wrap_content"
@@ -90,8 +77,27 @@
                     android:paddingLeft="30dp"
                     android:text="Ver mis recetas"
                     android:textColor="@android:color/white" />
-                
 
+                <Button
+                    android:id="@+id/botonNuevaMedida"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/botonGetProgreso"
+                    android:layout_below="@+id/textUser"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/selectable_background_button"
+                    android:drawableLeft="@drawable/ic_scales"
+                    android:paddingLeft="30dp"
+                    android:text="Medición Nueva"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="Catálogo de ingredientes" />
                 
             </RelativeLayout>
 
