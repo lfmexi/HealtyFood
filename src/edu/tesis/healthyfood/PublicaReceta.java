@@ -1,8 +1,6 @@
 package edu.tesis.healthyfood;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -19,8 +17,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -32,7 +28,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.MediaStore.Images;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -71,6 +66,8 @@ public class PublicaReceta extends Fragment {
 		boton_ingredientes = (Button)view.findViewById(R.id.receta_boton_agrega);
 		boton_ver = (Button)view.findViewById(R.id.recetas_ver_ingredientes);
 		boton_foto = (Button)view.findViewById(R.id.receta_photo);
+		Button cal = (Button)view.findViewById(R.id.button1);
+		
 		ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(act,
 		        R.array.categories_array, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -112,6 +109,16 @@ public class PublicaReceta extends Fragment {
 			}
 		});
 
+		cal.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				calorias();
+			}
+			
+		});
+		
 		return view;
 	}
 
@@ -122,6 +129,25 @@ public class PublicaReceta extends Fragment {
 //		return true;
 //	}
 
+	private void calorias(){
+		String ingredientes = "";
+		double cal=0;
+		for(Ingrediente_Receta ir :contenedor.lista.values()){
+			ingredientes+=ir.getNombre_ingrediente();
+			
+			if(ir.getGramos()!=0){
+				double cal_ir = ir.getCal_100g()/100 * ir.getGramos();
+				ingredientes = ingredientes + " -> " +cal_ir + " cal";
+				cal +=cal_ir;
+			}
+			ingredientes+="\n";
+		}
+		ingredientes = ingredientes+"Calorías en la receta: "+cal+" cal";
+		AlertDialog.Builder b = new AlertDialog.Builder(act);
+		b.setTitle("Calorías en la receta");
+		b.setMessage(ingredientes);
+		b.show();
+	}
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
@@ -341,7 +367,7 @@ public class PublicaReceta extends Fragment {
 			if(result!=null){
 				AlertDialog.Builder b= new AlertDialog.Builder(act);
 		        b.setTitle("Carga exitosa");
-		        b.setMessage("La receta ha sido publicada con Ã©xito");
+		        b.setMessage("La receta ha sido publicada con éxito");
 		        b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
 					@Override
