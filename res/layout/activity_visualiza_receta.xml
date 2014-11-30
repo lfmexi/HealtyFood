@@ -66,7 +66,7 @@
 
                     <Button
                         android:id="@+id/botonFavorito"
-		                android:background="@drawable/roundbackground"
+	      			  	android:background="@drawable/selectable_background_button"
         	            android:drawableLeft="@drawable/ic_like"
             	        android:paddingLeft="15dp"
                 	    android:paddingRight="15dp"
@@ -128,7 +128,7 @@
                     android:id="@+id/verIngredientes"
                     android:layout_width="220dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/roundbackground"
+      			  	android:background="@drawable/selectable_background_button"
                     android:drawableLeft="@drawable/ic_eye"
                     android:paddingLeft="15dp"
                     android:paddingRight="10dp"
@@ -137,10 +137,13 @@
                 <Button
                     android:id="@+id/botonConsumir"
                     style="?android:attr/buttonStyleSmall"
-                    android:layout_width="88dp"
-                    android:layout_height="81dp"
-                    android:background="@drawable/ic_action_action_assignment"
-                    android:text="Agregar al diario de consumo" />
+                    android:layout_width="180dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/selectable_background_button"
+                    android:drawableLeft="@drawable/ic_dining_room"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    android:text="Agregar al diario\nde consumo" />
 
                 <TextView
                     android:id="@+id/textoFecha"
