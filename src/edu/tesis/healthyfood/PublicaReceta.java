@@ -136,6 +136,7 @@ public class PublicaReceta extends Fragment {
 			}
 			
 			Bitmap bitmap = BitmapFactory.decodeFile(path_imagen);
+			bitmap=getResizedBitmap(bitmap, 400, 400);
 		    try{
 		        File file = new File(path_imagen);
 		        FileOutputStream fOut = new FileOutputStream(file);
