@@ -7,6 +7,7 @@ public class Ingrediente_Receta {
 	private double gramos;
 	private double litros;
 	private String tipoMedida;
+	private double cal_100g;
 	
 	public Ingrediente_Receta(String n,String t){
 		nombre_ingrediente=n;
@@ -55,6 +56,14 @@ public class Ingrediente_Receta {
 
 	public void setLitros(double litros) {
 		this.litros = litros;
+	}
+
+	public double getCal_100g() {
+		return cal_100g;
+	}
+
+	public void setCal_100g(double cal_100g) {
+		this.cal_100g = cal_100g;
 	}
 	
 	
