@@ -139,20 +139,6 @@
                     android:textColor="@android:color/white" />
 
                 <Button
-                    android:id="@+id/recetas_ver_ingredientes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@+id/receta_spinner_cat"
-                    android:layout_alignLeft="@+id/receta_spinner_cat"
-                    android:layout_marginLeft="29dp"
-      			  	android:background="@drawable/selectable_background_button"
-                    android:drawableLeft="@drawable/ic_eye"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:text="Ver"
-                    android:textColor="@android:color/white" />
-
-                <Button
                     android:id="@+id/button1"
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="wrap_content"
@@ -160,7 +146,27 @@
                     android:layout_alignLeft="@+id/textView3"
                     android:layout_below="@+id/textTipoReceta"
                     android:layout_marginTop="14dp"
-                    android:text="Ver calorías" />
+                    android:layout_toLeftOf="@+id/receta_spinner_cat"
+                    android:background="@drawable/selectable_background_button"
+                    android:drawableLeft="@drawable/ic_calories"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="Ver calorías"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/recetas_ver_ingredientes"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/receta_spinner_cat"
+                    android:layout_alignLeft="@+id/receta_spinner_cat"
+                    android:layout_marginLeft="14dp"
+                    android:background="@drawable/selectable_background_button"
+                    android:drawableLeft="@drawable/ic_eye"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="Ver"
+                    android:textColor="@android:color/white" />
 
             </RelativeLayout>
 
