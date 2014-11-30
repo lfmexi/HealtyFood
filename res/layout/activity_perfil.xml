@@ -93,11 +93,15 @@
 
                 <Button
                     android:id="@+id/button2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="280dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:text="Catálogo de ingredientes" />
+                    android:background="@drawable/selectable_background_button"
+                    android:paddingLeft="30dp"
+                    android:drawableLeft="@drawable/ic_ingredients"                    
+                    android:text="Catálogo de ingredientes" 
+                    android:textColor="@android:color/white" />
                 
             </RelativeLayout>
 
