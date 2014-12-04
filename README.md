@@ -24,7 +24,7 @@ El proyecto utiliza bibliotecas de terceros, las cuales son:
 
 Licencia
 ========
-Copyright Luis Fernando Morales [lfmexi](https://github.com/lfmexi) y Angel Estuardo Cajas [angelboxes](https://github.com/angelboxes)
+Copyright 2014 - Luis Fernando Morales [lfmexi](https://github.com/lfmexi) y Angel Estuardo Cajas [angelboxes](https://github.com/angelboxes)
 
 Licenciado bajo la Apache License, Version 2.0. No realizar ningún fork o proyecto
 alternativo si no se utiliza ésta licencia. Es posible obtener una copia de la licencia
