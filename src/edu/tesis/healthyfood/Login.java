@@ -38,7 +38,7 @@ import edu.tesis.healthyfood.sqlite.TMB;
 @SuppressWarnings("deprecation")
 public class Login extends Activity {
 
-	public static final String url="http://healthylifeapp.esy.es";
+	public static final String url="http://*******";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -83,7 +83,7 @@ public class Login extends Activity {
 	}
 	
 	private void loginOnClick(){
-		//en caso se logre realizar el login, ésto se realiza en la clase
+		//en caso se logre realizar el login, Ã©sto se realiza en la clase
 		//que deriva de AsyncTask
 		if(campo_username.getText()!=null && campo_password.getText()!=null){
 			String nombre = campo_username.getText().toString();
@@ -260,8 +260,8 @@ public class Login extends Activity {
 				padre.finish();
 			}else{
 				AlertDialog.Builder alert=new AlertDialog.Builder(padre);
-				alert.setTitle("Error de autenticaci�n");
-				alert.setMessage("Usuario o contrase�a no v�lidos");
+				alert.setTitle("Error de autenticación");
+				alert.setMessage("Usuario o contraseña no válidos");
 				alert.show();				
 			}
 		}
