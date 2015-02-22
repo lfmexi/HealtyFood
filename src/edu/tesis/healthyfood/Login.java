@@ -31,6 +31,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import edu.tesis.healthyfood.conn.Connection;
 import edu.tesis.healthyfood.sqlite.Medicion;
 import edu.tesis.healthyfood.sqlite.SQLite;
 import edu.tesis.healthyfood.sqlite.TMB;
@@ -38,7 +39,7 @@ import edu.tesis.healthyfood.sqlite.TMB;
 @SuppressWarnings("deprecation")
 public class Login extends Activity {
 
-	public static final String url="http://healthylifeapp.esy.es";
+	public static final String url=Connection.url;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
