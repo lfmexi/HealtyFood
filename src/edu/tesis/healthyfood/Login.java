@@ -40,6 +40,7 @@ import edu.tesis.healthyfood.sqlite.TMB;
 public class Login extends Activity {
 
 	public static final String url=Connection.url;
+	public static final String url="http://*******";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
