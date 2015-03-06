@@ -23,4 +23,4 @@ local.properties
 # Clase con configuración de IP
 /*/src/main/java/edu/tesis/heeathyfood/conn/
 
-.idea/
+.idea/workspace.xml
