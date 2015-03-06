@@ -25,6 +25,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -122,12 +123,6 @@ public class PublicaReceta extends Fragment {
 		return view;
 	}
 
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.publica_receta, menu);
-//		return true;
-//	}
 
 	private void calorias(){
 		String ingredientes = "";
@@ -142,9 +137,9 @@ public class PublicaReceta extends Fragment {
 			}
 			ingredientes+="\n";
 		}
-		ingredientes = ingredientes+"Calorías en la receta: "+cal+" cal";
+		ingredientes = ingredientes+"Calorï¿½as en la receta: "+cal+" cal";
 		AlertDialog.Builder b = new AlertDialog.Builder(act);
-		b.setTitle("Calorías en la receta");
+		b.setTitle("Calorï¿½as en la receta");
 		b.setMessage(ingredientes);
 		b.show();
 	}
@@ -152,16 +147,20 @@ public class PublicaReceta extends Fragment {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
 		super.onActivityResult(requestCode, resultCode, data);
-		
-		if(requestCode==REQUEST_CAMERA && resultCode==Activity.RESULT_OK){
+
+		if(requestCode==REQUEST_CAMERA && (resultCode==Activity.RESULT_OK)){
 			if(photoPath==null){
 				Uri selectImageUri=data.getData();
 				path_imagen = getPath(selectImageUri);
 			}else{
 				path_imagen = photoPath;
 			}
-			
-			Bitmap bitmap = BitmapFactory.decodeFile(path_imagen);
+			File image = new File(path_imagen);
+
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+
+			Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(),bmOptions);
+
 			bitmap=getResizedBitmap(bitmap, 400, 400);
 		    try{
 		        File file = new File(path_imagen);
@@ -275,8 +274,14 @@ public class PublicaReceta extends Fragment {
 		String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state)) 
         {					
-            long captureTime = System.currentTimeMillis();					
-            photoPath = Environment.getExternalStorageDirectory() + "/DCIM/Camera/Photo" + captureTime + ".jpg";
+            long captureTime = System.currentTimeMillis();
+
+            if(Build.VERSION.SDK_INT>Build.VERSION_CODES.JELLY_BEAN_MR1){
+                photoPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/HealthyFood/Photo" + captureTime + ".jpg";
+            }else{
+                photoPath = Environment.getExternalStorageDirectory() + "/DCIM/Camera/Photo" + captureTime + ".jpg";
+            }
+
             try
             {
             	Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
@@ -367,7 +372,7 @@ public class PublicaReceta extends Fragment {
 			if(result!=null){
 				AlertDialog.Builder b= new AlertDialog.Builder(act);
 		        b.setTitle("Carga exitosa");
-		        b.setMessage("La receta ha sido publicada con éxito");
+		        b.setMessage("La receta ha sido publicada con ï¿½xito");
 		        b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
 					@Override
@@ -380,7 +385,7 @@ public class PublicaReceta extends Fragment {
 			}else{
 				AlertDialog.Builder b= new AlertDialog.Builder(act);
 		        b.setTitle("Error");
-		        b.setMessage("La receta no ha sido publicada con éxito");
+		        b.setMessage("La receta no ha sido publicada con ï¿½xito");
 		        b.show();
 			}
 		}
