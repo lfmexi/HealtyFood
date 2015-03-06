@@ -14,6 +14,8 @@ realizado.
 Actualmente, la aplicación se encuentra en pre-producción y es experimental. Las contribuciones,
 forks y pull-requests son bienvenidas.
 
+#PROYECTO MIGRADO A AndroidStudio
+
 Bibliotecas externas
 ====================
 
