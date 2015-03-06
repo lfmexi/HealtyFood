@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="edu.tesis.healthyfood"
+    android:versionCode="1"
+    android:versionName="1.0" >
+	<uses-feature android:name="android.hardware.camera" android:required="true"/>
+    
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.Healthyfood" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Login"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name=".DrawerMenuActivity"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name=".MenuPrincipal"
+            android:label="@string/title_activity_menu_principal" >
+        </activity>
+        <activity
+            android:name=".BuscaRecetas"
+            android:label="@string/title_activity_busca_recetas" >
+        </activity>
+        <activity
+            android:name=".PublicaReceta"
+            android:label="@string/title_activity_publica_receta" >
+        </activity>
+        <activity
+            android:name=".MisRecetas"
+            android:label="@string/title_activity_mis_recetas" >
+        </activity>
+        <activity
+            android:name=".Ejercicios"
+            android:label="@string/title_activity_ejercicios" >
+        </activity>
+        <activity
+            android:name=".Perfila"
+            android:label="@string/title_activity_perfil" >
+        </activity>
+        <activity
+            android:name=".Medidor"
+            android:label="@string/title_activity_medidor" >
+        </activity>
+        <activity
+            android:name=".ForgotData"
+            android:label="@string/title_activity_forgot_data" >
+        </activity>
+        <activity
+            android:name=".Registrar"
+            android:label="@string/title_activity_registrar" >
+        </activity>
+        <activity
+            android:name=".Ingredientes"
+            android:label="@string/title_activity_ingredientes" >
+        </activity>
+        <activity
+            android:name=".MisRecetas2"
+            android:label="@string/title_activity_recetas_propias" >
+        </activity>
+        <activity
+            android:name=".Favoritas"
+            android:label="@string/title_activity_favoritas" >
+        </activity>
+        <activity
+            android:name=".Registro"
+            android:label="@string/title_activity_registro" >
+        </activity>
+        <activity
+            android:name=".VisualizaReceta"
+            android:label="@string/title_activity_visualiza_receta" >
+        </activity>
+        <activity
+            android:name=".ProgresoIMC"
+            android:label="@string/title_activity_progreso_imc" >
+        </activity>
+        <activity
+            android:name=".ConsumoDiario"
+            android:label="@string/title_activity_consumo_diario" >
+        </activity>
+        <activity
+            android:name=".VisualizaEjercicio"
+            android:label="@string/title_activity_visualiza_ejercicio" >
+        </activity>
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+</manifest>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HealthyFood</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_menu_principal">Menu Principal</string>
+    <string name="title_activity_busca_recetas">Buscar Recetas</string>
+    <string name="title_activity_publica_receta">Publicar Recetas</string>
+    <string name="title_activity_mis_recetas">Mis Recetas</string>
+    <string name="title_activity_ejercicios">Ejercicios</string>
+    <string name="title_activity_perfil">Perfil</string>
+    <string name="title_activity_medidor">Medidor</string>
+    <string name="title_tab_profile">Mi perfil</string>
+    <string name="title_tab_recipes">Recetas</string>
+    <string name="title_tab_settings">Configuración</string>
+
+    <string-array name="categories_array">
+        <item>Entrada</item>
+        <item>Ensalada</item>
+        <item>Plato Fuerte</item>
+        <item>Desayuno</item>
+        <item>Almuerzo</item>
+        <item>Refrigerio</item>
+        <item>Cena</item>
+        <item>Postre</item>
+        <item>Bebida</item>
+    </string-array>
+    <string-array name="option_list">
+        <item>Principal</item>
+        <item>Recetas</item>
+        <item>Ejercicios</item>
+        <item>Cerrar Sesión</item>
+    </string-array>
+    <string-array name="gender_array">
+        <item>Hombre</item>
+        <item>Mujer</item>
+    </string-array>
+    <string-array name="objective_array">
+        <item>Bajar peso</item>
+        <item>Mantener peso</item>
+        <item>Ganar peso</item>
+    </string-array>
+
+    <string name="drawer_open">Abrir</string>
+    <string name="drawer_close">Cerrar</string>
+    <string name="title_activity_forgot_data">Datos olvidados</string>
+    <string name="title_activity_registrar">Registrar</string>
+    <string name="title_activity_ingredientes">Ingredientes</string>
+    <string name="title_activity_recetas_propias">Recetas Propias</string>
+    <string name="title_activity_favoritas">Favoritas</string>
+    <string name="title_activity_registro">Registro</string>
+    <string name="title_activity_visualiza_receta">Receta</string>
+    <string name="title_activity_progreso_imc">Progreso IMC</string>
+    <string name="title_activity_consumo_diario">Consumo diario de calorías</string>
+    <string name="title_activity_visualiza_ejercicio">Visualización de ejercicios</string>
+
+</resources>

@@ -1,0 +1,25 @@
+# Aplicaciones
+*.apk
+*.ap_
+
+# Dalvik
+*.dex
+
+# Clases de Java
+*.class
+
+# Generados
+bin/
+gen/
+
+# Configuraciones de Gradle
+.gradle/
+build/
+/*/build/
+
+# Configuraciones locales
+local.properties
+
+# Clase con configuración de IP
+/*/src/main/java/edu/tesis/heeathyfood/conn/
+

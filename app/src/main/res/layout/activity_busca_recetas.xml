@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".BuscaRecetas" >
+
+    <ListView
+        android:id="@+id/busca_receta_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/receta_instrucciones" >
+
+    </ListView>
+
+    <Button
+        android:id="@+id/recetas_buscar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/receta_instrucciones"
+        android:layout_alignBottom="@+id/receta_instrucciones"
+        android:layout_alignRight="@+id/busca_receta_result"
+        android:text="Buscar" />
+
+    <EditText
+        android:id="@+id/receta_instrucciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="32dp"
+        android:layout_toLeftOf="@+id/recetas_buscar"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/receta_instrucciones"
+        android:layout_alignParentTop="true"
+        android:text="Buscador de Recetas"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>
