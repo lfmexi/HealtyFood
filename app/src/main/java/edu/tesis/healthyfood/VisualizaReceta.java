@@ -43,6 +43,7 @@ import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.media.ThumbnailUtils;
 import edu.tesis.healthyfood.sobj.ContenedorIngredientes;
 import edu.tesis.healthyfood.sobj.Ingrediente_Receta;
 import edu.tesis.healthyfood.sqlite.SQLite;
@@ -591,8 +592,10 @@ public class VisualizaReceta extends Activity {
 		
 		protected void onPostExecute(Bitmap result) {
 			alert.dismiss();
-			if(result!=null)
-	        	padre.imagen.setImageBitmap(result);
+			if(result!=null) {
+                Bitmap bit = ThumbnailUtils.extractThumbnail(result, 640, 480);
+                padre.imagen.setImageBitmap(bit);
+            }
 	    }
 	}
 }
