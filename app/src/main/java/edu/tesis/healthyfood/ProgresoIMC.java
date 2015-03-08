@@ -18,7 +18,6 @@ public class ProgresoIMC extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_progreso_imc);
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		Intent i = this.getIntent();
 		user = i.getExtras().getString("infoUser");

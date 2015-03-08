@@ -61,7 +61,6 @@ public class VisualizaReceta extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_visualiza_receta);
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		Intent i=this.getIntent();
 		user = i.getExtras().getString("infoUser");
@@ -178,7 +177,7 @@ public class VisualizaReceta extends Activity {
 		sql.cerrar();
 		if(agregado){
 			AlertDialog.Builder b=new AlertDialog.Builder(this);
-			b.setTitle("Éxito");
+			b.setTitle("ï¿½xito");
 			b.setMessage("Receta agregada al diario");
 			b.show();
 		}
@@ -386,24 +385,24 @@ public class VisualizaReceta extends Activity {
 		
 		private void postFile(String username, String nombre, String rating) throws ClientProtocolException, IOException{
 			String url=Login.url+"/raterecipe.php";
-			HttpClient cliente = new DefaultHttpClient();
 			HttpPost post = new HttpPost(url);
-	        MultipartEntityBuilder me = MultipartEntityBuilder.create();
-	        
-	        me.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);       
-	        me.addPart("user", new StringBody(username));
-	        me.addPart("receta", new StringBody(nombre));
-	        me.addPart("rating", new StringBody(rating));
-	        post.setEntity(me.build());
-	        HttpResponse response=cliente.execute(post);
-	        HttpEntity entidad = response.getEntity();
-	        
-	        entidad.consumeContent();
-	        cliente.getConnectionManager().shutdown();
+            HttpClient cliente = new DefaultHttpClient();
+
+            List<NameValuePair> params = new ArrayList<NameValuePair>(3);
+            params.add(new BasicNameValuePair("user",username));
+            params.add(new BasicNameValuePair("receta",nombre));
+            params.add(new BasicNameValuePair("rating",rating));
+            try {
+                post.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            cliente.execute(post);
 		}
 		
 		protected void onPostExecute(String result){
-			
+
 		}
 	}
 
@@ -434,17 +433,18 @@ public class VisualizaReceta extends Activity {
 			String url=Login.url+"/faverecipe.php";
 			HttpClient cliente = new DefaultHttpClient();
 			HttpPost post = new HttpPost(url);
-	        MultipartEntityBuilder me = MultipartEntityBuilder.create();
-	        
-	        me.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);       
-	        me.addPart("user", new StringBody(username));
-	        me.addPart("receta", new StringBody(nombre));
-	        post.setEntity(me.build());
-	        HttpResponse response=cliente.execute(post);
-	        HttpEntity entidad = response.getEntity();
-	        
-	        entidad.consumeContent();
-	        cliente.getConnectionManager().shutdown();
+
+            List<NameValuePair> params = new ArrayList<NameValuePair>(2);
+            params.add(new BasicNameValuePair("user",username));
+            params.add(new BasicNameValuePair("receta",nombre));
+            try {
+                post.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            cliente.execute(post);
+            cliente.getConnectionManager().shutdown();
 		}
 		
 		protected void onPostExecute(String result){
@@ -452,19 +452,11 @@ public class VisualizaReceta extends Activity {
 				AlertDialog.Builder b= new AlertDialog.Builder(padre);
 		        b.setTitle("Has marcado una receta como favorita");
 		        b.setMessage(result);
-		     //   b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//
-	//				@Override
-		//			public void onClick(DialogInterface arg0, int arg1) {
-			//			// TODO Auto-generated method stub
-				//		//this.getSupportFragmentManager().popBackStack();
-					//}
-		        //});
 		        b.show();
 			}else{
 				AlertDialog.Builder b= new AlertDialog.Builder(padre);
 		        b.setTitle("Error");
-		        b.setMessage("La receta no ha sido favorecida con éxito");
+		        b.setMessage("La receta no ha sido favorecida con ï¿½xito");
 		        b.show();
 			}
 		}
