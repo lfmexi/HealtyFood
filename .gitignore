@@ -24,3 +24,6 @@ local.properties
 /*/src/main/java/edu/tesis/heeathyfood/conn/
 
 .idea/workspace.xml
+
+# app.iml para build
+app/app.iml
