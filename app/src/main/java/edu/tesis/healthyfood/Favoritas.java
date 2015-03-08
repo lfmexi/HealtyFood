@@ -37,19 +37,26 @@ import android.widget.TextView;
 @SuppressWarnings("deprecation")
 public class Favoritas extends Fragment {
 private String user;
-private Activity act;
 
-	public Favoritas(String u, Activity a){
-		user=u;
-		act=a;
-		
-	}
+    public Favoritas(){}
+
+    public static Favoritas newInstance(String usr){
+        Favoritas fragment=new Favoritas();
+        Bundle args = new Bundle();
+        args.putString("user",usr);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 	private ListView lista;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		
 		View view = inflater.inflate(R.layout.activity_favoritas, container, false);
-		lista = (ListView)view.findViewById(R.id.fav_lista);
+
+        user = getArguments().getString("user");
+
+        lista = (ListView)view.findViewById(R.id.fav_lista);
 		lista.setOnItemClickListener(new OnItemClickListener(){
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -70,13 +77,6 @@ private Activity act;
 		this.startActivity(i);
 	}
 
-
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.favoritas, menu);
-//		return true;
-//	}
 
 	private class BuscaFavoritasAsync extends AsyncTask<String,Void,String[]>{
 		Favoritas padre;
@@ -148,7 +148,7 @@ private Activity act;
 				for(int i = 0;i<result.length;i++){
 					adaptador[i] = result[i];
 				}
-			padre.lista.setAdapter(new ArrayAdapter<String>(act,android.R.layout.simple_list_item_1,android.R.id.text1,adaptador));
+			padre.lista.setAdapter(new ArrayAdapter<String>(padre.getActivity(),android.R.layout.simple_list_item_1,android.R.id.text1,adaptador));
 			}
 		}
 	}

@@ -36,48 +36,16 @@
             android:label="@string/title_activity_menu_principal" >
         </activity>
         <activity
-            android:name=".BuscaRecetas"
-            android:label="@string/title_activity_busca_recetas" >
-        </activity>
-        <activity
-            android:name=".PublicaReceta"
-            android:label="@string/title_activity_publica_receta" >
-        </activity>
-        <activity
-            android:name=".MisRecetas"
-            android:label="@string/title_activity_mis_recetas" >
-        </activity>
-        <activity
-            android:name=".Ejercicios"
-            android:label="@string/title_activity_ejercicios" >
-        </activity>
-        <activity
             android:name=".Perfila"
             android:label="@string/title_activity_perfil" >
-        </activity>
-        <activity
-            android:name=".Medidor"
-            android:label="@string/title_activity_medidor" >
         </activity>
         <activity
             android:name=".ForgotData"
             android:label="@string/title_activity_forgot_data" >
         </activity>
         <activity
-            android:name=".Registrar"
-            android:label="@string/title_activity_registrar" >
-        </activity>
-        <activity
             android:name=".Ingredientes"
             android:label="@string/title_activity_ingredientes" >
-        </activity>
-        <activity
-            android:name=".MisRecetas2"
-            android:label="@string/title_activity_recetas_propias" >
-        </activity>
-        <activity
-            android:name=".Favoritas"
-            android:label="@string/title_activity_favoritas" >
         </activity>
         <activity
             android:name=".Registro"
@@ -90,10 +58,6 @@
         <activity
             android:name=".ProgresoIMC"
             android:label="@string/title_activity_progreso_imc" >
-        </activity>
-        <activity
-            android:name=".ConsumoDiario"
-            android:label="@string/title_activity_consumo_diario" >
         </activity>
         <activity
             android:name=".VisualizaEjercicio"

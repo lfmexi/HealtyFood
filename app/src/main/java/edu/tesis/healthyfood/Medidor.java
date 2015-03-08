@@ -23,24 +23,34 @@ public class Medidor extends Fragment {
 	private String sex;
 	private String birth;
 	private String ambito="";
-	private Activity act;
-	
-	public Medidor(String usuario,String sex,String birth, String ambit, Activity acto){
-		user=usuario;
-		this.sex = sex;
-		this.birth = birth;
-		ambito=ambit;
-		act=acto;
-	}
-	
+
+    public Medidor(){}
+
+    public static Medidor newInstance(String usuario,String sex,String birth, String ambit){
+        Medidor fragment=new Medidor();
+        Bundle args = new Bundle();
+        args.putString("user",usuario);
+        args.putString("sex",sex);
+        args.putString("birth",birth);
+        args.putString("ambito",ambit);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View view = inflater.inflate(R.layout.activity_medidor, container, false);
-		botonRegistrar=(Button)view.findViewById(R.id.botonRegistrarMedidas);
+
+        user = getArguments().getString("user");
+        sex = getArguments().getString("sex");
+        birth = getArguments().getString("birth");
+        ambito = getArguments().getString("ambito");
+
+        botonRegistrar=(Button)view.findViewById(R.id.botonRegistrarMedidas);
 		campoPeso = (EditText)view.findViewById(R.id.campoPeso);
 		campoAltura = (EditText)view.findViewById(R.id.campoAltura);
 				selectObjetivo = (Spinner)view.findViewById(R.id.selectObjetivo);
-		ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(act,
+		ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(getActivity(),
 		        R.array.objective_array, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		selectObjetivo.setAdapter(adapter);
@@ -90,7 +100,7 @@ public class Medidor extends Fragment {
 				sql.cerrar();
 
 				if(ambito.equals("registro")){
-					Intent i = new Intent(act,MenuPrincipal.class);
+					Intent i = new Intent(getActivity(),MenuPrincipal.class);
 					i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 					i.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
 					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -107,13 +117,7 @@ public class Medidor extends Fragment {
 			}
 		}
 	}
-	
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		act.getMenuInflater().inflate(R.menu.medidor, menu);
-//		return true;
-//	}
+
 
 	private Button botonRegistrar;
 	private EditText campoPeso;

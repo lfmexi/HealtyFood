@@ -44,18 +44,26 @@ public class Ejercicios extends Fragment {
 	ArrayList<String> listaEjercicios;
 	
 	private ListView lista;
-	
-	public Ejercicios(String user){
-		this.user=user;
-	}
-	
+
+    public Ejercicios(){}
+
+    public static Ejercicios newInstance(String usr){
+        Ejercicios fragment=new Ejercicios();
+        Bundle args = new Bundle();
+        args.putString("user",usr);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		
 		View view = inflater.inflate(R.layout.activity_ejercicios, container, false);
 		TextView tUser = (TextView)view.findViewById(R.id.textoUsuario);
 		TextView tObj = (TextView)view.findViewById(R.id.textoObjetivo);
 		lista = (ListView)view.findViewById(R.id.listView1);
-		
+
+        user = getArguments().getString("user");
+
 		lista.setOnItemClickListener(new OnItemClickListener(){
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -79,7 +87,7 @@ public class Ejercicios extends Fragment {
 			}else{
 				AlertDialog.Builder b = new AlertDialog.Builder(this.getActivity());
 				b.setTitle("Aviso");
-				b.setMessage("Registre una medición con objetivo antes de ver ejercicios");
+				b.setMessage("Registre una mediciï¿½n con objetivo antes de ver ejercicios");
 			}
 		}
 		

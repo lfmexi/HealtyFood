@@ -53,14 +53,18 @@ public class PublicaReceta extends Fragment {
 
     public PublicaReceta(){}
 
-	public PublicaReceta(String u, Activity a){
-		user=u;
-		act=a;
-	}
+    public static PublicaReceta newInstance(String usr){
+        PublicaReceta fragment=new PublicaReceta();
+        Bundle args = new Bundle();
+        args.putString("user",usr);
+        fragment.setArguments(args);
+        return fragment;
+    }
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View view = inflater.inflate(R.layout.activity_publica_receta, container, false);
-		contenedor = new ContenedorIngredientes();
+
+        contenedor = new ContenedorIngredientes();
 		selector_categoria = (Spinner)view.findViewById(R.id.receta_spinner_cat);
 		campo_nombre = (EditText)view.findViewById(R.id.receta_nombre);
 		campo_instrucciones = (EditText)view.findViewById(R.id.receta_instrucciones);
@@ -71,12 +75,11 @@ public class PublicaReceta extends Fragment {
 		boton_foto = (Button)view.findViewById(R.id.receta_photo);
 		Button cal = (Button)view.findViewById(R.id.button1);
 		
-		ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(act,
+		ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this.getActivity(),
 		        R.array.categories_array, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-		Intent i=act.getIntent();
-		user = i.getExtras().getString("infoUser");
+        user = getArguments().getString("user");
 		
 		selector_categoria.setAdapter(adapter);
 
@@ -140,7 +143,7 @@ public class PublicaReceta extends Fragment {
 			ingredientes+="\n";
 		}
 		ingredientes = ingredientes+"Calor�as en la receta: "+cal+" cal";
-		AlertDialog.Builder b = new AlertDialog.Builder(act);
+		AlertDialog.Builder b = new AlertDialog.Builder(this.getActivity());
 		b.setTitle("Calor�as en la receta");
 		b.setMessage(ingredientes);
 		b.show();
@@ -209,16 +212,16 @@ public class PublicaReceta extends Fragment {
 			}
 			ingredientes+="\n";
 		}
-		AlertDialog.Builder b = new AlertDialog.Builder(act);
+		AlertDialog.Builder b = new AlertDialog.Builder(this.getActivity());
 		b.setTitle("Ingredientes en la receta");
 		b.setMessage(ingredientes);
 		b.show();
 	}
 	
 	private void agregarOnClick(){
-		Intent i = new Intent(act,Ingredientes.class);
+		Intent i = new Intent(this.getActivity(),Ingredientes.class);
 		i.putExtra("ambito", "publica");
-		act.startActivity(i);
+		startActivity(i);
 	}
 	
 	private String constructIngredientes(){
@@ -241,7 +244,7 @@ public class PublicaReceta extends Fragment {
         	
         	if(!campo_nombre.getText().toString().equals("")&& !campo_instrucciones.getText().toString().equals("") && !contenedor.lista.isEmpty()){
 
-            	AlertDialog.Builder b= new AlertDialog.Builder(act);
+            	AlertDialog.Builder b= new AlertDialog.Builder(getActivity());
                 b.setTitle("Carga en progreso");
                 b.setMessage("Espere mientras se cargan los datos al servidor");
                 AlertDialog a = b.show();
@@ -249,13 +252,13 @@ public class PublicaReceta extends Fragment {
         		String ingredientes = constructIngredientes();
         		ut.execute(path_imagen,user,campo_nombre.getText().toString(),campo_instrucciones.getText().toString(),selector_categoria.getSelectedItem().toString(),ingredientes);
         	}else {
-            	AlertDialog.Builder b= new AlertDialog.Builder(act);
+            	AlertDialog.Builder b= new AlertDialog.Builder(getActivity());
                 b.setTitle("Error en la carga");
                 b.setMessage("Todos los campos son obligatorios");
                 b.show();
             }
         }else {
-        	AlertDialog.Builder b= new AlertDialog.Builder(act);
+        	AlertDialog.Builder b= new AlertDialog.Builder(getActivity());
             b.setTitle("Error en la carga");
             b.setMessage("Todos los campos son obligatorios");
             b.show();
@@ -264,7 +267,7 @@ public class PublicaReceta extends Fragment {
 	
 	public String getPath(Uri uri) {
         String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = act.managedQuery(uri, projection, null, null, null);
+        Cursor cursor = getActivity().managedQuery(uri, projection, null, null, null);
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
         return cursor.getString(column_index);
@@ -385,9 +388,9 @@ public class PublicaReceta extends Fragment {
 		        });
 		        b.show();
 			}else{
-				AlertDialog.Builder b= new AlertDialog.Builder(act);
+				AlertDialog.Builder b= new AlertDialog.Builder(padre.getActivity());
 		        b.setTitle("Error");
-		        b.setMessage("La receta no ha sido publicada con �xito");
+		        b.setMessage("La receta no ha sido publicada con exito");
 		        b.show();
 			}
 		}

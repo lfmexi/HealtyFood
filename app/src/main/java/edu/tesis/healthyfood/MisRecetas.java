@@ -38,15 +38,21 @@ import android.widget.TextView;
 public class MisRecetas extends Fragment {
 
 	private String user="";
-	private Activity act;
-	
-	public MisRecetas(String u, Activity a){
-		user=u;
-		act=a;
-	}
+
+    public MisRecetas(){}
+
+    public static MisRecetas newInstance(String usr){
+        MisRecetas fragment=new MisRecetas();
+        Bundle args = new Bundle();
+        args.putString("user",usr);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View view = inflater.inflate(R.layout.activity_recetas_propias, container, false);
 		lista = (ListView)view.findViewById(R.id.listaPropias);
+        user = getArguments().getString("user");
 		lista.setOnItemClickListener(new OnItemClickListener(){
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -59,12 +65,6 @@ public class MisRecetas extends Fragment {
 		return view;
 	}
 
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.recetas_propias, menu);
-//		return true;
-//	}
 	
 	private void listaOnClick(View v){
 		String nombre = ((TextView) v).getText().toString();
@@ -146,7 +146,7 @@ public class MisRecetas extends Fragment {
 				for(int i = 0;i<result.length;i++){
 					adaptador[i] = result[i];
 				}
-			padre.lista.setAdapter(new ArrayAdapter<String>(act,android.R.layout.simple_list_item_1,android.R.id.text1,adaptador));
+			padre.lista.setAdapter(new ArrayAdapter<String>(padre.getActivity(),android.R.layout.simple_list_item_1,android.R.id.text1,adaptador));
 			}
 		}
 	}

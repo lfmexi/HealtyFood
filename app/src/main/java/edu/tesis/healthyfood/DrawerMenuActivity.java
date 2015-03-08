@@ -37,7 +37,7 @@ public class DrawerMenuActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        //this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Intent i = this.getIntent();
         user = i.getExtras().getString("infoUser");
@@ -51,7 +51,7 @@ public class DrawerMenuActivity extends ActionBarActivity {
         	
         }
         //mTitle = mDrawerTitle = getTitle();
-        mTitle = mDrawerTitle = "Menú";
+        mTitle = mDrawerTitle = "Menï¿½";
         mPlanetTitles = getResources().getStringArray(R.array.option_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -96,7 +96,7 @@ public class DrawerMenuActivity extends ActionBarActivity {
             if(ambito!=null){
 			if(ambito.equals("registro")){
                 final FragmentTransaction ft = getSupportFragmentManager().beginTransaction(); 
-                ft.replace(R.id.content_frame, new Medidor(user,sex,birth, "perfil",this), "Medidor"); 
+                ft.replace(R.id.content_frame, Medidor.newInstance(user,sex,birth, "perfil"), "Medidor");
                 ft.addToBackStack(null);
                 ft.commit();
             }}
@@ -152,13 +152,13 @@ public class DrawerMenuActivity extends ActionBarActivity {
         Fragment fragment=new Fragment();
     	switch(position){
     		case 0:
-    	        fragment = new Perfil(user,sex,birth);
+    	        fragment = Perfil.newInstance(user,sex,birth);
     	        break;
     		case 1:
-    			fragment = new Recetas(user);
+    			fragment = Recetas.newInstance(user);
     			break;
     		case 2:
-    			fragment = new Ejercicios(user);
+    			fragment = Ejercicios.newInstance(user);
     	        break;
     		case 3:
     			Logout();

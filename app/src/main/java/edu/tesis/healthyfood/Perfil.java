@@ -20,18 +20,28 @@ public class Perfil extends Fragment {
 	String sex;
 	String birth;
 
-	public Perfil(String user,String sex,String birth) {
-		this.user=user;
-		this.sex=sex;
-		this.birth = birth;
-		// TODO Auto-generated constructor stub
-	}
+    public Perfil(){}
+
+    public static Perfil newInstance(String user,String sex,String birth){
+        Perfil fragment=new Perfil();
+        Bundle args = new Bundle();
+        args.putString("user",user);
+        args.putString("sex",sex);
+        args.putString("birth",birth);
+        fragment.setArguments(args);
+        return fragment;
+    }
 	
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View view = inflater.inflate(R.layout.activity_perfil, container, false);
-		botonMedir=(Button)view.findViewById(R.id.botonNuevaMedida);
+
+        user =  getArguments().getString("user");
+        sex = getArguments().getString("sex");
+        birth = getArguments().getString("birth");
+
+        botonMedir=(Button)view.findViewById(R.id.botonNuevaMedida);
 		TextView txt=(TextView)view.findViewById(R.id.textUser);
 		txt.setText("BIENVENIDO "+user.toUpperCase());
 		
@@ -92,7 +102,7 @@ public class Perfil extends Fragment {
 	
 	private void calorias(){
 		final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
-        ft.replace(R.id.content_frame, new ConsumoDiario(user),"Consumo diario de calorías"); 
+        ft.replace(R.id.content_frame, ConsumoDiario.newInstance(user),"Consumo diario de calorï¿½as");
         ft.addToBackStack(null);
         ft.commit();
 		/*Intent i = new Intent(this.getActivity(),ConsumoDiario.class);
@@ -102,14 +112,14 @@ public class Perfil extends Fragment {
 	
 	private void medir(){
         final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
-        ft.replace(R.id.content_frame, new Medidor(user,sex,birth, "perfil",getActivity()), "Medidor"); 
+        ft.replace(R.id.content_frame, Medidor.newInstance(user,sex,birth, "perfil"), "Medidor");
         ft.addToBackStack(null);
         ft.commit();
 	}
 	
 	private void myrecipes(){
         final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
-        ft.replace(R.id.content_frame, new MisRecetas(user,getActivity()), "Mis Recetas"); 
+        ft.replace(R.id.content_frame, MisRecetas.newInstance(user), "Mis Recetas");
         ft.addToBackStack(null);
         ft.commit();
 	}

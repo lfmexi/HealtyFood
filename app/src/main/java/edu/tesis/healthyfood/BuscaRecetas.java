@@ -42,23 +42,25 @@ public class BuscaRecetas extends Fragment {
 
 	
 	private String user="";
-	private Activity act;
-	
-	public BuscaRecetas(String u, Activity a){
-		user=u;
-		act=a;
-		
-	}
+    public BuscaRecetas(){}
+
+    public static BuscaRecetas newInstance(String usr){
+        BuscaRecetas fragment=new BuscaRecetas();
+        Bundle args = new Bundle();
+        args.putString("user",usr);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View view = inflater.inflate(R.layout.activity_busca_recetas, container, false);
 		campoReceta = (EditText)view.findViewById(R.id.receta_instrucciones);
 		botonBusqueda =(Button)view.findViewById(R.id.recetas_buscar);
 		resultado = (ListView)view.findViewById(R.id.busca_receta_result);
-		
-		Intent i=act.getIntent();
-		user = i.getExtras().getString("infoUser");
-		
+
+        user = getArguments().getString("user");
+
 		botonBusqueda.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
@@ -95,7 +97,7 @@ public class BuscaRecetas extends Fragment {
 	
 	private void listaOnItemClick(View v){
 		String nombre = ((TextView) v).getText().toString();
-		Intent i = new Intent(act,VisualizaReceta.class);
+		Intent i = new Intent(this.getActivity(),VisualizaReceta.class);
 		i.putExtra("infoUser", user);
 		i.putExtra("receta", nombre);
 		this.startActivity(i);
@@ -177,7 +179,7 @@ public class BuscaRecetas extends Fragment {
 				for(int i = 0;i<result.length;i++){
 					adaptador[i] = result[i];
 				}
-				padre.resultado.setAdapter(new ArrayAdapter<String>(act,android.R.layout.simple_list_item_1,android.R.id.text1,adaptador));
+				padre.resultado.setAdapter(new ArrayAdapter<String>(padre.getActivity(),android.R.layout.simple_list_item_1,android.R.id.text1,adaptador));
 			}
 		}
 	}

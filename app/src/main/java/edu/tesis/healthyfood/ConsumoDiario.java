@@ -48,15 +48,23 @@ public class ConsumoDiario extends Fragment implements  OnDateSetListener{
 	private int month;
 	private int day;
 	private ListView lista;
-	
-	public ConsumoDiario(String usr){
-		user=usr;
-	}
+
+    public ConsumoDiario(){}
+
+    public static ConsumoDiario newInstance(String usr){
+        ConsumoDiario fragment=new ConsumoDiario();
+        Bundle args = new Bundle();
+        args.putString("user",usr);
+        fragment.setArguments(args);
+        return fragment;
+    }
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.activity_consumo_diario,container,false);
-		
+
+        user = getArguments().getString("user");
+
 		lista = (ListView)v.findViewById(R.id.listView1);
 		Button b = (Button)v.findViewById(R.id.button1);
 		Button b2 = (Button)v.findViewById(R.id.button2);
@@ -142,7 +150,7 @@ public class ConsumoDiario extends Fragment implements  OnDateSetListener{
 	private void botonOnClick2(){
 		//this.showDialog(DATE_PICKER_ID);
         final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
-		ft.replace(R.id.content_frame, new BuscaRecetas(user,getActivity()), "Buscar Receta"); 
+		ft.replace(R.id.content_frame, BuscaRecetas.newInstance(user), "Buscar Receta");
         ft.addToBackStack(null);
         ft.commit();
 	}
@@ -196,7 +204,7 @@ public class ConsumoDiario extends Fragment implements  OnDateSetListener{
             yVals.add(new Entry(acumulado, i));
         }
         
-        LineDataSet d1 = new LineDataSet(yVals, "Calorías consumidas el día: "+new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(d));
+        LineDataSet d1 = new LineDataSet(yVals, "Calorï¿½as consumidas el dï¿½a: "+new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(d));
         d1.setLineWidth(3f);
         d1.setCircleSize(5f);
         d1.setHighLightColor(Color.rgb(244, 117, 117));

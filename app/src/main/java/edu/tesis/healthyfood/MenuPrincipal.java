@@ -34,9 +34,9 @@ public class MenuPrincipal extends ActionBarActivity implements TabListener {
 		ActionBar Bar=getSupportActionBar();
 		Bar.setDisplayHomeAsUpEnabled(true);
 		Bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);;
-		Tab p=Bar.newTab().setText(R.string.title_tab_recipes).setIcon(R.drawable.ic_action_action_assignment).setTabListener(new MyTabListener(new Recetas(user)));
+		Tab p=Bar.newTab().setText(R.string.title_tab_recipes).setIcon(R.drawable.ic_action_action_assignment).setTabListener(new MyTabListener(Recetas.newInstance(user)));
 		Bar.addTab(p);
-		p=Bar.newTab().setText(R.string.title_tab_profile).setIcon(R.drawable.ic_action_action_perm_identity).setTabListener(new MyTabListener(new Perfil(user,sex,birth)));
+		p=Bar.newTab().setText(R.string.title_tab_profile).setIcon(R.drawable.ic_action_action_perm_identity).setTabListener(new MyTabListener(Perfil.newInstance(user,sex,birth)));
 		Bar.addTab(p);
 		setContentView(R.layout.activity_menu_principal);
 		
