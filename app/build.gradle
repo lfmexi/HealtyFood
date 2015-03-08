@@ -6,6 +6,7 @@ android {
 
     compileOptions.encoding = 'windows-1251' // write your encoding here
 
+
     defaultConfig {
         applicationId "edu.tesis.healthyfood"
         minSdkVersion 9
@@ -13,7 +14,19 @@ android {
     }
 
     packagingOptions {
-        exclude 'META-INF/DEPENDECIES'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
     }
 
     buildTypes {
@@ -24,11 +37,14 @@ android {
     }
 }
 
+
 dependencies {
     compile 'com.android.support:appcompat-v7:18.0.0'
     compile 'com.android.support:appcompat-v7:20.0.0'
     compile files('libs/YouTubeAndroidPlayerApi.jar')
     compile files('libs/apache-mime4j-0.6.1.jar')
     compile files('libs/httpmime-4.3.4.jar')
+    compile files('libs/httpcore-4.3.2.jar')
+    compile files('libs/httplient-4.3.2.jar')
     compile files('libs/mpandroidchartlibrary-1-7-3.jar')
 }

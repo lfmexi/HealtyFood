@@ -48,7 +48,6 @@ import edu.tesis.healthyfood.sobj.Ingrediente_Receta;
 public class PublicaReceta extends Fragment {
 
 	String user="";
-	Activity act;
 	static ContenedorIngredientes contenedor = new ContenedorIngredientes();
 
     public PublicaReceta(){}
@@ -375,7 +374,7 @@ public class PublicaReceta extends Fragment {
 		protected void onPostExecute(String result){
 			alerta.dismiss();
 			if(result!=null){
-				AlertDialog.Builder b= new AlertDialog.Builder(act);
+				AlertDialog.Builder b= new AlertDialog.Builder(padre.getActivity());
 		        b.setTitle("Carga exitosa");
 		        b.setMessage("La receta ha sido publicada con �xito");
 		        b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
