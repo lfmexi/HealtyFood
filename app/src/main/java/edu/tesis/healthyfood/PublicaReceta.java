@@ -50,7 +50,9 @@ public class PublicaReceta extends Fragment {
 	String user="";
 	Activity act;
 	static ContenedorIngredientes contenedor = new ContenedorIngredientes();
-	
+
+    public PublicaReceta(){}
+
 	public PublicaReceta(String u, Activity a){
 		user=u;
 		act=a;
