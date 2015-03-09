@@ -32,14 +32,6 @@
             android:label="@string/title_activity_login" >
         </activity>
         <activity
-            android:name=".MenuPrincipal"
-            android:label="@string/title_activity_menu_principal" >
-        </activity>
-        <activity
-            android:name=".Perfila"
-            android:label="@string/title_activity_perfil" >
-        </activity>
-        <activity
             android:name=".ForgotData"
             android:label="@string/title_activity_forgot_data" >
         </activity>

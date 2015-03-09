@@ -105,9 +105,6 @@ public class Perfil extends Fragment {
         ft.replace(R.id.content_frame, ConsumoDiario.newInstance(user),"Consumo diario de calor�as");
         ft.addToBackStack(null);
         ft.commit();
-		/*Intent i = new Intent(this.getActivity(),ConsumoDiario.class);
-		i.putExtra("infoUser", user);
-		this.startActivity(i);*/
 	}
 	
 	private void medir(){
@@ -125,10 +122,6 @@ public class Perfil extends Fragment {
 	}
 
 	private void progreso(){
-        /*final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
-        ft.replace(R.id.content_frame, new ProgresoIMC(user), "Progreso IMC"); 
-        ft.addToBackStack(null);
-        ft.commit();*/
 		Intent i = new Intent(this.getActivity(),ProgresoIMC.class);
 		i.putExtra("infoUser", user);
 		this.startActivity(i);

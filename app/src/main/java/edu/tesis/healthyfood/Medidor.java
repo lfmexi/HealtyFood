@@ -100,7 +100,7 @@ public class Medidor extends Fragment {
 				sql.cerrar();
 
 				if(ambito.equals("registro")){
-					Intent i = new Intent(getActivity(),MenuPrincipal.class);
+					Intent i = new Intent(getActivity(),DrawerMenuActivity.class);
 					i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 					i.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
 					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
