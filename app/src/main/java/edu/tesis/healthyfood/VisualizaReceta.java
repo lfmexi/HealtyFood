@@ -71,7 +71,7 @@ public class VisualizaReceta extends Activity {
 		sql.abrir();
 		TMB last =sql.getLastTMB(user);
 		sql.cerrar();
-		
+
 		if(last!=null){
 			double calorias = last.value*1.2;
 			Toast.makeText(this, "Usted necesita "+calorias+" cal", Toast.LENGTH_SHORT).show();
@@ -117,7 +117,7 @@ public class VisualizaReceta extends Activity {
 				favoritoOnClick();
 			}
 		});
-	
+
 		LoaderAsync l = new LoaderAsync(this);
 		l.execute(receta);
 		RatingAsync l1 = new RatingAsync(this);
@@ -195,7 +195,7 @@ public class VisualizaReceta extends Activity {
 	private Button botonAgrega;
 	private RatingBar bar;
 
-	
+
 	private class LoaderAsync extends AsyncTask<String,Void,String[]>{
 
 		private VisualizaReceta padre;
@@ -593,7 +593,11 @@ public class VisualizaReceta extends Activity {
 		protected void onPostExecute(Bitmap result) {
 			alert.dismiss();
 			if(result!=null) {
-                Bitmap bit = ThumbnailUtils.extractThumbnail(result, 640, 480);
+                android.view.ViewGroup.LayoutParams layoutParams = padre.imagen.getLayoutParams();
+                int anchoimagen=layoutParams.width;
+                layoutParams.height = anchoimagen;
+                padre.imagen.setLayoutParams(layoutParams);
+                Bitmap bit = ThumbnailUtils.extractThumbnail(result, padre.imagen.getWidth(), padre.imagen.getHeight());
                 padre.imagen.setImageBitmap(bit);
             }
 	    }
