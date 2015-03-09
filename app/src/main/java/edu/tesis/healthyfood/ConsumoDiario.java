@@ -90,7 +90,8 @@ public class ConsumoDiario extends Fragment implements  OnDateSetListener{
 		}
 		
 		charts.add(new LineChartItem(getDiario(d),this.getActivity(),"Ingesta diaria recomendada"));
-		charts.add(new PieChartItem(this.getDiarioRecetas(d),this.getActivity(),"Porcentaje consumido por receta"));
+		charts.add(new PieChartItem(this.getDiarioRecetas(d),this.getActivity(),"Porcentaje consumido por receta",
+                getResources().getString(R.string.calorias_totales)));
 		
 		ChartDataAdapter cda = new ChartDataAdapter(this.getActivity(),charts);
 		lista.setAdapter(cda);
@@ -134,7 +135,8 @@ public class ConsumoDiario extends Fragment implements  OnDateSetListener{
 		}
 		
 		charts.add(new LineChartItem(getDiario(dt),this.getActivity(),"Ingesta diaria recomendada"));
-		charts.add(new PieChartItem(this.getDiarioRecetas(dt),this.getActivity(),"Porcentaje consumido por receta"));
+		charts.add(new PieChartItem(this.getDiarioRecetas(dt),this.getActivity(),"Porcentaje consumido por receta",
+                getResources().getString(R.string.calorias_totales)));
 		
 		ChartDataAdapter cda = new ChartDataAdapter(this.getActivity(),charts);
 		lista.setAdapter(cda);
@@ -204,7 +206,7 @@ public class ConsumoDiario extends Fragment implements  OnDateSetListener{
             yVals.add(new Entry(acumulado, i));
         }
         
-        LineDataSet d1 = new LineDataSet(yVals, "Calor�as consumidas el d�a: "+new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(d));
+        LineDataSet d1 = new LineDataSet(yVals,getResources().getString(R.string.calorias_consumidas_dia)+new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(d));
         d1.setLineWidth(3f);
         d1.setCircleSize(5f);
         d1.setHighLightColor(Color.rgb(244, 117, 117));

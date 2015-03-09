@@ -178,7 +178,7 @@ public class VisualizaReceta extends Activity {
 		sql.cerrar();
 		if(agregado){
 			AlertDialog.Builder b=new AlertDialog.Builder(this);
-			b.setTitle("�xito");
+			b.setTitle(getResources().getString(R.string.exito));
 			b.setMessage("Receta agregada al diario");
 			b.show();
 		}
@@ -457,7 +457,7 @@ public class VisualizaReceta extends Activity {
 			}else{
 				AlertDialog.Builder b= new AlertDialog.Builder(padre);
 		        b.setTitle("Error");
-		        b.setMessage("La receta no ha sido favorecida con �xito");
+		        b.setMessage(getResources().getString(R.string.receta_no_fav));
 		        b.show();
 			}
 		}

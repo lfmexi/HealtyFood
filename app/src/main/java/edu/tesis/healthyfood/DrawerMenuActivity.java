@@ -51,7 +51,7 @@ public class DrawerMenuActivity extends ActionBarActivity {
         	
         }
         //mTitle = mDrawerTitle = getTitle();
-        mTitle = mDrawerTitle = "Men�";
+        mTitle = mDrawerTitle = getResources().getString(R.string.menu);
         mPlanetTitles = getResources().getStringArray(R.array.option_list);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);

@@ -16,10 +16,12 @@ import android.view.View;
 public class PieChartItem extends ChartItem {
 
 	String descripcion;
+    String center;
 	@SuppressWarnings("rawtypes")
-	public PieChartItem(ChartData cd,Context c,String desc) {
+	public PieChartItem(ChartData cd,Context c,String desc,String center) {
 		super(cd);
 		descripcion=desc;
+        this.center=center;
 	}
 
 	@Override
@@ -47,7 +49,7 @@ public class PieChartItem extends ChartItem {
         holder.chart.setDescription(descripcion);
         holder.chart.setHoleRadius(40f);
         holder.chart.setTransparentCircleRadius(40f);
-        holder.chart.setCenterText("Calorías totales\nconsumidas");
+        holder.chart.setCenterText(center);
         holder.chart.setCenterTextSize(20f);
         holder.chart.setDrawXValues(true);
         holder.chart.setUsePercentValues(true);

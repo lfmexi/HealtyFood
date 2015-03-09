@@ -58,11 +58,8 @@ public class LineChartItem extends ChartItem{
         YLabels yl = holder.chart.getYLabels();
         yl.setLabelCount(5);
 
-        // set data
         holder.chart.setData((LineData) chartData);
 
-        // do not forget to refresh the chart
-        // holder.chart.invalidate();
         holder.chart.animateX(1000);
 
         return convertView;
