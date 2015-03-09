@@ -593,12 +593,12 @@ public class VisualizaReceta extends Activity {
 		protected void onPostExecute(Bitmap result) {
 			alert.dismiss();
 			if(result!=null) {
-                android.view.ViewGroup.LayoutParams layoutParams = padre.imagen.getLayoutParams();
-                int anchoimagen=layoutParams.width;
-                layoutParams.height = anchoimagen;
-                padre.imagen.setLayoutParams(layoutParams);
-                Bitmap bit = ThumbnailUtils.extractThumbnail(result, padre.imagen.getWidth(), padre.imagen.getHeight());
-                padre.imagen.setImageBitmap(bit);
+              //  android.view.ViewGroup.LayoutParams layoutParams = padre.imagen.getLayoutParams();
+              //  int anchoimagen=layoutParams.width;
+              //  layoutParams.height = anchoimagen;
+              //  padre.imagen.setLayoutParams(layoutParams);
+              //  Bitmap bit = ThumbnailUtils.extractThumbnail(result, padre.imagen.getWidth(), padre.imagen.getHeight());
+                padre.imagen.setImageBitmap(imagen);
             }
 	    }
 	}

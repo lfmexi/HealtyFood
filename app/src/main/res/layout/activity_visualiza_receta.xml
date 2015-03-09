@@ -61,7 +61,8 @@
                         android:id="@+id/visualizaImagen"
                         android:layout_width="0dp"
                         android:layout_height="84dp"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.5"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/ic_stat_icono_camara" />
 
                     <Button
@@ -72,7 +73,7 @@
                 	    android:paddingRight="15dp"
                 	    android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.5"
                         android:text="Favorita" />
 
                 </LinearLayout>
@@ -124,26 +125,34 @@
 
                 </LinearLayout>
 
-                <Button
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <Button
                     android:id="@+id/verIngredientes"
-                    android:layout_width="220dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
                     android:layout_height="wrap_content"
       			  	android:background="@drawable/selectable_background_button"
                     android:drawableLeft="@drawable/ic_eye"
                     android:paddingLeft="15dp"
                     android:paddingRight="10dp"
-                    android:text="Ver Ingredientes >" />
+                    android:text="Ver Ingredientes" />
 
                 <Button
                     android:id="@+id/botonConsumir"
                     style="?android:attr/buttonStyleSmall"
-                    android:layout_width="180dp"
+                    android:layout_width="0dp"
                     android:layout_height="60dp"
+                    android:layout_weight="0.5"
                     android:background="@drawable/selectable_background_button"
                     android:drawableLeft="@drawable/ic_dining_room"
                     android:paddingLeft="15dp"
                     android:paddingRight="10dp"
                     android:text="Agregar al diario\nde consumo" />
+
+                    </LinearLayout>
 
                 <TextView
                     android:id="@+id/textoFecha"
