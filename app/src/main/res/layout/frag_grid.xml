@@ -10,36 +10,13 @@
         android:layout_height="wrap_content"
         android:text="Historial de mediciones"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <LinearLayout
+    <GridView
+        android:id="@+id/gridView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:numColumns="4" >
+    </GridView>
 
-        <TextView
-            android:id="@+id/textObjetivo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fecha" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="       Altura (m)" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="       Peso (kg)" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="  IMC (kg/m^2)" />
-
-    </LinearLayout>
 
     <GridView
         android:id="@+id/gridView1"

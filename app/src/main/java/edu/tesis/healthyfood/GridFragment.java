@@ -30,16 +30,17 @@ public class GridFragment extends Fragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View v = inflater.inflate(R.layout.frag_grid, container,false);
 		GridView gv=(GridView)v.findViewById(R.id.gridView1);
+        GridView gv_encabezado = (GridView)v.findViewById(R.id.gridView2);
 
         this.user = getArguments().getString("user");
 
         ArrayList<String>listado=new ArrayList<String>();
-		
+
 		SQLite sql=new SQLite(this.getActivity());
 		sql.abrir();
 		ArrayList<Medicion> mediciones = sql.getMediciones(user);
 		sql.cerrar();
-		
+
 		for(int i =0;i<mediciones.size();i++){
 			listado.add(new SimpleDateFormat("dd-MM/yy").format(mediciones.get(i).getFecha()));
 			listado.add(mediciones.get(i).getAltura()+"");
@@ -50,6 +51,11 @@ public class GridFragment extends Fragment{
 		ArrayAdapter<String> aa=new ArrayAdapter<String>(this.getActivity(),
 				android.R.layout.simple_list_item_1,listado);
 		gv.setAdapter(aa);
+
+        
+        ArrayAdapter<String>enc = new ArrayAdapter<String>(this.getActivity(),
+                android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.encabezado_progreso_array));
+        gv_encabezado.setAdapter(enc);
 		return v;
 	}
 

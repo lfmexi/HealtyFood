@@ -29,6 +29,13 @@
     <string name="obeso">Se encuentra en obesidad</string>
     <string name="obesidad_morbidad">Se encuentra en obesidad mórbida</string>
 
+    <string-array name="encabezado_progreso_array">
+        <item name="fecha">Fecha</item>
+        <item name="altura_m">Altura (m)</item>
+        <item name="peso_kg">Peso (kg)</item>
+        <item name="imc_kg_m2">IMC (kg/m^2)</item>
+    </string-array>
+
     <string-array name="categories_array">
         <item>Entrada</item>
         <item>Ensalada</item>
