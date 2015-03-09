@@ -92,17 +92,17 @@ public class ChartFragment extends Fragment {
 	private void onSelected(Entry e){
 		float val = e.getVal();
 		if(val<16f){
-			Toast.makeText(getActivity(), "Se encuentra en delgadez severa", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), getResources().getString(R.string.delgadez_servera), Toast.LENGTH_SHORT).show();
 		}else if(val<18.5f){
-			Toast.makeText(getActivity(), "Se encuentra bajo peso", Toast.LENGTH_SHORT).show();	
+			Toast.makeText(getActivity(), getResources().getString(R.string.bajo_peso), Toast.LENGTH_SHORT).show();
 		}else if(val<25f){
-			Toast.makeText(getActivity(), "Se encuentra normal", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), getResources().getString(R.string.normal), Toast.LENGTH_SHORT).show();
 		}else if(val<30f){
-			Toast.makeText(getActivity(), "Se encuentra en sobrepeso", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), getResources().getString(R.string.sobrepeso), Toast.LENGTH_SHORT).show();
 		}else if(val<40f){
-			Toast.makeText(getActivity(), "Se encuentra obeso", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), getResources().getString(R.string.obeso), Toast.LENGTH_SHORT).show();
 		}else{
-			Toast.makeText(getActivity(), "Se encuentra en obesidad m�rbida", Toast.LENGTH_SHORT).show();		
+			Toast.makeText(getActivity(), getResources().getString(R.string.obesidad_morbidad), Toast.LENGTH_SHORT).show();
 		}
 	}
 	
@@ -128,7 +128,7 @@ public class ChartFragment extends Fragment {
             yVals.add(new Entry((float) mediciones.get(i).getImc(), i));
         }
 
-        LineDataSet set1 = new LineDataSet(yVals, "IMC por medici�n");
+        LineDataSet set1 = new LineDataSet(yVals, getResources().getString(R.string.imc_por_medicion));
 
         
         set1.enableDashedLine(15f, 1f, 0f);

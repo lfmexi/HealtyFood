@@ -20,6 +20,14 @@
     <string name="receta_no_fav">La receta no ha sido favorecida con éxito</string>
     <string name="calorias_consumidas_dia">Calorías consumidas el día: </string>
     <string name="calorias_totales">Calorías totales \nConsumidas</string>
+    <string name="imc_por_medicion">IMC por medición</string>
+
+    <string name="delgadez_servera">Se encuentra en delgadez severa</string>
+    <string name="bajo_peso">Se encuentra bajo peso</string>
+    <string name="normal">Se encuentra normal</string>
+    <string name="sobrepeso">Se encuentra en sobrepeso</string>
+    <string name="obeso">Se encuentra en obesidad</string>
+    <string name="obesidad_morbidad">Se encuentra en obesidad mórbida</string>
 
     <string-array name="categories_array">
         <item>Entrada</item>
