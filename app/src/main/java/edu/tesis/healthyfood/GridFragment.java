@@ -16,14 +16,24 @@ import edu.tesis.healthyfood.sqlite.SQLite;
 public class GridFragment extends Fragment{
 	
 	private String user;
-	
-	public GridFragment(String usr){
-		user=usr;
-	}
+
+    public GridFragment(){}
+
+    public static GridFragment newInstance(String usr){
+        GridFragment fragment=new GridFragment();
+        Bundle args = new Bundle();
+        args.putString("user",usr);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View v = inflater.inflate(R.layout.frag_grid, container,false);
 		GridView gv=(GridView)v.findViewById(R.id.gridView1);
-		ArrayList<String>listado=new ArrayList<String>();
+
+        this.user = getArguments().getString("user");
+
+        ArrayList<String>listado=new ArrayList<String>();
 		
 		SQLite sql=new SQLite(this.getActivity());
 		sql.abrir();

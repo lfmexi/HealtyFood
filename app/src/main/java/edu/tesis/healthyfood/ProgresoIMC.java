@@ -41,10 +41,10 @@ public class ProgresoIMC extends FragmentActivity {
             
             switch(pos) {
             case 0:
-                f = new ChartFragment(user);
+                f = ChartFragment.newInstance(user);
                 break;
             case 1:
-                f=new GridFragment(user);
+                f=GridFragment.newInstance(user);
             	break;
             }
 

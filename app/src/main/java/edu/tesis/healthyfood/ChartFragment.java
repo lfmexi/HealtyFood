@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import com.github.mikephil.charting.charts.BarLineChartBase.BorderPosition;
+import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -27,15 +28,24 @@ public class ChartFragment extends Fragment {
 	
 	private String user="";
 	private LineChart pChart;
-	
-	public ChartFragment (String user){
-		this.user=user;
-	}
+
+    public ChartFragment(){}
+
+    public static ChartFragment newInstance(String usr){
+        ChartFragment fragment=new ChartFragment();
+        Bundle args = new Bundle();
+        args.putString("user",usr);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View v = inflater.inflate(R.layout.frag_chart_progreso, container,false);
-		pChart = (LineChart)v.findViewById(R.id.chartProgresoIMC);
+
+        this.user = getArguments().getString("user");
+
+        pChart = (LineChart)v.findViewById(R.id.chartProgresoIMC);
 		
 		pChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener(){
 			@Override
@@ -82,17 +92,17 @@ public class ChartFragment extends Fragment {
 	private void onSelected(Entry e){
 		float val = e.getVal();
 		if(val<16f){
-			Toast.makeText(getActivity(), "Se encuentra en delgadez severa", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), getResources().getString(R.string.delgadez_servera), Toast.LENGTH_SHORT).show();
 		}else if(val<18.5f){
-			Toast.makeText(getActivity(), "Se encuentra bajo peso", Toast.LENGTH_SHORT).show();	
+			Toast.makeText(getActivity(), getResources().getString(R.string.bajo_peso), Toast.LENGTH_SHORT).show();
 		}else if(val<25f){
-			Toast.makeText(getActivity(), "Se encuentra normal", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), getResources().getString(R.string.normal), Toast.LENGTH_SHORT).show();
 		}else if(val<30f){
-			Toast.makeText(getActivity(), "Se encuentra en sobrepeso", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), getResources().getString(R.string.sobrepeso), Toast.LENGTH_SHORT).show();
 		}else if(val<40f){
-			Toast.makeText(getActivity(), "Se encuentra obeso", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), getResources().getString(R.string.obeso), Toast.LENGTH_SHORT).show();
 		}else{
-			Toast.makeText(getActivity(), "Se encuentra en obesidad mórbida", Toast.LENGTH_SHORT).show();		
+			Toast.makeText(getActivity(), getResources().getString(R.string.obesidad_morbidad), Toast.LENGTH_SHORT).show();
 		}
 	}
 	
@@ -118,7 +128,7 @@ public class ChartFragment extends Fragment {
             yVals.add(new Entry((float) mediciones.get(i).getImc(), i));
         }
 
-        LineDataSet set1 = new LineDataSet(yVals, "IMC por medición");
+        LineDataSet set1 = new LineDataSet(yVals, getResources().getString(R.string.imc_por_medicion));
 
         
         set1.enableDashedLine(15f, 1f, 0f);
