@@ -102,7 +102,7 @@ public class Perfil extends Fragment {
 	
 	private void calorias(){
 		final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
-        ft.replace(R.id.content_frame, ConsumoDiario.newInstance(user),"Consumo diario de calor�as");
+        ft.replace(R.id.content_frame, ConsumoDiario.newInstance(user),getResources().getString(R.string.consumo_calorias));
         ft.addToBackStack(null);
         ft.commit();
 	}

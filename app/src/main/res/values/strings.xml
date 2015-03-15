@@ -76,4 +76,5 @@
     <string name="title_activity_consumo_diario">Consumo diario de calorías</string>
     <string name="title_activity_visualiza_ejercicio">Visualización de ejercicios</string>
 
+    <string name="consumo_calorias">Consumo diario de calorías</string>
 </resources>

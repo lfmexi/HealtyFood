@@ -82,7 +82,7 @@ public class DrawerMenuActivity extends ActionBarActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         if (savedInstanceState == null) {
-            selectItem(0);
+            selectItem(0,true);
             if(ambito!=null){
                 if(ambito.equals("registro")){
                     final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -130,10 +130,10 @@ public class DrawerMenuActivity extends ActionBarActivity {
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
+            selectItem(position,false);
         }
     }
-    private void selectItem(int position) {
+    private void selectItem(int position,boolean saved) {
         Fragment fragment=new Fragment();
     	switch(position){
     		case 0:
@@ -154,7 +154,7 @@ public class DrawerMenuActivity extends ActionBarActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction ft =fragmentManager.beginTransaction();
         ft.replace(R.id.content_frame, fragment);
-        ft.addToBackStack(null);
+        if(!saved)ft.addToBackStack(null);
         ft.commit();
         mDrawerList.setItemChecked(position, true);
         mDrawerLayout.closeDrawer(mDrawerList);
