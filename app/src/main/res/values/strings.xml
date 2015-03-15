@@ -51,7 +51,7 @@
         <item>Principal</item>
         <item>Recetas</item>
         <item>Ejercicios</item>
-        <item>Cerrar Sesión</item>
+        <item>Configuración</item>
     </string-array>
     <string-array name="gender_array">
         <item>Hombre</item>
@@ -75,6 +75,31 @@
     <string name="title_activity_progreso_imc">Progreso IMC</string>
     <string name="title_activity_consumo_diario">Consumo diario de calorías</string>
     <string name="title_activity_visualiza_ejercicio">Visualización de ejercicios</string>
+    <string name="title_activity_settings">Configuración</string>
 
     <string name="consumo_calorias">Consumo diario de calorías</string>
+    <string name="username">Username</string>
+    <string name="username_register">Username</string>
+    <string name="email">e-mail</string>
+    <string name="nombre_reg">Nombre</string>
+    <string name="sexo_reg">Sexo</string>
+    <string name="fecha_nacimiento_reg">Fecha de nacimiento</string>
+    <string name="seleccionar_fecha_reg">Seleccionar Fecha</string>
+    <string name="fecha_reg">Small Text</string>
+    <string name="password_reg">Password</string>
+    <string name="confirma_pass_reg">Confirma Password</string>
+    <string name="registro_reg">Registrar</string>
+    <string name="editar_button">Editar</string>
+    <string name="cancelar_button">Cancelar</string>
+    <string name="nueva_password_edit">Nuevo Password</string>
+    <string name="confirma_nueva_pass">Confirma Nuevo Password</string>
+
+    <string name="settings">Cuenta</string>
+    <string name="user_summary">Configuración del usuario</string>
+    <string name="password_summary">Cambio de Password</string>
+    <string name="settings_summary">Configuración de la cuenta</string>
+    <string name="user_setting">Usuario</string>
+    <string name="password_setting">Cambio de password</string>
+    <string name="sync_setting">Sincronización</string>
+    <string name="logout_setting">Cerrar Sesión</string>
 </resources>

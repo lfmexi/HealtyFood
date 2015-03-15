@@ -3,11 +3,20 @@
     package="edu.tesis.healthyfood"
     android:versionCode="1"
     android:versionName="1.0" >
-	<uses-feature android:name="android.hardware.camera" android:required="true"/>
-    
+
     <uses-sdk
         android:minSdkVersion="9"
         android:targetSdkVersion="17" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -55,9 +64,10 @@
             android:name=".VisualizaEjercicio"
             android:label="@string/title_activity_visualiza_ejercicio" >
         </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 </manifest>

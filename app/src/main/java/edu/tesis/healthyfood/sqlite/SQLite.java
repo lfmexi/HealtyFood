@@ -229,7 +229,13 @@ public class SQLite {
 		
 		return med;
 	}
-	
+
+    public boolean updateSession(String username,int id){
+        ContentValues cv = new ContentValues();
+        cv.put(sqlh.username,username);
+        return (db.update(sqlh.tabla,cv,sqlh.id_sesion+"=?",new String[]{id+""})!=-1)?true:false;
+    }
+
 	public Sesion getLastSesion(){
 		Sesion ses=null;
 		Cursor cursor = db.query(sqlh.tabla,

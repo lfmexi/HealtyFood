@@ -34,6 +34,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import edu.tesis.healthyfood.genericTasks.GenericJson;
 import edu.tesis.healthyfood.sqlite.SQLite;
 
 @SuppressWarnings("deprecation")
@@ -135,13 +137,13 @@ public class Registro extends Activity {
 				}else{
 					AlertDialog.Builder alert=new AlertDialog.Builder(this);
 					alert.setTitle("Email");
-					alert.setMessage("El email ingresado no es válido");
+					alert.setMessage("El email ingresado no es vï¿½lido");
 					alert.show();
 				}
 			}else{
 				AlertDialog.Builder alert=new AlertDialog.Builder(this);
 				alert.setTitle("Password");
-				alert.setMessage("Las contraseñas no coinciden");
+				alert.setMessage("Las contraseï¿½as no coinciden");
 				alert.show();
 			}
 		}
@@ -187,27 +189,13 @@ public class Registro extends Activity {
 			}
 			return getValores(cliente,post);
 		}
-		
-		private StringBuilder inputStreamToString(InputStream is) {
-		    String rLine = "";
-		    StringBuilder answer = new StringBuilder();
-		    BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-		    try {
-		     while ((rLine = rd.readLine()) != null) {
-		      answer.append(rLine);
-		       }
-		    }
-		    catch (IOException e) {
-		        e.printStackTrace();
-		     }
-		    return answer;
-		}
+
 		
 		private String getValores(HttpClient cliente, HttpPost post){
 			String regs=null;
 			try{
 		    	HttpResponse response = cliente.execute(post);
-		    	return inputStreamToString(response.getEntity().getContent()).toString();	
+		    	return GenericJson.inputStreamToString(response.getEntity().getContent()).toString();
 			} catch (ClientProtocolException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -238,7 +226,7 @@ public class Registro extends Activity {
 				}else{
 					
 					AlertDialog.Builder alert=new AlertDialog.Builder(padre);
-					alert.setTitle("Error de autenticación");
+					alert.setTitle("Error de autenticaciï¿½n");
 					alert.setMessage(result);
 					alert.show();
 				}

@@ -146,18 +146,21 @@ public class DrawerMenuActivity extends ActionBarActivity {
     			fragment = Ejercicios.newInstance(user);
     	        break;
     		case 3:
-    			Logout();
-    			break;
+                this.startActivity(new Intent(this,SettingsActivity.class));
+    			finish();
+                break;
     	}
 
     	setTitle("HealthyFood");
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        final FragmentTransaction ft =fragmentManager.beginTransaction();
-        ft.replace(R.id.content_frame, fragment);
-        if(!saved)ft.addToBackStack(null);
-        ft.commit();
-        mDrawerList.setItemChecked(position, true);
-        mDrawerLayout.closeDrawer(mDrawerList);
+        if(position<3){
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            final FragmentTransaction ft =fragmentManager.beginTransaction();
+            ft.replace(R.id.content_frame, fragment);
+            if(!saved && position>0)ft.addToBackStack(null);
+            ft.commit();
+            mDrawerList.setItemChecked(position, true);
+            mDrawerLayout.closeDrawer(mDrawerList);
+        }
     }
 
     @Override
@@ -166,24 +169,17 @@ public class DrawerMenuActivity extends ActionBarActivity {
         getSupportActionBar().setTitle(mTitle);
     }
 
-    /**
-     * When using the ActionBarDrawerToggle, you must call it during
-     * onPostCreate() and onConfigurationChanged()...
-     */
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-    
 
 }

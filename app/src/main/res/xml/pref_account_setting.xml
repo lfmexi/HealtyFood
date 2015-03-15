@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <edu.tesis.healthyfood.UserSetting
+        android:title="@string/user_setting"
+        android:summary="@string/user_summary"/>
+    <edu.tesis.healthyfood.PasswordSetting
+        android:title="@string/password_setting"
+        android:summary="@string/password_summary"/>
+</PreferenceScreen>

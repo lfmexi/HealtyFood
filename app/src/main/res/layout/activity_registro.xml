@@ -19,20 +19,21 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/tituloReceta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Username" />
+                android:text="@string/username_register" />
 
             <EditText
                 android:id="@+id/registro_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10" >
+                android:ems="10"
+                android:inputType="text">
 
                 <requestFocus />
             </EditText>
@@ -41,7 +42,7 @@
                 android:id="@+id/textTipoReceta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="e-mail" />
+                android:text="@string/email" />
 
             <EditText
                 android:id="@+id/registro_email"
@@ -54,19 +55,20 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nombre" />
+                android:text="@string/nombre_reg" />
 
             <EditText
                 android:id="@+id/registro_nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10" />
+                android:ems="10"
+                android:inputType="textCapCharacters" />
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sexo" />
+                android:text="@string/sexo_reg" />
 
             <Spinner
                 android:id="@+id/selectorSexo"
@@ -77,7 +79,7 @@
                 android:id="@+id/textNombreEjercicio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fecha de nacimiento" />
+                android:text="@string/fecha_nacimiento_reg" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -87,13 +89,13 @@
                     android:id="@+id/botonSeleccionFecha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Seleccionar Fecha" />
+                    android:text="@string/seleccionar_fecha_reg" />
 
                 <TextView
                     android:id="@+id/textoFecha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Small Text"
+                    android:text="@string/fecha_reg"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
             </LinearLayout>
@@ -102,7 +104,7 @@
                 android:id="@+id/textCalorias"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Password" />
+                android:text="@string/password_reg" />
 
             <EditText
                 android:id="@+id/registro_pass"
@@ -115,7 +117,7 @@
                 android:id="@+id/textUsuario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Confirma Password" />
+                android:text="@string/confirma_pass_reg" />
 
             <EditText
                 android:id="@+id/registro_confirma"
@@ -128,7 +130,7 @@
                 android:id="@+id/registro_boton_confirma"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Registrar" />
+                android:text="@string/registro_reg" />
 
         </LinearLayout>
     </ScrollView>
