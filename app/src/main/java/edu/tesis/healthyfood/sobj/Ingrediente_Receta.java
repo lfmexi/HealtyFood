@@ -1,6 +1,9 @@
 package edu.tesis.healthyfood.sobj;
 
-public class Ingrediente_Receta {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Ingrediente_Receta implements Parcelable{
 
 	private String nombre_ingrediente;
 	private int unidades;
@@ -65,6 +68,41 @@ public class Ingrediente_Receta {
 	public void setCal_100g(double cal_100g) {
 		this.cal_100g = cal_100g;
 	}
-	
-	
+
+
+    public Ingrediente_Receta(Parcel in){
+        setNombre_ingrediente(in.readString());
+        setUnidades(in.readInt());
+        setGramos(in.readDouble());
+        setTipoMedida(in.readString());
+        setLitros(in.readDouble());
+        setCal_100g(in.readDouble());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(getNombre_ingrediente());
+        parcel.writeInt(getUnidades());
+        parcel.writeDouble(getGramos());
+        parcel.writeString(getTipoMedida());
+        parcel.writeDouble(getLitros());
+        parcel.writeDouble(getCal_100g());
+    }
+
+    public static final Creator<Ingrediente_Receta> CREATOR=new Creator<Ingrediente_Receta>() {
+        @Override
+        public Ingrediente_Receta createFromParcel(Parcel parcel) {
+            return new Ingrediente_Receta(parcel);
+        }
+
+        @Override
+        public Ingrediente_Receta[] newArray(int i) {
+            return new Ingrediente_Receta[i];
+        }
+    };
 }

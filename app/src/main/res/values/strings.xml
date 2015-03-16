@@ -93,6 +93,7 @@
     <string name="cancelar_button">Cancelar</string>
     <string name="nueva_password_edit">Nuevo Password</string>
     <string name="confirma_nueva_pass">Confirma Nuevo Password</string>
+    <string name="calorias_receta">Calorías en la receta</string>
 
     <string name="settings">Cuenta</string>
     <string name="user_summary">Configuración del usuario</string>

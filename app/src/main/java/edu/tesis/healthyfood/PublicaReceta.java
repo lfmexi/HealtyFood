@@ -19,6 +19,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,6 +30,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,7 +50,7 @@ import edu.tesis.healthyfood.sobj.Ingrediente_Receta;
 public class PublicaReceta extends Fragment {
 
 	String user="";
-	static ContenedorIngredientes contenedor = new ContenedorIngredientes();
+	static ContenedorIngredientes contenedor;
 
     public PublicaReceta(){}
 
@@ -127,8 +129,34 @@ public class PublicaReceta extends Fragment {
 		return view;
 	}
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("path",this.path_imagen);
+        outState.putParcelable("lista",contenedor);
+    }
 
-	private void calorias(){
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if(savedInstanceState!=null){
+            path_imagen=savedInstanceState.getString("path");
+
+            if(!path_imagen.equals("")){
+                File image = new File(path_imagen);
+
+                BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+
+                Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(),bmOptions);
+
+                bitmap=getResizedBitmap(bitmap, 400, 400);
+                imagen.setImageBitmap(bitmap);
+            }
+            contenedor=savedInstanceState.getParcelable("lista");
+        }
+    }
+
+    private void calorias(){
 		String ingredientes = "";
 		double cal=0;
 		for(Ingrediente_Receta ir :contenedor.lista.values()){
@@ -141,9 +169,9 @@ public class PublicaReceta extends Fragment {
 			}
 			ingredientes+="\n";
 		}
-		ingredientes = ingredientes+"Calor�as en la receta: "+cal+" cal";
+		ingredientes = ingredientes+getResources().getString(R.string.calorias_receta)+": "+cal+" cal";
 		AlertDialog.Builder b = new AlertDialog.Builder(this.getActivity());
-		b.setTitle("Calor�as en la receta");
+		b.setTitle(getResources().getString(R.string.calorias_receta));
 		b.setMessage(ingredientes);
 		b.show();
 	}

@@ -95,6 +95,17 @@ public class DrawerMenuActivity extends ActionBarActivity {
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        setTitle("HealthyFood");
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_principal, menu);
         return super.onCreateOptionsMenu(menu);
@@ -156,7 +167,7 @@ public class DrawerMenuActivity extends ActionBarActivity {
             FragmentManager fragmentManager = getSupportFragmentManager();
             final FragmentTransaction ft =fragmentManager.beginTransaction();
             ft.replace(R.id.content_frame, fragment);
-            if(!saved && position>0)ft.addToBackStack(null);
+            if(!saved)ft.addToBackStack(null);
             ft.commit();
             mDrawerList.setItemChecked(position, true);
             mDrawerLayout.closeDrawer(mDrawerList);
