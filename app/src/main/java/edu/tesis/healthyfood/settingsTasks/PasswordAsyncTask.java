@@ -76,15 +76,17 @@ public class PasswordAsyncTask extends SettingAsyncTask{
 
     @Override
     protected void onPostExecute(String[] result) {
-        if(action==UPDATE_ACTION){
-            if(result[0].equals("success")){
-                SQLite sqlite=new SQLite(((PasswordSetting)getObject()).getContext());
-                sqlite.abrir();
-                Sesion ses = sqlite.getLastSesion();
-                if(sqlite.updateSession(result[1],ses.getId())){
-                    Toast.makeText(((PasswordSetting) getObject()).getContext(), "Datos actualizados", Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(((PasswordSetting)getObject()).getContext(),"Error al guardar los cambios, sincronice por favor",Toast.LENGTH_LONG).show();
+        if(result!=null){
+            if(action==UPDATE_ACTION){
+                if(result[0].equals("success")){
+                    SQLite sqlite=new SQLite(((PasswordSetting)getObject()).getContext());
+                    sqlite.abrir();
+                    Sesion ses = sqlite.getLastSesion();
+                    if(sqlite.updateSession(result[1],ses.getId())){
+                        Toast.makeText(((PasswordSetting) getObject()).getContext(), "Datos actualizados", Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(((PasswordSetting)getObject()).getContext(),"Error al guardar los cambios, sincronice por favor",Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         }

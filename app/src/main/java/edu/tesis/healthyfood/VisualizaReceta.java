@@ -326,7 +326,7 @@ public class VisualizaReceta extends Activity {
                 String state = Environment.getExternalStorageState();
                 if (Environment.MEDIA_MOUNTED.equals(state)) {
                     if(Build.VERSION.SDK_INT>Build.VERSION_CODES.JELLY_BEAN_MR1){
-                        padre.path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/HealthyFood/temp/" + result[0] + ".jpg";
+                        padre.path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/HealthyFood/" + result[0] + ".jpg";
                     }else{
                         padre.path = Environment.getExternalStorageDirectory() + "/DCIM/Camera/" + result[0] + ".jpg";
                     }
@@ -657,7 +657,7 @@ public class VisualizaReceta extends Activity {
                     String state = Environment.getExternalStorageState();
                     if (Environment.MEDIA_MOUNTED.equals(state)) {
                         if(Build.VERSION.SDK_INT>Build.VERSION_CODES.JELLY_BEAN_MR1){
-                            padre.path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/HealthyFood/temp/" + padre.info_receta[0] + ".jpg";
+                            padre.path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/HealthyFood/" + padre.info_receta[0] + ".jpg";
                         }else{
                             padre.path = Environment.getExternalStorageDirectory() + "/DCIM/Camera/" + padre.info_receta[0] + ".jpg";
                         }
