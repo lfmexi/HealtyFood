@@ -36,7 +36,9 @@ import android.widget.TextView;
 
 @SuppressWarnings("deprecation")
 public class Favoritas extends Fragment {
-private String user;
+
+    private String user;
+    private String[] adapter;
 
     public Favoritas(){}
 
@@ -50,12 +52,13 @@ private String user;
 
 	private ListView lista;
 
+    @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		
 		View view = inflater.inflate(R.layout.activity_favoritas, container, false);
 
         user = getArguments().getString("user");
-
+        adapter = new String[]{};
         lista = (ListView)view.findViewById(R.id.fav_lista);
 		lista.setOnItemClickListener(new OnItemClickListener(){
 			@Override
@@ -65,9 +68,19 @@ private String user;
 				listaOnClick(arg1);
 			}
 		});
-		new BuscaFavoritasAsync(this).execute(user);
+        if(savedInstanceState==null)new BuscaFavoritasAsync(this).execute(user);
+        else {
+            adapter=savedInstanceState.getStringArray("adapter");
+            lista.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,android.R.id.text1,adapter));
+        }
 		return view;
 	}
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putStringArray("adapter",adapter);
+    }
 	
 	private void listaOnClick(View v){
 		String nombre = ((TextView) v).getText().toString();
@@ -148,7 +161,8 @@ private String user;
 				for(int i = 0;i<result.length;i++){
 					adaptador[i] = result[i];
 				}
-			padre.lista.setAdapter(new ArrayAdapter<String>(padre.getActivity(),android.R.layout.simple_list_item_1,android.R.id.text1,adaptador));
+                padre.adapter=adaptador;
+			    padre.lista.setAdapter(new ArrayAdapter<String>(padre.getActivity(),android.R.layout.simple_list_item_1,android.R.id.text1,adaptador));
 			}
 		}
 	}

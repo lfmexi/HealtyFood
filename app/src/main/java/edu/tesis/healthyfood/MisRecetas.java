@@ -38,7 +38,7 @@ import android.widget.TextView;
 public class MisRecetas extends Fragment {
 
 	private String user="";
-
+    private String[] adapter;
     public MisRecetas(){}
 
     public static MisRecetas newInstance(String usr){
@@ -49,10 +49,12 @@ public class MisRecetas extends Fragment {
         return fragment;
     }
 
+    @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View view = inflater.inflate(R.layout.activity_recetas_propias, container, false);
 		lista = (ListView)view.findViewById(R.id.listaPropias);
         user = getArguments().getString("user");
+        adapter = new String[]{};
 		lista.setOnItemClickListener(new OnItemClickListener(){
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -61,12 +63,22 @@ public class MisRecetas extends Fragment {
 				listaOnClick(arg1);
 			}
 		});
-		new BuscaPropiaAsync(this).execute(user);
+        if(savedInstanceState==null) new BuscaPropiaAsync(this).execute(user);
+        else {
+            adapter=savedInstanceState.getStringArray("adapter");
+            lista.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,android.R.id.text1,adapter));
+        }
 		return view;
 	}
 
-	
-	private void listaOnClick(View v){
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putStringArray("adapter",adapter);
+    }
+
+    private void listaOnClick(View v){
 		String nombre = ((TextView) v).getText().toString();
 		Intent i = new Intent(getActivity(),VisualizaReceta.class);
 		i.putExtra("infoUser", user);
@@ -146,7 +158,8 @@ public class MisRecetas extends Fragment {
 				for(int i = 0;i<result.length;i++){
 					adaptador[i] = result[i];
 				}
-			padre.lista.setAdapter(new ArrayAdapter<String>(padre.getActivity(),android.R.layout.simple_list_item_1,android.R.id.text1,adaptador));
+                padre.adapter=adaptador;
+			    padre.lista.setAdapter(new ArrayAdapter<String>(padre.getActivity(),android.R.layout.simple_list_item_1,android.R.id.text1,adaptador));
 			}
 		}
 	}

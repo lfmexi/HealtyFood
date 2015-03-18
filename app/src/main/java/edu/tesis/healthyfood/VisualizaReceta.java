@@ -1,6 +1,8 @@
 package edu.tesis.healthyfood;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -31,7 +33,9 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -55,7 +59,8 @@ public class VisualizaReceta extends Activity {
 	private String user="";
 	private String receta="";
 	private String[]info_receta;
-	
+	private String path="";
+
 	private ContenedorIngredientes ingredientes;
 	
 	@Override
@@ -72,11 +77,6 @@ public class VisualizaReceta extends Activity {
 		TMB last =sql.getLastTMB(user);
 		sql.cerrar();
 
-		if(last!=null){
-			double calorias = last.value*1.2;
-			Toast.makeText(this, "Usted necesita "+calorias+" cal", Toast.LENGTH_SHORT).show();
-		}
-		
 		textNombreReceta = (TextView)this.findViewById(R.id.textoNombreReceta);
 		textUsuario = (TextView)this.findViewById(R.id.textUsuario);
 		textTipoReceta = (TextView)this.findViewById(R.id.textTipoReceta);
@@ -117,14 +117,58 @@ public class VisualizaReceta extends Activity {
 				favoritoOnClick();
 			}
 		});
+        if(savedInstanceState==null){
 
-		LoaderAsync l = new LoaderAsync(this);
-		l.execute(receta);
-		RatingAsync l1 = new RatingAsync(this);
-		l1.execute(receta,user);
+            if(last!=null){
+                double calorias = last.value*1.2;
+                Toast.makeText(this, "Usted necesita "+calorias+" cal", Toast.LENGTH_SHORT).show();
+            }
+
+            LoaderAsync l = new LoaderAsync(this);
+            l.execute(receta);
+            RatingAsync l1 = new RatingAsync(this);
+            l1.execute(receta,user);
+
+        }else{
+            textUsuario.setText(savedInstanceState.getString("usuario"));
+            textNombreReceta.setText(savedInstanceState.getString("nombre_receta"));
+            textCalorias.setText(savedInstanceState.getString("calorias"));
+            textTipoReceta.setText(savedInstanceState.getString("tipo_receta"));
+            campoInstrucciones.setText(savedInstanceState.getString("instrucciones"));
+            info_receta=savedInstanceState.getStringArray("info_receta");
+            botonAgrega.setOnClickListener(new OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+                    agregaOnClick();
+                }
+            });
+            ingredientes=savedInstanceState.getParcelable("ingredientes");
+            path = savedInstanceState.getString("path");
+
+            File file=new File(path);
+            if(file.exists()){
+                BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+                Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(),bmOptions);
+                imagen.setImageBitmap(bitmap);
+            }
+        }
 	}
-	
-	@Override
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("usuario",textUsuario.getText().toString());
+        outState.putString("nombre_receta",textNombreReceta.getText().toString());
+        outState.putString("tipo_receta",textTipoReceta.getText().toString());
+        outState.putString("calorias",textCalorias.getText().toString());
+        outState.putString("instrucciones",campoInstrucciones.getText().toString());
+        outState.putStringArray("info_receta",info_receta);
+        outState.putString("path",path);
+        outState.putParcelable("ingredientes",ingredientes);
+    }
+
+    @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.visualiza_receta, menu);
@@ -278,12 +322,27 @@ public class VisualizaReceta extends Activity {
 						agregaOnClick();
 					}
 				});
-				//enviar a pedir la imagen
-				AlertDialog.Builder b= new AlertDialog.Builder(padre);
-                b.setTitle("Carga en progreso");
-                b.setMessage("Espere mientras carga la imagen de la receta");
-                AlertDialog a = b.show();
-				new DownloadImage(padre,a).execute(Login.url+"/"+result[5]);
+
+                String state = Environment.getExternalStorageState();
+                if (Environment.MEDIA_MOUNTED.equals(state)) {
+                    if(Build.VERSION.SDK_INT>Build.VERSION_CODES.JELLY_BEAN_MR1){
+                        padre.path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/HealthyFood/temp/" + result[0] + ".jpg";
+                    }else{
+                        padre.path = Environment.getExternalStorageDirectory() + "/DCIM/Camera/" + result[0] + ".jpg";
+                    }
+                }
+                File file=new File(padre.path);
+                if(file.exists()){
+                    BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+                    Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(),bmOptions);
+                    padre.imagen.setImageBitmap(bitmap);
+                }else{
+                    AlertDialog.Builder b= new AlertDialog.Builder(padre);
+                    b.setTitle("Carga en progreso");
+                    b.setMessage("Espere mientras carga la imagen de la receta");
+                    AlertDialog a = b.show();
+                    new DownloadImage(padre,a).execute(Login.url+"/"+result[5]);
+                }
 			}
 		}
 	}
@@ -593,12 +652,28 @@ public class VisualizaReceta extends Activity {
 		protected void onPostExecute(Bitmap result) {
 			alert.dismiss();
 			if(result!=null) {
-              //  android.view.ViewGroup.LayoutParams layoutParams = padre.imagen.getLayoutParams();
-              //  int anchoimagen=layoutParams.width;
-              //  layoutParams.height = anchoimagen;
-              //  padre.imagen.setLayoutParams(layoutParams);
-              //  Bitmap bit = ThumbnailUtils.extractThumbnail(result, padre.imagen.getWidth(), padre.imagen.getHeight());
                 padre.imagen.setImageBitmap(result);
+                if(padre.path.equals("")){
+                    String state = Environment.getExternalStorageState();
+                    if (Environment.MEDIA_MOUNTED.equals(state)) {
+                        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.JELLY_BEAN_MR1){
+                            padre.path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/HealthyFood/temp/" + padre.info_receta[0] + ".jpg";
+                        }else{
+                            padre.path = Environment.getExternalStorageDirectory() + "/DCIM/Camera/" + padre.info_receta[0] + ".jpg";
+                        }
+                    }
+                }
+                File file = new File(padre.path);
+                if(!file.exists()){
+                    try{
+                        FileOutputStream fOut = new FileOutputStream(file);
+                        result.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
+                        fOut.flush();
+                        fOut.close();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
             }
 	    }
 	}

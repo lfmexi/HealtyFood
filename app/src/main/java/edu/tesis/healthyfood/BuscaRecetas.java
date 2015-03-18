@@ -42,6 +42,7 @@ public class BuscaRecetas extends Fragment {
 
 	
 	private String user="";
+    private String[] adapter;
     public BuscaRecetas(){}
 
     public static BuscaRecetas newInstance(String usr){
@@ -52,7 +53,7 @@ public class BuscaRecetas extends Fragment {
         return fragment;
     }
 
-	
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View view = inflater.inflate(R.layout.activity_busca_recetas, container, false);
 		campoReceta = (EditText)view.findViewById(R.id.receta_instrucciones);
@@ -60,7 +61,7 @@ public class BuscaRecetas extends Fragment {
 		resultado = (ListView)view.findViewById(R.id.busca_receta_result);
 
         user = getArguments().getString("user");
-
+        adapter = new String[]{};
 		botonBusqueda.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
@@ -78,16 +79,18 @@ public class BuscaRecetas extends Fragment {
 				listaOnItemClick(arg1);
 			}
 		});
+        if(savedInstanceState!=null){
+            adapter=savedInstanceState.getStringArray("adapter");
+            resultado.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,android.R.id.text1,adapter));
+        }
 		return view;
 	}
 
-
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.busca_recetas, menu);
-//		return true;
-//	}
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putStringArray("adapter",adapter);
+    }
 
 	private void botonOnClick(){
 		String patron = campoReceta.getText().toString();
@@ -179,6 +182,7 @@ public class BuscaRecetas extends Fragment {
 				for(int i = 0;i<result.length;i++){
 					adaptador[i] = result[i];
 				}
+                padre.adapter=adaptador;
 				padre.resultado.setAdapter(new ArrayAdapter<String>(padre.getActivity(),android.R.layout.simple_list_item_1,android.R.id.text1,adaptador));
 			}
 		}
