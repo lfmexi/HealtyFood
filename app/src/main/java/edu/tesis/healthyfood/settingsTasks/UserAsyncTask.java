@@ -102,9 +102,9 @@ public class UserAsyncTask extends SettingAsyncTask {
                     sqlite.abrir();
                     Sesion ses = sqlite.getLastSesion();
                     if(sqlite.updateSession(result[1],ses.getId())){
-                        Toast.makeText(((UserSetting)getObject()).getContext(),"Datos actualizados",Toast.LENGTH_LONG);
+                        Toast.makeText(((UserSetting)getObject()).getContext(),"Datos actualizados",Toast.LENGTH_LONG).show();
                     }else{
-                        Toast.makeText(((UserSetting)getObject()).getContext(),"Error al guardar los cambios, sincronice por favor",Toast.LENGTH_LONG);
+                        Toast.makeText(((UserSetting)getObject()).getContext(),"Error al guardar los cambios, sincronice por favor",Toast.LENGTH_LONG).show();
                     }
                 }
             }

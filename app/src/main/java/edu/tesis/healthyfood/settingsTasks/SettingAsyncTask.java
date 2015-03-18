@@ -21,8 +21,8 @@ import edu.tesis.healthyfood.Login;
 public abstract class SettingAsyncTask extends AsyncTask<String,Void,String[]> {
 
 
-    static final int LOAD_ACTION=0;
-    static final int UPDATE_ACTION=1;
+    public static final int LOAD_ACTION=0;
+    public static final int UPDATE_ACTION=1;
 
     private Object object;
 
