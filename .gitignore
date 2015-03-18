@@ -27,4 +27,4 @@ local.properties
 
 # app.iml para build
 app/app.iml
-*.iml
+HealtyFood.iml
