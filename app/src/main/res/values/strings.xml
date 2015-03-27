@@ -104,4 +104,6 @@
     <string name="password_setting">Cambio de password</string>
     <string name="sync_setting">Sincronización</string>
     <string name="logout_setting">Cerrar Sesión</string>
+
+    <string name="APP_ID">458658497620957</string>
 </resources>

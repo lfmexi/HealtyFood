@@ -39,6 +39,7 @@ android {
 
 
 dependencies {
+    compile project(':facebook')
     compile files('libs/YouTubeAndroidPlayerApi.jar')
     compile files('libs/apache-mime4j-0.6.1.jar')
     compile files('libs/httpmime-4.3.4.jar')

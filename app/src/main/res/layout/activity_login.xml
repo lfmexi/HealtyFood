@@ -95,7 +95,12 @@
                     android:text="Olvidé mis datos" />
                 
             </RelativeLayout>
-
+            <Button
+                android:id="@+id/socialButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Social"/>
         </LinearLayout>
     </ScrollView>
 

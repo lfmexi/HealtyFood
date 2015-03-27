@@ -26,6 +26,11 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -37,7 +42,7 @@ import edu.tesis.healthyfood.sqlite.SQLite;
 import edu.tesis.healthyfood.sqlite.TMB;
 
 @SuppressWarnings("deprecation")
-public class Login extends Activity {
+public class Login extends FragmentActivity {
 
 	public static final String url=Connection.url;
 	@Override
@@ -50,6 +55,7 @@ public class Login extends Activity {
 		botonLogin = (Button)this.findViewById(R.id.main_boton_ingreso);
 		botonForgot = (Button)this.findViewById(R.id.login_forgot);
 		botonRegister = (Button)this.findViewById(R.id.login_boton_register);
+        social = (Button)this.findViewById(R.id.socialButton);
 		
 		botonLogin.setOnClickListener(new OnClickListener(){
 			@Override
@@ -75,6 +81,13 @@ public class Login extends Activity {
 				loginRegister();
 			}}
 		);
+
+        social.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                socialOnClick();
+            }
+        });
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -82,6 +95,19 @@ public class Login extends Activity {
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
 	}
+
+    private void socialOnClick(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction ft =fragmentManager.beginTransaction();
+        Fragment prev=fragmentManager.findFragmentByTag("dialog");
+        if(prev!=null){
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+
+        DialogFragment dialogFragment = SocialDialogFragment.newInstance();
+        dialogFragment.show(ft,"dialog");
+    }
 	
 	private void loginOnClick(){
 		//en caso se logre realizar el login, Ã©sto se realiza en la clase
@@ -114,6 +140,7 @@ public class Login extends Activity {
 	private Button botonRegister;
 	private EditText campo_username;
 	private EditText campo_password;
+    private Button social;
 	
 	private class LoginAsyncTask extends AsyncTask<String,Void,String[]>{
 
@@ -261,8 +288,8 @@ public class Login extends Activity {
 				padre.finish();
 			}else{
 				AlertDialog.Builder alert=new AlertDialog.Builder(padre);
-				alert.setTitle("Error de autenticación");
-				alert.setMessage("Usuario o contraseña no válidos");
+				alert.setTitle("Error de autenticaciï¿½n");
+				alert.setMessage("Usuario o contraseï¿½a no vï¿½lidos");
 				alert.show();				
 			}
 		}

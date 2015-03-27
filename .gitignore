@@ -1,3 +1,4 @@
+
 # Aplicaciones
 *.apk
 *.ap_
@@ -21,10 +22,14 @@ build/
 local.properties
 
 # Clase con configuración de IP
-/*/src/main/java/edu/tesis/heeathyfood/conn/
+app/src/main/java/edu/tesis/healthyfood/conn
 
-.idea/workspace.xml
+# mas propiedades del proyecto
+.idea/**
 
 # app.iml para build
+
 app/app.iml
-HealtyFood.iml
+
+# iml del proyecto
+*HealtyFood.iml
