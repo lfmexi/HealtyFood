@@ -37,14 +37,17 @@
                     android:text="Bienvenido a HealtyFood"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                <ImageButton
-                    android:id="@+id/main_boton_entrar"
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tituloReceta"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="60dp"
-                    android:src="@drawable/ic_launcher_start" />
+                    android:id="@+id/progressBar"
+                    android:layout_centerVertical="true"
+                    android:layout_alignLeft="@+id/tituloReceta"
+                    android:layout_alignStart="@+id/tituloReceta"
+                    android:layout_alignRight="@+id/tituloReceta"
+                    android:layout_alignEnd="@+id/tituloReceta"
+                    android:indeterminate="false" />
 
             </RelativeLayout>
         </LinearLayout>

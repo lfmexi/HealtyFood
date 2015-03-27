@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import edu.tesis.healthyfood.genericTasks.GenericCheckSession;
 import edu.tesis.healthyfood.sqlite.SQLite;
 import edu.tesis.healthyfood.sqlite.Sesion;
 
@@ -123,9 +125,32 @@ public class DrawerMenuActivity extends ActionBarActivity {
                return super.onOptionsItemSelected(item);
         }
    }
-    
 
-	private void Logout(){
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==0){
+
+            SQLite sql = new SQLite(this);
+            sql.abrir();
+            Sesion s = sql.getLastSesion();
+            sql.cerrar();
+
+            int decision = GenericCheckSession.generateSessionStart(sql, s);
+
+            if(decision==GenericCheckSession.SESSION_STARTED){
+                Intent i = this.getIntent();
+                i.putExtra("infoUser", s.getUser());
+                i.putExtra("sex",s.getSex());
+                i.putExtra("birth", s.getBirth());
+
+                user = i.getExtras().getString("infoUser");
+                sex = i.getExtras().getString("sex");
+                birth = i.getExtras().getString("birth");
+            }
+        }
+    }
+
+    private void Logout(){
 		SQLite sql = new SQLite(this);
 		sql.abrir();
 		Sesion s = sql.getLastSesion();
@@ -157,8 +182,10 @@ public class DrawerMenuActivity extends ActionBarActivity {
     			fragment = Ejercicios.newInstance(user);
     	        break;
     		case 3:
-                this.startActivity(new Intent(this,SettingsActivity.class));
-    			finish();
+                this.startActivityForResult(new Intent(this, SettingsActivity.class), 0);
+    			break;
+            case 4:
+                Logout();
                 break;
     	}
 
