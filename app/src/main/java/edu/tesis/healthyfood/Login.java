@@ -31,6 +31,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -49,7 +50,10 @@ public class Login extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		campo_username = (EditText)this.findViewById(R.id.loginUsername);
+
+        Log.i("Hash",Connection.printKeyHash(this));
+
+        campo_username = (EditText)this.findViewById(R.id.loginUsername);
 		campo_password = (EditText)this.findViewById(R.id.loginPassword);
 		
 		botonLogin = (Button)this.findViewById(R.id.main_boton_ingreso);
