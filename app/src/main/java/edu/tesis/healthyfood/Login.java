@@ -37,6 +37,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.facebook.Profile;
+
 import edu.tesis.healthyfood.conn.Connection;
 import edu.tesis.healthyfood.sqlite.Medicion;
 import edu.tesis.healthyfood.sqlite.SQLite;
@@ -138,7 +141,14 @@ public class Login extends FragmentActivity {
 		startActivity(i);
 		finish();
 	}
-	
+
+    public void loginFacebook(Profile profile){
+        new LoginAsyncTask(this,true,profile).execute(
+                profile.getName(),
+                "fromFB"
+        );
+    }
+
 	private Button botonLogin;
 	private Button botonForgot;
 	private Button botonRegister;
@@ -149,11 +159,18 @@ public class Login extends FragmentActivity {
 	private class LoginAsyncTask extends AsyncTask<String,Void,String[]>{
 
 		private Login padre;
-		
+        private boolean fb;
+		private Profile profile;
 		public LoginAsyncTask(Login p){
 			padre = p;
 		}
-		
+
+        public LoginAsyncTask(Login p,boolean fromFB,Profile profile){
+            padre = p;
+            fb=fromFB;
+            this.profile = profile;
+        }
+
 		@Override
 		protected String[] doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
@@ -219,7 +236,10 @@ public class Login extends FragmentActivity {
 			if(result!=null){
 				SQLite sql = new SQLite(padre);
 				sql.abrir();
-				sql.addReg(result[0],result[1],result[2]);
+                if(!fb)
+				    sql.addReg(result[0],result[1],result[2]);
+                else
+                    sql.addReg(result[0],result[1],result[2],fb);
 				sql.cerrar();
 				
 				String [] fecha = result[2].split("-");
@@ -288,13 +308,31 @@ public class Login extends FragmentActivity {
 				i.putExtra("infoUser", result[0]);
 				i.putExtra("sex",result[1]);
 				i.putExtra("birth", result[2]);
+                i.putExtra("fb",fb);
 				padre.startActivity(i);
 				padre.finish();
 			}else{
-				AlertDialog.Builder alert=new AlertDialog.Builder(padre);
-				alert.setTitle("Error de autenticaci�n");
-				alert.setMessage("Usuario o contrase�a no v�lidos");
-				alert.show();				
+                if(!fb){
+                    AlertDialog.Builder alert=new AlertDialog.Builder(padre);
+                    alert.setTitle(padre.getResources().getString(R.string.error_auth));
+                    alert.setMessage(padre.getResources().getString(R.string.user_o_pass));
+                    alert.show();
+                }else if(profile!=null){
+                    String id = profile.getId();
+                    String username = profile.getName();
+                    String firstName = profile.getFirstName();
+                    String lastName = profile.getLastName();
+
+                    Intent intent=new Intent(padre,CompleteFBData.class);
+                    intent.putExtra("id",id);
+                    intent.putExtra("username",username);
+                    intent.putExtra("firstName",firstName);
+                    intent.putExtra("lastName",lastName);
+                    intent.putExtra("fb",true);
+
+                    padre.startActivity(intent);
+                    padre.finish();
+                }
 			}
 		}
 	}

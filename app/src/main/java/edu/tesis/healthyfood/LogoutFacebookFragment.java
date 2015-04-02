@@ -20,17 +20,19 @@ import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import edu.tesis.healthyfood.genericTasks.GenericCheckSession;
+
 /**
- * Created by luis on 27/03/15.
+ * Created by luis on 2/04/15.
  */
-public class SocialDialogFragment extends DialogFragment {
+public class LogoutFacebookFragment extends DialogFragment {
 
     CallbackManager callbackManager;
     ProfileTracker profileTracker;
     AccessTokenTracker accessTokenTracker;
 
-    public static SocialDialogFragment newInstance(){
-        SocialDialogFragment fragment=new SocialDialogFragment();
+    public static LogoutFacebookFragment newInstance(){
+        LogoutFacebookFragment fragment=new LogoutFacebookFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -84,7 +86,7 @@ public class SocialDialogFragment extends DialogFragment {
             public void onError(FacebookException exception) {
                 // App code
                 onCancelFb();
-                Log.i("Exception:",exception.toString());
+                Log.i("Exception:", exception.toString());
             }
         });
         return v;
@@ -97,7 +99,7 @@ public class SocialDialogFragment extends DialogFragment {
     }
 
     private void onCancelFb(){
-        Toast.makeText(this.getActivity(),"Fallo",Toast.LENGTH_LONG);
+        Toast.makeText(this.getActivity(), "Fallo", Toast.LENGTH_LONG);
         Log.i("error","error de login de facebook");
     }
     private void onSuccesLogin(LoginResult loginResult){
@@ -105,13 +107,13 @@ public class SocialDialogFragment extends DialogFragment {
     }
 
     private void changeProfile(Profile profile){
-        if(profile!=null){
+        if(profile==null){
             if(this.getDialog()!=null){
-                this.getDialog().dismiss();
                 profileTracker.stopTracking();
-                accessTokenTracker.stopTracking();
-                ((Login)this.getActivity()).loginFacebook(profile);
+                this.dismiss();
+                GenericCheckSession.Logout(this.getActivity());
             }
         }
     }
+
 }

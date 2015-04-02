@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -33,6 +34,7 @@ public class DrawerMenuActivity extends ActionBarActivity {
     String sex="";
     String birth="";
     String ambito="";
+    boolean fb=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,9 @@ public class DrawerMenuActivity extends ActionBarActivity {
         user = i.getExtras().getString("infoUser");
         sex = i.getExtras().getString("sex");
         birth = i.getExtras().getString("birth");
-        
+        fb = i.getExtras().getBoolean("fb");
+
+
         try{
         	ambito = i.getExtras().getString("ambito");        	
         }
@@ -151,16 +155,20 @@ public class DrawerMenuActivity extends ActionBarActivity {
     }
 
     private void Logout(){
-		SQLite sql = new SQLite(this);
-		sql.abrir();
-		Sesion s = sql.getLastSesion();
-		if(sql.deleteSesion(s.getId())){
-			sql.cerrar();
-			this.finish();
-			return;
-		}
-		sql.cerrar();
-		this.finish();
+        if(fb){
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            final FragmentTransaction ft =fragmentManager.beginTransaction();
+            Fragment prev=fragmentManager.findFragmentByTag("dialog");
+            if(prev!=null){
+                ft.remove(prev);
+            }
+            ft.addToBackStack(null);
+
+            DialogFragment dialogFragment = LogoutFacebookFragment.newInstance();
+            dialogFragment.show(ft,"dialog");
+        }else{
+            GenericCheckSession.Logout(this);
+        }
 	}
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {

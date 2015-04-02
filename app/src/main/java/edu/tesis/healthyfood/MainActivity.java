@@ -29,13 +29,15 @@ public class MainActivity extends ActionBarActivity implements TabListener  {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
         progressBar=(ProgressBar)findViewById(R.id.progressBar);
-        Thread thread = new Thread(){
-            @Override
-            public void run() {
-                progress();
-            }
-        };
-        thread.start();
+        if(savedInstanceState==null){
+            Thread thread = new Thread(){
+                @Override
+                public void run() {
+                    progress();
+                }
+            };
+            thread.start();
+        }
 	}
 
 	private void progress(){
@@ -54,6 +56,7 @@ public class MainActivity extends ActionBarActivity implements TabListener  {
             i.putExtra("infoUser", s.getUser());
             i.putExtra("sex",s.getSex());
             i.putExtra("birth", s.getBirth());
+            i.putExtra("fb",s.isFb());
             this.startActivity(i);
         }else{
             int progress = 0;
