@@ -34,7 +34,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="114dp"
-                    android:text="Bienvenido a HealtyFood"
+                    android:text="Bienvenido a HealthyFood"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <ProgressBar

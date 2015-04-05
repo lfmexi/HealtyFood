@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SQLiteHelper extends SQLiteOpenHelper {
 
 	private static final String database="HealthyFoodDB";
-	private static final int version = 14;
+	private static final int version = 15;
 	
 	public final String tabla = "Sesion";
 	public final String id_sesion = "idSesion";
@@ -17,6 +17,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	public final String birth = "birth";
 	public final String fecha_inicio = "fecha_inicio";
 	public final String fecha_fin = "fecha_fin";
+    public final String fb = "fb";
 	
 	public final String tablaMedicion = "Medicion";
 	public final String peso = "peso";
@@ -48,7 +49,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 			sex +" TEXT NOT NULL, "+
 			birth+" TEXT NOT NULL, "+
 			fecha_inicio +" DATETIME NULL, "+
-			fecha_fin+ " DATETIME NULL)";
+			fecha_fin+ " DATETIME NULL,"+
+            fb+" TEXT NULL)";
 	
 	private final String ddlMedicion ="CREATE TABLE "+tablaMedicion+" ( "
 			+username +" TEXT NOT NULL, "+

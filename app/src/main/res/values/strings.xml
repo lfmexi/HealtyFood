@@ -104,6 +104,11 @@
     <string name="password_setting">Cambio de password</string>
     <string name="sync_setting">Sincronización</string>
     <string name="logout_setting">Cerrar Sesión</string>
+    <string name="error_auth">Error de autenticación</string>
+    <string name="user_o_pass">Usuario o contraseña no válidos</string>
+    <string name="pass_no_coincide">Las contraseñas no coinciden</string>
+    <string name="email_no_valido">Email no válido</string>
 
     <string name="APP_ID">458658497620957</string>
+    <string name="title_activity_complete_fbdata">CompleteFBData</string>
 </resources>

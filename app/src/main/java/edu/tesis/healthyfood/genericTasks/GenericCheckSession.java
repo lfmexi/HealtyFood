@@ -1,5 +1,7 @@
 package edu.tesis.healthyfood.genericTasks;
 
+import android.app.Activity;
+
 import java.util.Calendar;
 
 import edu.tesis.healthyfood.sqlite.Medicion;
@@ -85,5 +87,19 @@ public class GenericCheckSession {
             }
         }
         return SESSION_CLOSED;
+    }
+
+    public static int Logout(Activity activity){
+        SQLite sql = new SQLite(activity);
+        sql.abrir();
+        Sesion s = sql.getLastSesion();
+        if(sql.deleteSesion(s.getId())){
+            sql.cerrar();
+            activity.finish();
+            return SESSION_CLOSED;
+        }
+        sql.cerrar();
+        activity.finish();
+        return -1;
     }
 }

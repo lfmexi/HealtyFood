@@ -9,6 +9,7 @@ public class Sesion {
 	private String birth;
 	private Date fecha_inicio;
 	private Date fecha_fin;
+    private boolean fb;
 	
 	public Sesion(String u,Date fi,Date ff){
 		fecha_inicio=fi;
@@ -63,6 +64,13 @@ public class Sesion {
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
-	
+
+    public boolean isFb() {
+        return fb;
+    }
+
+    public void setFb(boolean fb) {
+        this.fb = fb;
+    }
 	
 }

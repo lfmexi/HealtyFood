@@ -129,14 +129,28 @@ public class SQLite {
 		}
 		return t;
 	}
-	
-	public boolean addReg(String username,String sex,String birth){
+
+    public boolean addReg(String username,String sex,String birth){
+        if(username!=null){
+            ContentValues cv = new ContentValues();
+            cv.put(sqlh.username, username);
+            cv.put(sqlh.sex,sex);
+            cv.put(sqlh.birth, birth);
+            cv.put(sqlh.fecha_inicio, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+
+            return(db.insert(sqlh.tabla, null, cv)!=-1)?true:false;
+        }
+        return false;
+    }
+
+	public boolean addReg(String username,String sex,String birth,boolean fb){
 		if(username!=null){
 			ContentValues cv = new ContentValues();
 			cv.put(sqlh.username, username);
 			cv.put(sqlh.sex,sex);
 			cv.put(sqlh.birth, birth);
 			cv.put(sqlh.fecha_inicio, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+            cv.put(sqlh.fb,fb+"");
 			
 			return(db.insert(sqlh.tabla, null, cv)!=-1)?true:false;
 		}
@@ -240,7 +254,7 @@ public class SQLite {
 		Sesion ses=null;
 		Cursor cursor = db.query(sqlh.tabla,
 				new String[]{sqlh.id_sesion,sqlh.username,sqlh.fecha_inicio,sqlh.fecha_fin
-							,sqlh.sex,sqlh.birth},
+							,sqlh.sex,sqlh.birth,sqlh.fb},
 							null,null,null,null,
 							sqlh.id_sesion+" DESC ","1");
 		if(cursor.moveToFirst()){
@@ -268,7 +282,9 @@ public class SQLite {
 				
 				ses.setSex(cursor.getString(4));
 				ses.setBirth(cursor.getString(5));
-				
+				String bool = cursor.getString(6);
+                if(bool!=null)
+                    ses.setFb(true);
 			}while(cursor.moveToNext());
 		}
 		return ses;

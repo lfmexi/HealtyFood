@@ -137,13 +137,13 @@ public class Registro extends Activity {
 				}else{
 					AlertDialog.Builder alert=new AlertDialog.Builder(this);
 					alert.setTitle("Email");
-					alert.setMessage("El email ingresado no es v�lido");
+					alert.setMessage(this.getResources().getString(R.string.email_no_valido));
 					alert.show();
 				}
 			}else{
 				AlertDialog.Builder alert=new AlertDialog.Builder(this);
 				alert.setTitle("Password");
-				alert.setMessage("Las contrase�as no coinciden");
+				alert.setMessage(this.getResources().getString(R.string.pass_no_coincide));
 				alert.show();
 			}
 		}
@@ -224,9 +224,8 @@ public class Registro extends Activity {
 					padre.startActivity(i);
 					padre.finish();
 				}else{
-					
 					AlertDialog.Builder alert=new AlertDialog.Builder(padre);
-					alert.setTitle("Error de autenticaci�n");
+					alert.setTitle(padre.getResources().getString(R.string.error_auth));
 					alert.setMessage(result);
 					alert.show();
 				}
