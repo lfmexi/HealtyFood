@@ -51,7 +51,7 @@ public class Login extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 
-        Log.i("Hash",Connection.printKeyHash(this));
+//        Log.i("Hash",Connection.printKeyHash(this));
 
         campo_username = (EditText)this.findViewById(R.id.loginUsername);
 		campo_password = (EditText)this.findViewById(R.id.loginPassword);
