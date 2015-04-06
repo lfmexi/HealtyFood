@@ -2,7 +2,6 @@ package edu.tesis.healthyfood;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
@@ -26,9 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.tesis.healthyfood.genericTasks.GenericJson;
-import edu.tesis.healthyfood.settingsTasks.PasswordAsyncTask;
 import edu.tesis.healthyfood.settingsTasks.SettingAsyncTask;
-import edu.tesis.healthyfood.settingsTasks.UserAsyncTask;
 import edu.tesis.healthyfood.sqlite.SQLite;
 import edu.tesis.healthyfood.sqlite.Sesion;
 
