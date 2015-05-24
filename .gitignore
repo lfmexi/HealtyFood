@@ -25,7 +25,8 @@ local.properties
 app/src/main/java/edu/tesis/healthyfood/conn
 
 # mas propiedades del proyecto
-.idea/**
+.idea/*
+.idea/gradle.xml
 
 # app.iml para build
 
