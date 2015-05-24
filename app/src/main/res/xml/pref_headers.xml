@@ -8,7 +8,7 @@
     <!--header android:fragment="edu.tesis.healthyfood.SettingsActivity$SyncSettingFrag"
         android:title="@string/sync_setting"/-->
 
-    <header android:title="@string/logout_setting">
+    <!--header android:title="@string/logout_setting">
 
-    </header>
+    </header-->
 </preference-headers>
