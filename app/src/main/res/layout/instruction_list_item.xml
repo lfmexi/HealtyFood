@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/instruccion_item_text"
-        android:id="@+id/textView15" />
+        android:id="@+id/textInstruccion" />
 
     <Button
         style="?android:attr/buttonStyleSmall"

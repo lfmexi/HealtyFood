@@ -44,6 +44,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import edu.tesis.healthyfood.sobj.ContenedorIngredientes;
+import edu.tesis.healthyfood.sobj.ContenedorInstrucciones;
 import edu.tesis.healthyfood.sobj.Ingrediente_Receta;
 
 @SuppressWarnings("deprecation")
@@ -51,6 +52,7 @@ public class PublicaReceta extends Fragment {
 
 	String user="";
 	static ContenedorIngredientes contenedor;
+	static ContenedorInstrucciones instrucciones;
 
     public PublicaReceta(){}
 
@@ -66,6 +68,8 @@ public class PublicaReceta extends Fragment {
 		View view = inflater.inflate(R.layout.activity_publica_receta, container, false);
 
         contenedor = new ContenedorIngredientes();
+		instrucciones = new ContenedorInstrucciones();
+
 		selector_categoria = (Spinner)view.findViewById(R.id.receta_spinner_cat);
 		campo_nombre = (EditText)view.findViewById(R.id.receta_nombre);
 		campo_instrucciones = (EditText)view.findViewById(R.id.receta_instrucciones);

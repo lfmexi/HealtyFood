@@ -45,7 +45,7 @@ import edu.tesis.healthyfood.sobj.Ingrediente_Receta;
 public class Ingredientes extends Activity {
 
 	private TreeMap<String,Ingrediente_Receta> ingredientes;
-	
+    private String[] adapter;
 	private String ambito;
 	
 	@Override
@@ -69,14 +69,19 @@ public class Ingredientes extends Activity {
 			}
 		});
 		
-		listaRes.setOnItemClickListener(new OnItemClickListener(){
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// TODO Auto-generated method stub
-				listaOnItemClick(arg1);
-			}
-		});
+		listaRes.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+                // TODO Auto-generated method stub
+                listaOnItemClick(arg1);
+            }
+        });
+
+        if(savedInstanceState!=null){
+            adapter=savedInstanceState.getStringArray("adapter");
+            listaRes.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,android.R.id.text1,adapter));
+        }
 	}
 
 	@Override
@@ -86,14 +91,20 @@ public class Ingredientes extends Activity {
 		return true;
 	}
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putStringArray("adapter", adapter);
+    }
+
 	private void listaOnItemClick(View v){
 		final AlertDialog.Builder b = new AlertDialog.Builder(this);
 		final String nombre = ((TextView) v).getText().toString();
 		if(ambito.equals("perfil")){
 			if(ingredientes.containsKey(nombre)){
-				b.setTitle("Información sobre el ingrediente");
+				b.setTitle("Informaciï¿½n sobre el ingrediente");
 				final Ingrediente_Receta ir = ingredientes.get(nombre);
-				b.setMessage("El ingrediente contiene "+ir.getCal_100g()+" calorías por cada 100 gramos");
+				b.setMessage("El ingrediente contiene "+ir.getCal_100g()+" calorï¿½as por cada 100 gramos");
 				b.show();
 			}
 		}else{
@@ -120,7 +131,7 @@ public class Ingredientes extends Activity {
 										ir.setUnidades(entero);
 										PublicaReceta.contenedor.lista.put(nombre, ir);
 									}else{
-										Toast.makeText(b.getContext(), "Ingrese un número; mayor a 0",20).show();
+										Toast.makeText(b.getContext(), "Ingrese un nï¿½mero; mayor a 0",Toast.LENGTH_LONG).show();
 									}
 								}catch(NumberFormatException nfe){
 									//nada
@@ -141,7 +152,7 @@ public class Ingredientes extends Activity {
 										ir.setGramos(entero);
 										PublicaReceta.contenedor.lista.put(nombre, ir);
 									}else{
-										Toast.makeText(b.getContext(), "Ingrese un número; mayor a 0",20).show();
+										Toast.makeText(b.getContext(), "Ingrese un nï¿½mero; mayor a 0",Toast.LENGTH_LONG).show();
 									}
 								}catch(NumberFormatException nfe){
 									//nada
@@ -162,7 +173,7 @@ public class Ingredientes extends Activity {
 										ir.setLitros(entero);
 										PublicaReceta.contenedor.lista.put(nombre, ir);
 									}else{
-										Toast.makeText(b.getContext(), "Ingrese un número; mayor a 0",20).show();
+										Toast.makeText(b.getContext(), "Ingrese un nï¿½mero; mayor a 0",Toast.LENGTH_LONG).show();
 									}
 								}catch(NumberFormatException nfe){
 									//nada
@@ -175,7 +186,7 @@ public class Ingredientes extends Activity {
 				}
 			}else{
 				b.setTitle("Eliminar ingrediente");
-				b.setMessage("El ingrediente ya ha sido agregado, ¿desea eliminarlo?");
+				b.setMessage("El ingrediente ya ha sido agregado, ï¿½desea eliminarlo?");
 				b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -255,7 +266,7 @@ public class Ingredientes extends Activity {
 			    	    String campo1 = object.getString("nombre");
 			    	    String campo2 = object.getString("tipoMedida");
 			    	    String campo3 = object.getString("calorias");
-			    	    regs[i] = campo1+"¬"+campo2+"¬"+campo3;
+			    	    regs[i] = campo1+"ï¿½"+campo2+"ï¿½"+campo3;
 			    	}
 		    	}
 		    }catch(JSONException e){
@@ -274,12 +285,13 @@ public class Ingredientes extends Activity {
 				String adaptador[] = new String[result.length];
 				for(int i = 0;i<result.length;i++){
 					String linea_ingrediente = result[i];
-					String [] attr_ingrediente = linea_ingrediente.split("¬");
+					String [] attr_ingrediente = linea_ingrediente.split("ï¿½");
 					Ingrediente_Receta ir =  new Ingrediente_Receta(attr_ingrediente[0],attr_ingrediente[1]);
 					ir.setCal_100g(Double.parseDouble(attr_ingrediente[2]));
 					padre.ingredientes.put(attr_ingrediente[0],ir);
 					adaptador[i] = attr_ingrediente[0];
 				}
+                padre.adapter = adaptador;
 				padre.listaRes.setAdapter(new ArrayAdapter<String>(padre,android.R.layout.simple_list_item_1,android.R.id.text1,adaptador));
 			}
 		}
