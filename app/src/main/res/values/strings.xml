@@ -112,4 +112,8 @@
     <string name="APP_ID">458658497620957</string>
     <string name="title_activity_complete_fbdata">CompleteFBData</string>
     <string name="agregar">Agregar</string>
+    <string name="nueva_instrucc">Nueva Instrucción</string>
+    <string name="instruccion_item_text">Instrucción</string>
+    <string name="editar">Editar</string>
+    <string name="eliminar">Eliminar</string>
 </resources>
