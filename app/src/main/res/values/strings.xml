@@ -111,4 +111,5 @@
 
     <string name="APP_ID">458658497620957</string>
     <string name="title_activity_complete_fbdata">CompleteFBData</string>
+    <string name="agregar">Agregar</string>
 </resources>
