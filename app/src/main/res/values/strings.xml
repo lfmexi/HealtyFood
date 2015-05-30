@@ -116,6 +116,6 @@
     <string name="instruccion_item_text">Instrucción</string>
     <string name="editar">Editar</string>
     <string name="eliminar">Eliminar</string>
-
+    <string name="login_vacio">Ingrese usuario y contraseña</string>
     <string name="separator">¬</string>
 </resources>

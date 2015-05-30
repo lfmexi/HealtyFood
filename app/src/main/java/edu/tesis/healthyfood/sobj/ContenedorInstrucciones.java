@@ -12,7 +12,7 @@ import java.util.TreeMap;
 public class ContenedorInstrucciones implements Parcelable {
     public TreeMap<Integer,Instruccion> mapa;
 
-    public ContenedorInstrucciones(){mapa = new TreeMap<>();}
+    public ContenedorInstrucciones(){mapa = new TreeMap<Integer,Instruccion>();}
 
     public ContenedorInstrucciones(Parcel in){
         this();

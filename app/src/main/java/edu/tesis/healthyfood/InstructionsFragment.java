@@ -44,7 +44,7 @@ public class InstructionsFragment extends Fragment {
         listView = (ListView)rootView.findViewById(R.id.listViewInstruc);
         Button botonAgregar = (Button)rootView.findViewById(R.id.buttonAddInstruccion);
 
-        items = new ArrayList<>();
+        items = new ArrayList<InstruccionListItem>();
         for(Map.Entry<Integer,Instruccion> entry:PublicaReceta.instrucciones.mapa.entrySet()){
             final int idInstr = entry.getKey();
             View.OnClickListener editar = new View.OnClickListener() {

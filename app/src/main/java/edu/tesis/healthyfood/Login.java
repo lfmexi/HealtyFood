@@ -37,6 +37,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.facebook.Profile;
 
@@ -123,9 +124,11 @@ public class Login extends FragmentActivity {
 			String nombre = campo_username.getText().toString();
 			String pass = campo_password.getText().toString();
 			
-			if(nombre!=null && pass!=null){
+			if(!nombre.equals("") && !pass.equals("")){
 				LoginAsyncTask lt = new LoginAsyncTask(this);
 				lt.execute(nombre,pass);
+			}else{
+                Toast.makeText(this,this.getResources().getString(R.string.login_vacio),Toast.LENGTH_LONG).show();
 			}
 			
 		}
