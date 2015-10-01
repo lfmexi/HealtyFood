@@ -102,9 +102,9 @@ public class Ingredientes extends Activity {
 		final String nombre = ((TextView) v).getText().toString();
 		if(ambito.equals("perfil")){
 			if(ingredientes.containsKey(nombre)){
-				b.setTitle("Informaci�n sobre el ingrediente");
+				b.setTitle(getString(R.string.titulo_info_ingrediente));
 				final Ingrediente_Receta ir = ingredientes.get(nombre);
-				b.setMessage("El ingrediente contiene "+ir.getCal_100g()+" calor�as por cada 100 gramos");
+				b.setMessage("El ingrediente contiene "+ir.getCal_100g()+getString(R.string.mensaje_calorias_ingrediente));
 				b.show();
 			}
 		}else{
@@ -131,7 +131,7 @@ public class Ingredientes extends Activity {
 										ir.setUnidades(entero);
 										PublicaReceta.contenedor.lista.put(nombre, ir);
 									}else{
-										Toast.makeText(b.getContext(), "Ingrese un n�mero; mayor a 0",Toast.LENGTH_LONG).show();
+										Toast.makeText(b.getContext(), getString(R.string.mensaje_error_numero),Toast.LENGTH_LONG).show();
 									}
 								}catch(NumberFormatException nfe){
 									//nada
@@ -152,7 +152,7 @@ public class Ingredientes extends Activity {
 										ir.setGramos(entero);
 										PublicaReceta.contenedor.lista.put(nombre, ir);
 									}else{
-										Toast.makeText(b.getContext(), "Ingrese un n�mero; mayor a 0",Toast.LENGTH_LONG).show();
+										Toast.makeText(b.getContext(), getString(R.string.mensaje_error_numero),Toast.LENGTH_LONG).show();
 									}
 								}catch(NumberFormatException nfe){
 									//nada
@@ -173,7 +173,7 @@ public class Ingredientes extends Activity {
 										ir.setLitros(entero);
 										PublicaReceta.contenedor.lista.put(nombre, ir);
 									}else{
-										Toast.makeText(b.getContext(), "Ingrese un n�mero; mayor a 0",Toast.LENGTH_LONG).show();
+										Toast.makeText(b.getContext(), getString(R.string.mensaje_error_numero),Toast.LENGTH_LONG).show();
 									}
 								}catch(NumberFormatException nfe){
 									//nada
@@ -186,7 +186,7 @@ public class Ingredientes extends Activity {
 				}
 			}else{
 				b.setTitle("Eliminar ingrediente");
-				b.setMessage("El ingrediente ya ha sido agregado, �desea eliminarlo?");
+				b.setMessage(this.getString(R.string.elimina_ingrediente_msg));
 				b.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {

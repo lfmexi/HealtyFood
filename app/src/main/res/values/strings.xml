@@ -118,4 +118,9 @@
     <string name="eliminar">Eliminar</string>
     <string name="login_vacio">Ingrese usuario y contraseña</string>
     <string name="separator">¬</string>
+
+    <string name="elimina_ingrediente_msg">El ingrediente ya ha sido agregado, ¿desea eliminarlo?</string>
+    <string name="mensaje_error_numero">Ingrese un número; mayor a 0</string>
+    <string name="mensaje_calorias_ingrediente"> calorías por cada 100 gramos</string>
+    <string name="titulo_info_ingrediente">Información sobre el ingrediente</string>
 </resources>
