@@ -21,15 +21,17 @@ import edu.tesis.healthyfood.sqlite.SQLite;
 public class Medidor extends Fragment {
 	private String user;
 	private String sex;
+	private String nombre;
 	private String birth;
 	private String ambito="";
 
     public Medidor(){}
 
-    public static Medidor newInstance(String usuario,String sex,String birth, String ambit){
+    public static Medidor newInstance(String usuario,String username,String sex,String birth, String ambit){
         Medidor fragment=new Medidor();
         Bundle args = new Bundle();
         args.putString("user",usuario);
+		args.putString("nombre",username);
         args.putString("sex",sex);
         args.putString("birth",birth);
         args.putString("ambito",ambit);
@@ -42,6 +44,7 @@ public class Medidor extends Fragment {
 		View view = inflater.inflate(R.layout.activity_medidor, container, false);
 
         user = getArguments().getString("user");
+		nombre = getArguments().getString("nombre");
         sex = getArguments().getString("sex");
         birth = getArguments().getString("birth");
         ambito = getArguments().getString("ambito");

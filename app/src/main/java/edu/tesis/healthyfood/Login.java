@@ -147,7 +147,7 @@ public class Login extends FragmentActivity {
 
     public void loginFacebook(Profile profile){
         new LoginAsyncTask(this,true,profile).execute(
-                profile.getName(),
+                profile.getId(),
                 "fromFB"
         );
     }

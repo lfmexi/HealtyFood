@@ -139,9 +139,9 @@ public class CompleteFBData extends Activity {
             if(android.util.Patterns.EMAIL_ADDRESS.matcher(c_email).matches()){
                 String birth = year+"-"+month+"-"+day;
                 String sex=selectSexo.getSelectedItem().toString();
-                RegistroAsyncTask r = new RegistroAsyncTask(this,username);
+                RegistroAsyncTask r = new RegistroAsyncTask(this,id,username);
                 r.execute(
-                        username,
+                        id,
                         firstName+" "+lastName,
                         "fromFB",
                         campoemail.getText().toString(),
@@ -162,10 +162,12 @@ public class CompleteFBData extends Activity {
     private class RegistroAsyncTask extends AsyncTask<String,Void,String> {
         private CompleteFBData padre;
         private String user;
+        private String name;
 
-        public RegistroAsyncTask(CompleteFBData padre,String user){
+        public RegistroAsyncTask(CompleteFBData padre,String user,String name){
             this.user=user;
             this.padre=padre;
+            this.name=name;
         }
 
         @Override
@@ -216,6 +218,7 @@ public class CompleteFBData extends Activity {
 
                     Intent i = new Intent(padre,DrawerMenuActivity.class);
                     i.putExtra("infoUser", user);
+                    i.putExtra("nombre",name);
                     i.putExtra("sex",sex);
                     i.putExtra("birth", birth);
                     i.putExtra("ambito", "registro");

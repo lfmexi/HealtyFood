@@ -17,15 +17,17 @@ public class Perfil extends Fragment {
 
 	
 	String user="";
+	String nombre ="";
 	String sex;
 	String birth;
 
     public Perfil(){}
 
-    public static Perfil newInstance(String user,String sex,String birth){
+    public static Perfil newInstance(String user,String username,String sex,String birth){
         Perfil fragment=new Perfil();
         Bundle args = new Bundle();
         args.putString("user",user);
+		args.putString("nombre",username);
         args.putString("sex",sex);
         args.putString("birth",birth);
         fragment.setArguments(args);
@@ -43,7 +45,7 @@ public class Perfil extends Fragment {
 
         botonMedir=(Button)view.findViewById(R.id.botonNuevaMedida);
 		TextView txt=(TextView)view.findViewById(R.id.textUser);
-		txt.setText("BIENVENIDO "+user.toUpperCase());
+		txt.setText("BIENVENIDO "+nombre.toUpperCase());
 		
 		Button boton = (Button)view.findViewById(R.id.button1);
 		Button botonrec = (Button)view.findViewById(R.id.button_misrecetas);
@@ -109,7 +111,7 @@ public class Perfil extends Fragment {
 	
 	private void medir(){
         final FragmentTransaction ft = getFragmentManager().beginTransaction(); 
-        ft.replace(R.id.content_frame, Medidor.newInstance(user,sex,birth, "perfil"), "Medidor");
+        ft.replace(R.id.content_frame, Medidor.newInstance(user,nombre,sex,birth, "perfil"), "Medidor");
         ft.addToBackStack(null);
         ft.commit();
 	}
